@@ -75,6 +75,8 @@
     font-size: 40px;
     line-height: 58px;
     padding: 0%;
+    text-align: left;
+    margin-left: 25px;
 }
 
 #habit_label {
@@ -106,6 +108,7 @@
     font-size: 35px;
     padding: 3px;
     margin: 0px;
+    text-align: left;
 }
 
 .habit_group input[type="checkbox"]{
