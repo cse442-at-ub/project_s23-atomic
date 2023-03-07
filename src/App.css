@@ -1,4 +1,5 @@
-.App {
+/* Original App CSS messes with other component CSS */
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +36,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
