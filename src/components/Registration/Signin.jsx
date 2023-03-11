@@ -77,7 +77,7 @@ function Signin() {
   // function to handle the form submission
   const handleSubmit = (event) => {
     let valid_username = checkUsername();
-    let valid_email = checkEmail();
+    let valid_email = checkEmail(email);
     // email regex check will return true if email is empty
     if (email === '') {
       valid_email = false
@@ -100,22 +100,26 @@ function Signin() {
   // function to handle errors 
   const handleErrors = () => {
     if(username !== ''){
-      let valid_username = checkUsername();
+      checkUsername();
     }
     if(email !== ''){
-
-      let valid_email = checkEmail();
+      let valid_email = checkEmail(email);
       // email regex check will return true if email is empty
       if (email === '') {
         valid_email = false
         error['email'] = 'false'
       }
+      if (!valid_email){
+        error['email'] = 'false'
+      }else{
+        error['email'] = 'true'
+      }
     }
     if(password !== ''){
-      let valid_length = checkPasswordLength();
+      checkPasswordLength();
     }
     if(confirmPassword !== ''){
-      let valid_password = checkPassword();
+      checkPassword();
     }
   }
 

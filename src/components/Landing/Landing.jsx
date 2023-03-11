@@ -11,7 +11,6 @@ function Landing() {
                     <label>Atomic</label>
                 </div>
                 <div className='nav_button_div'>
-                    <label>Contact Us</label>
                     <label>About Us</label>
                     <label>FAQ</label>
                     <button id="navbar_log_in">| Log In</button>
