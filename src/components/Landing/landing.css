@@ -86,10 +86,11 @@
     height: 100%;
 
     font-family: 'Futura';
-    color: rgba(79, 98, 194, 0.79);
+    color: rgba(79, 98, 194, 0.78);
 
     background-image: url('/src/assets/images/journey_landing_image.png');
     /* background-image: url('/src/assets/images/headspace.png'); */
+
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
