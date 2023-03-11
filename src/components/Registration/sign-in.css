@@ -26,7 +26,7 @@
     flex-wrap: nowrap;
     align-content: space-around;
 
-    background-image: url(../Images/orange-wallpaper.jpeg);
+    background-image: url(/src/assets/images/orange-wallpaper.jpeg);
 }
 #signin_message {
     width: 446px;
