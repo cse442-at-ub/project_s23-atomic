@@ -89,14 +89,17 @@
     color: rgba(79, 98, 194, 0.79);
 
     background-image: url('/src/assets/images/journey_landing_image.png');
+    /* background-image: url('/src/assets/images/headspace.png'); */
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .landing_page_container h1 {
     font-size: 69px;
     color: rgba(79, 98, 194);
-    margin-top: 6%;
+    margin-top: 90px;
     padding: 0%;
 }
 
