@@ -25,8 +25,8 @@ function App() {
       </header> */}
 
       {/* <Signin /> */}
-      {/* <ChooseHabits /> */}
-      <Landing />
+      <ChooseHabits />
+      {/* <Landing /> */}
 
     </div>
   );
