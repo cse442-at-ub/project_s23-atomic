@@ -1,6 +1,6 @@
 import React from "react"
-import logo from "../images/logo.png"
-import gear from "../images/gearIcon.png"
+import logo from '../../assets/images/atomic_logo.png'
+import gear from '../../assets/images/gearIcon.png'
 
 
 export default function Navbar() {

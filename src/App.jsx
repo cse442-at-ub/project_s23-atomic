@@ -10,6 +10,7 @@ import {
 import Signin from './components/Registration/Signin';
 import ChooseHabits from './components/Registration/ChooseHabits';
 import Landing from './components/Landing/Landing'
+import HomeMain from './components/Homepage/HomeMain';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signin />} />
         <Route path="/choose-habit" element={<ChooseHabits />} />   
+        <Route path="/homepage" element={<HomeMain />} />
       </Routes>    
 
 

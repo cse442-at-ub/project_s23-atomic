@@ -1,20 +1,13 @@
 {
-<<<<<<< HEAD
-  "name": "atom-home",
-  "homepage": "https://www-student.cse.buffalo.edu/~argraca",
-=======
   "name": "app",
->>>>>>> fb5f95d35a3c2bddedc1f910f9019e8a3193ac74
+  "homepage": "https://www-student.cse.buffalo.edu/~argraca",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
-=======
     "jquery": "^3.6.3",
->>>>>>> fb5f95d35a3c2bddedc1f910f9019e8a3193ac74
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
@@ -44,11 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
   },
   "devDependencies": {
     "react-router-dom": "^6.8.2"
-=======
->>>>>>> fb5f95d35a3c2bddedc1f910f9019e8a3193ac74
   }
 }

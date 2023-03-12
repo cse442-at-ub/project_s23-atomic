@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-=======
-/* Original App CSS messes with other component CSS */
->>>>>>> fb5f95d35a3c2bddedc1f910f9019e8a3193ac74
 .App {
   text-align: center;
 }
 
-<<<<<<< HEAD
-.App-logo {
-=======
 /* .App-logo {
->>>>>>> fb5f95d35a3c2bddedc1f910f9019e8a3193ac74
   height: 40vmin;
   pointer-events: none;
 }
@@ -19,11 +11,7 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-<<<<<<< HEAD
-}
-=======
 } */
->>>>>>> fb5f95d35a3c2bddedc1f910f9019e8a3193ac74
 
 .App-header {
   background-color: #282c34;
@@ -36,11 +24,7 @@
   color: white;
 }
 
-<<<<<<< HEAD
-.App-link {
-=======
 /* .App-link {
->>>>>>> fb5f95d35a3c2bddedc1f910f9019e8a3193ac74
   color: #61dafb;
 }
 
@@ -51,8 +35,4 @@
   to {
     transform: rotate(360deg);
   }
-<<<<<<< HEAD
-}
-=======
 } */
->>>>>>> fb5f95d35a3c2bddedc1f910f9019e8a3193ac74
