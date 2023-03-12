@@ -65,8 +65,12 @@
 .nav_button_div  button:hover {
     background-color: rgba(79, 98, 194);
     color:#FFE1A7;
-    
 }
+
+.nav_button_div  button:active {
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+}
+
 
 #navbar_log_in {
     background-color: transparent;
@@ -80,6 +84,16 @@
     color: rgba(79, 98, 194);
 }
 
+#navbar_log_in:hover {
+    transform: translateY(-4px);
+}
+
+#navbar_log_in:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+
 .landing_page_container {
     position: absolute; 
     width: 100%;
@@ -88,8 +102,8 @@
     font-family: 'Futura';
     color: rgba(79, 98, 194, 0.78);
 
-    background-image: url('/src/assets/images/journey_landing_image.png');
-    /* background-image: url('/src/assets/images/headspace.png'); */
+    /* background-image: url('/src/assets/images/journey_landing_image.png'); */
+    background-image: url('/src/assets/images/headspace.png');
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -145,5 +159,12 @@
 
     background-color: rgba(79, 98, 194);
     color:#FFE1A7
+
+}
+
+.landing_button_div button:active {
+
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    transform: translateY(4px);
 
 }

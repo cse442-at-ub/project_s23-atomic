@@ -12,8 +12,8 @@ function Landing() {
                 </div>
                 <div className='nav_button_div'>
                     <label>About Us</label>
-                    <label>FAQ</label>
-                    <button id="navbar_log_in">| Log In</button>
+                    <label>FAQ  |</label>
+                    <button id="navbar_log_in">Log In</button>
                     <button>Sign Up</button>
                 </div>
             </div>
