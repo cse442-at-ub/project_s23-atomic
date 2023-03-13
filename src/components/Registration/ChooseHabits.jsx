@@ -4,13 +4,13 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 
-
-// we want to pass user id to this component when navigating in order to correctly add habits to database 
-// future implementation may use cookies that is handled by php backend
 function ChooseHabits() {
 
-     // use navigate uses Router to navigate to different paths
+    // use navigate uses Router to navigate to different paths
     const navigate = useNavigate();
+    // we want to pass user id to this component when navigating from signin page
+    // in order to correctly add habits to database 
+    // Future implementation may use cookies to do this that is handled by php backend
     // signin.jsx sends state variable user, which holds the new users id, to choosehabits.jsx
     // useLocation is used to get that state
     const { state } = useLocation();
@@ -44,8 +44,6 @@ function ChooseHabits() {
         "Sit All Day": {'counter': 0, 'total': 1, 'details': 'Sitting is addicting. Go on a short walk or get up and clean.','category':'Wellness'},
         "Bite Nails": {'counter': 0, 'total': 5, 'details': 'A habit since childhood. Small steps.','category':'Wellness'},
     }
-
-
 
     // state variable to track whether correct number of habits was chosen
     const [habitBool, setHabitBool] = useState(true);
@@ -134,9 +132,9 @@ function ChooseHabits() {
             // console.log(response.config.data);
             routeHome();
         }).catch(function (error) {
-        console.log("failed to send post request");
-        console.log(error);
-        console.log('error is '+ error.msg);
+            console.log("failed to send post request");
+            console.log(error);
+            console.log('error is '+ error.msg);
         });
     }
 

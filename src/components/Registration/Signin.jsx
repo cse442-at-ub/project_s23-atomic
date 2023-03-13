@@ -138,12 +138,12 @@ function Signin() {
       // php echos back message on response, successful response will contain user id
       const data = (response.data).split('\n');
       if (data[1] === 'Username'){
-        // alert("Username already taken.")
+        alert("Username already taken.")
         error['usermsg'] = "Username is already taken.";
         error['username'] = 'true';
         console.log(error['username'])
       }else if (data[1] === 'Email'){
-        // alert("Email already is use.")
+        alert("Email already is use.")
         error['emailmsg'] = "Email is already in use.";
         error['email'] = 'true';
         console.log(error['email'])

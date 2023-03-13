@@ -7,12 +7,15 @@
 		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); //servername, username, pass, db.
 
 		// the database will have two tables
-		// users: holds id, username, email, password, good_habits, bad_habits
-		// log: holds id, username, email, and dates, which contains json string of all the habits tracked in a date
+		// users table: holds id (int), username, email, password, good_habits, bad_habits
+		// good_habits and bad_habits is a json object that holds all the habits
+		// log table: holds id, username, email, and dates, which contains json object of all the habits tracked in a date
 		// habits in log and users table should have a universal style in the application
 		// for example one habit will contain other information
 		// 'drink water' : {'counter': 0, 'total': 8, details: '', category:''}
-		// in the track table, counter will be incremented up to the total number
+		// in the log table, counter will be incremented up to the total number
+		// dates will look something like {"2023:3:13":{'drink water' : {'counter': 0, 'total': 8, details: '', category:''}}}
+		
 		
 		// Check connection
 		if ($conn->connect_error) {
@@ -31,12 +34,12 @@
 		$good = json_encode($data['good_habits'],JSON_FORCE_OBJECT);
 		$bad = json_encode($data['bad_habits'],JSON_FORCE_OBJECT);
 
-
-		// want to pull out users information from users table
+		// want to pull out users information from users table using id
 		$query = "SELECT * FROM users WHERE id = '{$id}'";
 		$result = mysqli_query($conn,$query);
 		$row = $result->fetch_assoc();
 		
+		// save username and email to add to log table
 		$username = $row["username"];
 		$email = $row["email"];
 
@@ -53,7 +56,8 @@
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }
-		// add habit bjects into users table
+
+		// now add habit objects into users table
 		$sql = "UPDATE users SET `good_habits` = '$good', `bad_habits` = '$bad' WHERE `id` = $id";
         if(mysqli_query($conn, $sql)){
             echo "Records added successfully.\n";
