@@ -37,8 +37,8 @@ function Signin() {
     email: 'true',
     password: 'true',
     confirmPassword: 'true',
-    usermsg: "Username must be at least 3 characters.",
-    emailmsg: "Must provide a valid email."
+    usermsg: "",
+    emailmsg: ""
   };
 
 
@@ -114,7 +114,8 @@ function Signin() {
 
     if (valid_username && valid_email && valid_length && valid_password) {
       // call makePost to make axios post request
-      makePost();
+      const request = await makePost();
+      
     } else {
       console.log('Form submission failed');
       console.log(error)
@@ -134,15 +135,17 @@ function Signin() {
       },
       headers: { "Content-Type": "multipart/form-data" },
     }).then(function (response) {
-      // php echos back message on response, successful respone will contain user id
+      // php echos back message on response, successful response will contain user id
       const data = (response.data).split('\n');
       if (data[1] === 'Username'){
+        // alert("Username already taken.")
         error['usermsg'] = "Username is already taken.";
-        error['username'] = 'false';
+        error['username'] = 'true';
         console.log(error['username'])
       }else if (data[1] === 'Email'){
-        error['emailmsg'] = "Email is already taken.";
-        error['email'] = 'false';
+        // alert("Email already is use.")
+        error['emailmsg'] = "Email is already in use.";
+        error['email'] = 'true';
         console.log(error['email'])
       }else{
         // successful submit will navigate to next page
@@ -150,8 +153,8 @@ function Signin() {
         console.log(response)
         console.log(response.data);
         // initialize original error messages
-        error['usermsg'] = "Username must be at least 3 characters."
-        error['emailmsg'] = "Must provide a valid email."
+        error['usermsg'] = ""
+        error['emailmsg'] = ""
         error['email'] = 'true'
         error['username'] = 'true'
         routeChooseHabits(parseInt(data[1]));
@@ -208,10 +211,12 @@ function Signin() {
           <form id="signin_form" action="#" method="post" onSubmit={handleSubmit}>
             <label id="username_label">Username</label>
             <input id="username_input" type="text" placeholder="At least 3 characters" onChange={changeUsername}/>
-            <small id="username_error">{error['username'] !== 'true' ? error['usermsg'] : ""}</small>
+            <small id="username_error">{error['username'] !== 'true' ? "Username must be at least 3 characters." : ""}</small>
+            <small id="email_error">{error['usermsg']}</small>
             <label id="email_label">Email</label>
             <input id="email_input" type="email" placeholder="Enter your email" onChange={changeEmail}/>
-            <small id="email_error">{error['email'] !== 'true' ? error['emailmsg'] : ""}</small>
+            <small id="email_error">{error['email'] !== 'true' ? "Must provide a valid email." : ""}</small>
+            <small id="email_error">{error['emailmsg']}</small>
             <label id="password_label">Password</label>
             <input id="password_input" type="password" placeholder="Must be at least 8 characters" onChange={changePassword}/>
             <small id="password_error">{error['password'] !== 'true' ? "Password must be at least 8 characters." : ""}</small>
