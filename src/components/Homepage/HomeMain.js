@@ -6,7 +6,9 @@ import './style.css'
 export default function HomeMain() {
     return (
     <div className="mainContainer">
-    <button className="createButton">Create New</button>    
+    <Link to="/create">
+    <button className="createButton">Create New</button>   
+    </Link> 
 
     <p className="healthHabitsList">  </p>
     <h2 className="healthHabits"></h2>
