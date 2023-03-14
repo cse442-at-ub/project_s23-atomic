@@ -7,6 +7,9 @@ import LoginCharacter from "../../assets/images/login-character.png"
 function Login() {
     return(
         <>
+        <div id="login-back-link">
+            <a href="">&lt; Back</a>
+        </div>
         <div className="login-container">
             <div id="login-main">
                 <div id="login-greeting">

@@ -53,6 +53,19 @@ input[type="submit"]:active {
     translate: 3px 3px;
 }
 
+#login-back-link {
+    font-size: 36px;
+    text-align: left;
+
+    margin: 50px 0px 0px 100px;
+}
+
+#login-back-link a {
+    color: rgba(79, 98, 194, 0.75);
+    cursor: pointer;
+    text-decoration-line: none;  
+  }
+
 #login-greeting img {
     height: 400px;
 }
