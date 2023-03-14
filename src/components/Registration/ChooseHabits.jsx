@@ -4,13 +4,17 @@ import { useState } from 'react';
 
 function ChooseHabits() {
 
+    // state variable to track whether correct number of habits was chosen
     const [habitBool, setHabitBool] = useState(true);
+    // counts the number of habits chosen
     const [habitCounter, setHabitCounter] = useState(0);
+    // adds habits to their corresponding list (plain string)
     const [habitList, setHabitList] = useState({
         dailyHabits: [],
         habitsToStop: []
     });
 
+    // function to increment or decrement habit counter variable when a habit is selected
     const countHabits = (event) => {
         if (event.target.checked) {
             setHabitCounter(habitCounter + 1);
@@ -19,6 +23,7 @@ function ChooseHabits() {
         }
     }
 
+    // adds or removes habit to/from correct list based on good habit chosen
     const addHabit = (event) => {
         countHabits(event);
         if (event.target.checked) {
@@ -34,6 +39,7 @@ function ChooseHabits() {
         }
     }
 
+    // adds or removes habit to/from correct list based on bad habit chosen
     const addHabitToStop = (event) => {
         countHabits(event);
         if (event.target.checked) {
@@ -49,6 +55,8 @@ function ChooseHabits() {
         }
     }
 
+
+    // handles submiting of form; checks whether 3 or more habits were chosen
     const handleSubmit = (event) => {
         if (habitCounter < 3) {
             setHabitBool(false); 
