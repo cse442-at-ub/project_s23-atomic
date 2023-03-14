@@ -114,12 +114,15 @@ function ChooseHabits() {
     }
 
     // use axios to send the post request to php server
+    // localhost is the php server tht is created when you cd into PHP and run php -S localhost:8000
+    // need to have actual url to access server
     const makePost = async() => {
         let good_habits_object = makeObject(habitList.dailyHabits, true);
         let bad_habits_object = makeObject(habitList.habitsToStop, false);
         await axios({
         method: "post",
         url: "http://localhost:8000/addhabit.php",
+        // url: "https://www-student.cse.buffalo.edu/~argraca/addhabit.php",
         data: {
             id: state.user,
             good_habits: good_habits_object,

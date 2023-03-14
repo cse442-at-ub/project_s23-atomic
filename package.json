@@ -1,5 +1,6 @@
 {
   "name": "app",
+  "homepage": "https://www-student.cse.buffalo.edu/~argraca",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

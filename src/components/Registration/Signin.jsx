@@ -3,7 +3,8 @@ import './sign-in.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+// this is the address to connect to the php server when making axios request
+// https://www-student.cse.buffalo.edu/~argraca
 function Signin() {
 
   // use navigate uses Router to navigate to different paths
@@ -17,7 +18,7 @@ function Signin() {
     navigate(path)
   }
   const routeLanding = () =>{
-    let path = '/'
+    let path = '/~argraca'
     navigate(path)
   }
 
@@ -124,10 +125,13 @@ function Signin() {
   };
 
   // use axios to send the post request to php server
+  // localhost is the php server tht is created when you cd into PHP and run php -S localhost:8000
+  // need to have actual url to access server
   const makePost = async() => {
     await axios({
       method: "post",
       url: "http://localhost:8000/insert.php",
+      // url: "https://www-student.cse.buffalo.edu/~argraca/insert.php",
       data: {
         username: username,
         email: email,
