@@ -125,7 +125,7 @@ function Signin() {
   };
 
   // use axios to send the post request to php server
-  // localhost is the php server tht is created when you cd into PHP and run php -S localhost:8000
+  // localhost is the php server tht is created when you cd into PHP directory and run php -S localhost:8000
   // need to have actual url to access server
   const makePost = async() => {
     await axios({

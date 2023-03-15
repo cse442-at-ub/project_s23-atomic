@@ -21,8 +21,11 @@ function Landing() {
         <div className="landing_page_container">
             <div className='landing_navbar'>
                 <div className='logo_div'>
-                    <img src={Logo} alt="atom logo" style={{width: 40, height: 40}}></img>
-                    <label>Atomic</label>
+                    <img src={Logo} alt="atom logo" style={{width: 50, height: 50}}></img>
+                    <div id="app_name_nav">
+                        <label>Atomic</label>
+                        <label>Habits for Life</label>
+                    </div>
                 </div>
                 <div className='nav_button_div'>
                     <label>About Us</label>
