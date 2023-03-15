@@ -1,8 +1,27 @@
 import React from 'react';
 import './sign-in.css';
+import axios from 'axios';
 import { useState } from 'react';
-
+import { useNavigate } from "react-router-dom";
+// this is the address to connect to the php server when making axios request
+// https://www-student.cse.buffalo.edu/~argraca
 function Signin() {
+
+  // use navigate uses Router to navigate to different paths
+  const navigate = useNavigate();
+  const routeChooseHabits = (id) =>{ 
+      let path = `/choose-habit`; 
+      navigate(path, {state: {user: id}});
+  }
+  const routeLogin = () =>{
+    let path = '/login'
+    navigate(path)
+  }
+  const routeLanding = () =>{
+    let path = '/~argraca'
+    navigate(path)
+  }
+
 
   // state variables for the form inputs: username, email, password, and confirm password
   const [username, setUsername] = useState('');
@@ -10,13 +29,19 @@ function Signin() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+
   // state variable to track where errors occur in the form
+  // emailmsg and usermsg are used in order to change the error message when the 
+  // email or username is not unique after checking the database and receiving the response
   let error = {
     username: 'true',
     email: 'true',
     password: 'true',
-    confirmPassword: 'true'
+    confirmPassword: 'true',
+    usermsg: "",
+    emailmsg: ""
   };
+
 
   // functions to update the state variables when the user types in the form inputs
   const changeUsername = (event) => { 
@@ -75,7 +100,9 @@ function Signin() {
 
 
   // function to handle the form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+    
     let valid_username = checkUsername();
     let valid_email = checkEmail(email);
     // email regex check will return true if email is empty
@@ -87,15 +114,61 @@ function Signin() {
     let valid_password = checkPassword();
 
     if (valid_username && valid_email && valid_length && valid_password) {
-      console.log('Form submitted successfully');
+      // call makePost to make axios post request
+      const request = await makePost();
+      
     } else {
-      event.preventDefault();
       console.log('Form submission failed');
       console.log(error)
       console.log(error['username'] === 'false')
     }
-    
   };
+
+  // use axios to send the post request to php server
+  // localhost points to the php server tht is created when you cd into PHP directory and run php -S localhost:8000
+  // need to have actual url to access server
+  const makePost = async() => {
+    await axios({
+      method: "post",
+      url: "http://localhost:8000/insert.php",
+      // url: "https://www-student.cse.buffalo.edu/~argraca/insert.php",
+      data: {
+        username: username,
+        email: email,
+        password: password,
+      },
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then(function (response) {
+      // php echos back message on response, successful response will contain user id
+      const data = (response.data).split('\n');
+      if (data[1] === 'Username'){
+        alert("Username already taken.")
+        error['usermsg'] = "Username is already taken.";
+        error['username'] = 'true';
+        console.log(error['username'])
+      }else if (data[1] === 'Email'){
+        alert("Email already is use.")
+        error['emailmsg'] = "Email is already in use.";
+        error['email'] = 'true';
+        console.log(error['email'])
+      }else{
+        // successful submit will navigate to next page
+        console.log("success");
+        console.log(response)
+        console.log(response.data);
+        // initialize original error messages
+        error['usermsg'] = ""
+        error['emailmsg'] = ""
+        error['email'] = 'true'
+        error['username'] = 'true'
+        routeChooseHabits(parseInt(data[1]));
+      }
+    }).catch(function (error) {
+      console.log("failed to send post request");
+      console.log(error);
+      console.log('error is '+ error.msg);
+    });
+  }
 
   // function to handle errors 
   const handleErrors = () => {
@@ -132,20 +205,22 @@ function Signin() {
         <div className="message_div">
           <h2 id="signin_message">Start your journey to building strong habits</h2>
           <p id="account_question">Already Have An Account?
-            <button id="login_button">Log In</button>
+            <button id="login_button" onClick={routeLogin}>Log In</button>
           </p>
-          <button id="back_buton">↵</button>
+          <button id="back_buton" onClick={routeLanding}>↵</button>
         </div>
 
         <div className="signin_div">
           <h2 id="signin_header">Create Your Account</h2>
-          <form id="signin_form" onSubmit={handleSubmit}>
+          <form id="signin_form" action="#" method="post" onSubmit={handleSubmit}>
             <label id="username_label">Username</label>
             <input id="username_input" type="text" placeholder="At least 3 characters" onChange={changeUsername}/>
             <small id="username_error">{error['username'] !== 'true' ? "Username must be at least 3 characters." : ""}</small>
+            <small id="email_error">{error['usermsg']}</small>
             <label id="email_label">Email</label>
             <input id="email_input" type="email" placeholder="Enter your email" onChange={changeEmail}/>
             <small id="email_error">{error['email'] !== 'true' ? "Must provide a valid email." : ""}</small>
+            <small id="email_error">{error['emailmsg']}</small>
             <label id="password_label">Password</label>
             <input id="password_input" type="password" placeholder="Must be at least 8 characters" onChange={changePassword}/>
             <small id="password_error">{error['password'] !== 'true' ? "Password must be at least 8 characters." : ""}</small>
