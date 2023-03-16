@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./login.css"
 
 import LoginCharacter from "../../assets/images/login-character.png"
 
 function Login() {
+
+    const [login, setLogin] = useState({
+        username: "",
+        password: "",
+    })
+
+    const setUsername = (event) => {
+        setLogin({ ...login, username: event.target.value });
+    };
+    const setPassword = (event) => {
+        setLogin({ ...login, password: event.target.value });
+    };
+
+    // function to handle the form submission
+    const handleSubmit = async(event) => {
+    event.preventDefault();
+    
+    const request = await makePost();
+    };
+
+    // Need to make makePost() still
+
+
     return(
         <>
         <div id="login-back-link">
@@ -17,7 +40,7 @@ function Login() {
                     <img src={LoginCharacter} alt="login-character" />
                 </div>
                 <div id="login-form">
-                    <form>
+                    <form method="post" onSubmit={handleSubmit}>
                         <div className="login-form-field">
                             <label>
                                 <h6>Username</h6>
