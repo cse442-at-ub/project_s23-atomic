@@ -4,7 +4,7 @@ import './App.css';
 
 import {
   BrowserRouter,
-  BrowserRouter as Router, Route, Routes
+  BrowserRouter as Navigate, Route, Routes
 } from 'react-router-dom';
 
 import Signin from './components/Registration/Signin';
@@ -25,7 +25,9 @@ function App() {
       {/* // defines what path display which component */}
       {/* may need to change to work with php, but can be used for frontend testing purposes */}
       <Routes>
-        <Route path="/" element={<Landing />} />
+        {/* // root usually is  path / so redirect / path to correct root path */}
+        {/* <Route path='/' element={<Navigate to='/~argraca' />} /> */}
+        <Route path="/~argraca" element={<Landing />} />
         <Route path="/signup" element={<Signin />} />
         <Route path="/choose-habit" element={<ChooseHabits />} />   
         <Route path="/homepage" element={<HomeMain />} />
