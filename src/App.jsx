@@ -11,6 +11,10 @@ import Signin from './components/Registration/Signin';
 import ChooseHabits from './components/Registration/ChooseHabits';
 import Landing from './components/Landing/Landing'
 import HomeMain from './components/Homepage/HomeMain';
+import Statistics from './components/Statistics/Stats';
+import Settings from './components/Settings/settings'
+import Information from './components/Information/Info'
+import CreateNew from './components/CreateNew/create'
 
 function App() {
   return (
@@ -27,7 +31,10 @@ function App() {
         <Route path="/signup" element={<Signin />} />
         <Route path="/choose-habit" element={<ChooseHabits />} />   
         <Route path="/homepage" element={<HomeMain />} />
-        {/* <Route path="/login" element={< />} /> */}
+        <Route path="/statistics" element={<Statistics />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/information" element={<Information />} />
+        <Route path="/create" element={<CreateNew />} />
       </Routes>    
 
 
