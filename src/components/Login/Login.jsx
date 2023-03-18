@@ -25,41 +25,8 @@ function Login() {
     const request = await makePost();
     };
 
-    // need to have actual url to access server
-    const makePost = async() => {
-        await axios({
-        method: "post",
-        url: "http://localhost:8000/insert.php",
-        // url: "https://www-student.cse.buffalo.edu/~argraca/insert.php",
-        data: {
-            username: username,
-            password: password,
-        },
-        headers: { "Content-Type": "multipart/form-data" },
-        }).then(function (response) {
-        // php echos back message on response, successful response will contain user id
-        const data = (response.data).split('\n');
+    // Need to make makePost() still
 
-        // Need if-else conditionals incase user doesn't exist
-
-        // }else{
-            // successful submit will navigate to next page
-            console.log("success");
-            console.log(response)
-            console.log(response.data);
-            // initialize original error messages
-            error['usermsg'] = ""
-            error['emailmsg'] = ""
-            error['email'] = 'true'
-            error['username'] = 'true'
-            routeChooseHabits(parseInt(data[1]));
-        // }
-        }).catch(function (error) {
-        console.log("failed to send post request");
-        console.log(error);
-        console.log('error is '+ error.msg);
-        });
-    }
 
     return(
         <>
