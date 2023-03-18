@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useNavigate } from "react";
 
 import "./login.css"
 
@@ -22,10 +22,47 @@ function Login() {
     const handleSubmit = async(event) => {
     event.preventDefault();
     
-    const request = await makePost();
+    // const request = await makePost();
     };
 
-    // Need to make makePost() still
+    // const navigate = useNavigate(); // Allows usage of navigate() to go to a specified page
+
+    // Path to go to Choose Habits page after logging in
+    // const routeChooseHabits = (id) =>{ 
+    //     let path = `/choose-habit`; 
+    //     navigate(path, {state: {user: id}});
+    // }
+
+    // need to have actual url to access server
+    // const makePost = async() => {
+    //     await axios({
+    //     method: "post",
+    //     url: "http://localhost:8000/insert.php",
+    //     // url: "https://www-student.cse.buffalo.edu/~argraca/insert.php",
+    //     data: {
+    //         username: login.username,
+    //         password: login.password,
+    //     },
+    //     headers: { "Content-Type": "multipart/form-data" },
+    //     }).then(function (response) {
+    //     // php echos back message on response, successful response will contain user id
+    //     const data = (response.data).split('\n');
+
+    //     // Need if-else conditionals incase user doesn't exist
+
+    //     // }else{
+    //         // successful submit will navigate to next page
+    //         console.log("success");
+    //         console.log(response)
+    //         console.log(response.data);
+    //         routeChooseHabits(parseInt(data[1]));
+    //     // }
+    //     }).catch(function (error) {
+    //     console.log("failed to send post request");
+    //     console.log(error);
+    //     console.log('error is '+ error.msg);
+    //     });
+    // }
 
 
     return(
