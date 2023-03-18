@@ -7,6 +7,7 @@ import {
   BrowserRouter as Navigate, Route, Routes
 } from 'react-router-dom';
 
+import Login from './components/Login/Login';
 import Signin from './components/Registration/Signin';
 import ChooseHabits from './components/Registration/ChooseHabits';
 import Landing from './components/Landing/Landing'
@@ -28,6 +29,8 @@ function App() {
         {/* // root usually is  path / so redirect / path to correct root path */}
         {/* <Route path='/' element={<Navigate to='/~argraca' />} /> */}
         <Route path="/~argraca" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signin />} />
         <Route path="/choose-habit" element={<ChooseHabits />} />   
         <Route path="/homepage" element={<HomeMain />} />
