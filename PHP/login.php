@@ -1,6 +1,6 @@
 <?php
 // connecting the database with your device info
-$db = mysqli_connect("host_name", "username", "password", "database");
+$db = mysqli_connect("localhost", "root", "", "users"); //hostName, username, password, database
 
 //retrieving username and password of user
 $username = $_POST['username'];
