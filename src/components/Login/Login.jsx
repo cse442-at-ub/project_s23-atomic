@@ -68,7 +68,7 @@ function Login() {
     return(
         <>
         <div id="login-back-link">
-            <a href="">&lt; Back</a>
+            <a href="/">&lt; Back</a>
         </div>
         <div className="login-container">
             <div id="login-main">
