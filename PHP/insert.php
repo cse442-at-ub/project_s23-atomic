@@ -7,7 +7,7 @@
 		// servername, username, password, database name.
 		// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
 		// this is our groups database
-		// $conn = mysqli_connect("oceanus.cse.buffalo.edu:3306 ", "karlitho", "50308831", "cse442_2023_spring_team_q_db"); //servername, username, pass, db.
+		// $conn = mysqli_connect("oceanus.cse.buffalo.edu:3306 ", , , ); //servername, username, pass, db.
 
 
 		// the database will have one table for now
