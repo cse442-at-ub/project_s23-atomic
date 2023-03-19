@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.landing_navbar {
+    position: absolute; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+
+    background-color: #FFE1A7;
+    color: rgba(79, 98, 194);
+    
+    font-family: 'Futura';
+}   
+
+.logo_div {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align:left;
+}
+
+#app_name_nav{
+    display: flex;
+    flex-direction: column;
+}
+
+.logo_div label{
+    margin-left: 20px;
+    align-items:flex-start;
+    justify-content: flex-start;
+}
+
+.nav_button_div {
+    position: relative;
+    align-items: flex-end;
+
+    padding: 10px;
+}
+
+.nav_button_div label{
+    margin-left: 10px;
+    cursor: pointer;
+
+    font-size: 22px;
+}
+
+
+.nav_button_div button{
+    position: relative;
+    align-items: flex-end;
+    cursor: pointer;
+
+    height: 45px;
+    width: 130px;
+
+    border-radius: 20px;
+    border: none;
+
+    font-size: 28px;
+    font-family: 'Futura';
+
+    border: 2px rgba(79, 98, 194) solid;
+    color:rgba(79, 98, 194);
+    background-color: #FFE1A7;
+}
+
+.nav_button_div  button:hover {
+    background-color: rgba(79, 98, 194);
+    color:#FFE1A7;
+}
+
+.nav_button_div  button:active {
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+}
+
+
+#navbar_log_in {
+    background-color: transparent;
+    height: 45px;
+    width: 130px;
+    font-size: 1.5em;
+    border: none;
+    font-size: 28px;
+    font-family: 'Futura';
+
+    color: rgba(79, 98, 194);
+}
+
+#navbar_log_in:hover {
+    transform: translateY(-4px);
+}
+
+#navbar_log_in:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+
+.landing_page_container {
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+
+    font-family: 'Futura';
+    color: rgba(79, 98, 194, 0.78);
+
+    /* background-image: url('/src/assets/images/journey_landing_image.png'); */
+    background-image: url('/src/assets/images/headspace.png');
+    /* background-image: url('/src/assets/images/orange-background.jpg'); */
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.landing_page_container h1 {
+    font-size: 69px;
+    color: rgba(79, 98, 194);
+    margin-top: 90px;
+    padding: 0%;
+}
+
+.landing_page_container p {
+    font-size: 22px;
+    padding: 0px;
+}
+
+#mantra {
+    font-size: 34px;
+    padding: 2px;
+}
+
+.landing_button_div {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+
+    top: 25%;
+}
+
+.landing_button_div button {
+    color: rgba(79, 98, 194);
+    background-color: #FFE1A7;
+    padding: 10px;
+    margin: 30px;
+
+    width: 200px;
+    height: 90px;
+
+    font-size: 42px;
+    font-family: 'Futura';
+
+    border: none;
+    cursor: pointer;
+}
+
+.landing_button_div button:hover {
+
+    background-color: rgba(79, 98, 194);
+    color:#FFE1A7
+
+}
+
+.landing_button_div button:active {
+
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    transform: translateY(4px);
+
+}

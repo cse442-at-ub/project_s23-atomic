@@ -1,0 +1,80 @@
+.login-container {
+    text-align: left;
+    min-height: 100vh; /* Make sure elements extend to bottom of page */
+
+    /* Note: background is currently controlled by style.css (homepage dedicated css) */
+}
+
+#login-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    font-size: 48px;
+    font-weight: normal;
+    text-align: center;
+    margin-top: 0px;
+}
+
+h6 {
+    font-size: 18px;
+    font-weight: lighter;
+    margin: 0;
+}
+
+input[type="text"],
+input[type="password"] {
+    font-size: 20px;
+
+    background: rgba(254, 213, 140, 0.25);
+    border: 3px solid rgba(79, 98, 194, 0.7);
+    border-radius: 10px;
+
+    margin: 5px 0px;
+    padding: 10px 15px;
+}
+
+#login-submit {
+    margin-top: 60px;
+}
+
+input[type="submit"] {
+    font-size: 24px;
+    
+    background: rgba(79, 98, 194, 0.75);
+    border-radius: 10px;
+
+    padding: 10px 10px;
+    width: 100%;
+}
+input[type="submit"]:hover {
+    background: rgba(39, 68, 210, 0.75);
+    cursor: pointer;
+}
+input[type="submit"]:active {
+    border: 0;
+    translate: 3px 3px;
+}
+
+#login-back-link {
+    font-size: 36px;
+    text-align: left;
+
+    margin: 25px 0px 0px 100px;
+}
+
+#login-back-link a {
+    color: rgba(79, 98, 194, 0.75);
+    cursor: pointer;
+    text-decoration-line: none;  
+  }
+
+#login-greeting img {
+    height: 400px;
+}
+
+.login-form-field{
+    margin: 20px 0px;
+}

@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.choose_habits_container {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(/src/assets/images/orange-background.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: 'Inter', sans-serif;
+    color: rgba(79, 98, 194, 0.75);
+
+}
+
+.choose_habits_div {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 70%;
+    height: 90%;
+
+    left: 12%;
+    top: 5%;
+    right: 25%;
+
+    background: #FFFFFF;
+}
+#choose_habits_header {
+    font-style: normal;
+    font-size: 64px;
+    text-align: center;
+    padding: 0%;
+    margin: 15px;
+}
+#choose_habits_message {
+    text-align: center;
+    font-style: normal;
+    font-style: italic;
+    font-weight: bolder;
+    font-size: 48px;
+    padding: 0%;
+    margin: 15px;
+    color: rgba(79, 98, 194);
+}
+
+#warning_message {
+    text-align: center;
+    font-style: italic;
+    font-weight: bolder;
+    font-size: 48px;
+    transform: scale(1.3);
+    padding: 0%;
+    margin: 15px;
+    color: red;
+}
+
+.choose_habits_div small {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+    padding: 0%;
+}
+
+#choose_habits_form {
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+    margin: 25px;
+}
+
+#habit_heading {
+    font-style: normal;
+    font-size: 40px;
+    line-height: 58px;
+    padding: 0%;
+    text-align: left;
+    margin-left: 25px;
+}
+
+#habit_label {
+    font-style: normal;
+    font-size: 32px;
+    line-height: 58px;
+    text-align: center;
+    padding: 0%;
+}
+
+.habit_group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 0%;
+    margin: 0px;
+}
+
+.habit_group ul {
+    list-style-type: none;
+    column-count: 2;
+    padding: 0%;
+    margin-left: 55px;
+    margin-top: 0px;
+    width: 100%;
+}
+
+.habit_group li {
+    font-size: 35px;
+    padding: 3px;
+    margin: 0px;
+    text-align: left;
+}
+
+.habit_group input[type="checkbox"]{
+    cursor: pointer;
+    padding: 5px;
+    margin: 15px;
+}
+
+.button_group {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    align-content: flex-end;
+    justify-content: flex-start;
+
+    width: 100%;
+    padding: 0%;
+    margin-right: 80px;
+    margin-bottom: 2%;
+
+    font-family: 'Inter', sans-serif;
+}
+.button_group button{
+    width: 12%;
+    float: right;
+    height: 45px;
+    cursor: pointer;
+    margin: 10px;
+
+    font-style: normal;
+    font-size: 24px;
+    text-align: center;
+    color: #FFFFFF;
+
+    background: rgba(79, 98, 194, 0.75);
+    border-radius: 8px;
+}
