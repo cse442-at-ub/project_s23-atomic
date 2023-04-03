@@ -3,8 +3,7 @@ import './sign-in.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-// this is the address to connect to the php server when making axios request
-// https://www-student.cse.buffalo.edu/~argraca
+
 function Signin() {
 
   // use navigate uses Router to navigate to different paths
@@ -131,7 +130,6 @@ function Signin() {
     await axios({
       method: "post",
       url: "http://localhost:8000/insert.php",
-      // url: "https://www-student.cse.buffalo.edu/~argraca/insert.php",
       data: {
         username: username,
         email: email,
@@ -207,7 +205,7 @@ function Signin() {
           <p id="account_question">Already Have An Account?
             <button id="login_button" onClick={routeLogin}>Log In</button>
           </p>
-          <button id="back_buton" onClick={routeLanding}>↵</button>
+          <button id="back_buton" onClick={routeLanding}>&lt; Back</button>
         </div>
 
         <div className="signin_div">

@@ -122,7 +122,6 @@ function ChooseHabits() {
         await axios({
         method: "post",
         url: "http://localhost:8000/addhabit.php",
-        // url: "https://www-student.cse.buffalo.edu/~argraca/addhabit.php",
         data: {
             id: state.user,
             good_habits: good_habits_object,
