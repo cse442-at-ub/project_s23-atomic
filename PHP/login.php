@@ -5,6 +5,10 @@ session_start();
 	include("connection.php");
 	include("functions.php");
 
+	if(isset($_COOKIE["cookieboy"]))
+	{
+		header("Location: index.php"); //if cookie is already set, user should not be able to access login page, they should be redirected to index.
+	}
 
 	if($_SERVER['REQUEST_METHOD'] == "POST")
 	{
@@ -30,7 +34,8 @@ session_start();
 					{
 
 						$_SESSION['user_id'] = $user_data['user_id'];
-						header("Location: index.php");
+						setcookie("cookieboy", $user_data['user_name'], time()+3600); //setting cookie for an hour with username as the cookie value
+						header("Location: index.php"); //redirecting to index page.
 						die;
 					}
 				}
