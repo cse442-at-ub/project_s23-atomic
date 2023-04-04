@@ -9,7 +9,7 @@
 .options_title_container h2 {
     font-size: 3.5em;
     font-weight: 700;
-    color: rgba(79, 98, 194, 0.75);
+    color: rgba(79, 98, 194);
     margin: 10px;
     height: 130px;
     padding: 0;
@@ -34,7 +34,7 @@
 }
 .preset_option_container {
     width: 40%;
-    height: 30vw;
+    height: 35vw;
     word-wrap: normal;
     padding: 16px;
 }
@@ -47,7 +47,7 @@
 
 .custom_option_container {
     width: 40%;
-    height: 30vw;
+    height: 35vw;
     word-wrap: normal;
     padding: 16px;
 }
@@ -59,7 +59,7 @@
 }
 
 .border {
-    height: 30vw;
+    height: 35vw;
     border: 3px solid rgba(79, 98, 194);
 }
 
@@ -82,24 +82,36 @@
 }
 
 @media screen and (max-width: 600px) {
+    #link {
+        margin-top: 30%;
+    }
     .options_title_container  {
-        margin-top: 35%;
+        margin-top: 5%;
         display: flex;
         flex-direction: column;
+    }
+    .options_title_container h2 {
+        font-size: 34px;
     }
     .preset_option_container {
         width: 80%;
         height: 50%;
         word-wrap: normal;
         border-right: none;
-        border-bottom: 3px solid rgba(79, 98, 194);
+        font-size: 12px;
+        margin: 10px;
     }
     .custom_option_container {
         width: 80%;
-        height: 70%;
+        height: 50%;
         word-wrap: normal;
         border-left: none;
-        border-top: 3px solid rgba(79, 98, 194);
+        font-size: 12px;
+        margin: 10px;
+    }
+    .border {
+        height: 1vw;
+        border-bottom: 2px solid rgba(79, 98, 194);
     }
 }
 

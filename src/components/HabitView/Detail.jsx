@@ -33,12 +33,11 @@ function Detail(){
     };
 
     useEffect(() => {
-        let error = true;
-        if(state.added && error){
+        if (sessionStorage.getItem("added") === "true"){
+            sessionStorage.setItem("added","false");
             notify();
-            error = false;
         }
-      }, [state.added]);
+      }, []);
 
     return(
         <div className="detail_wrapper">

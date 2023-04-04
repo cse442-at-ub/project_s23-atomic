@@ -25,6 +25,7 @@ function Suggestions(){
         const sum = habit["counter"];
         const t = habit["total"];
         const path = '/detail';
+        sessionStorage.setItem("added","true")
         navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t, added: true}});
     }
 
