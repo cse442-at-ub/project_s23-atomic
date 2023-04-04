@@ -13,7 +13,7 @@ export default function Navbar() {
             <h3 className="nav--subtitle"> Habits For Life </h3>
         </button>
             <Link to="/statistics">
-                <button onClick="location.href='localhost:3000/signup'" className="nav--stats"> Statistics</button>
+                <button className="nav--stats"> Statistics</button>
             </Link>
             <Link to="/information">
             <button className="nav--info"> Information</button>

@@ -21,6 +21,10 @@ background: #F69335;
 
 }
 
+.nav--homeButton:hover{
+    cursor: pointer;
+}
+
 .nav--title{
     /* Atomic */
 
@@ -127,6 +131,10 @@ height: 46px;
 right: 120px;
 top: 25px;
 
+}
+
+.date_container {
+    margin-top: 8%;
 }
 
 .schoolHabitsList{

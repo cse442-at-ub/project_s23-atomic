@@ -3,6 +3,8 @@ import './sign-in.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signin() {
 
@@ -97,6 +99,14 @@ function Signin() {
     return valid
   }
 
+  // use toastify to notify user on error for username or email that's already in use
+  const notify = (error)=>{
+    if(error === "Username"){
+      toast.error('Username Already In Use',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
+    }else{
+      toast.error('Email already in Use.',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
+    }   
+  }
 
   // function to handle the form submission
   const handleSubmit = async(event) => {
@@ -140,15 +150,17 @@ function Signin() {
       // php echos back message on response, successful response will contain user id
       const data = (response.data).split('\n');
       if (data[1] === 'Username'){
-        alert("Username already taken.")
+        // alert("Username already taken.")
         error['usermsg'] = "Username is already taken.";
         error['username'] = 'true';
+        notify("Username")
         console.log(error['username'])
       }else if (data[1] === 'Email'){
-        alert("Email already is use.")
+        // alert("Email already is use.")
         error['emailmsg'] = "Email is already in use.";
         error['email'] = 'true';
         console.log(error['email'])
+        notify("Email")
       }else{
         // successful submit will navigate to next page
         console.log("success");
@@ -201,32 +213,37 @@ function Signin() {
     <div className='signin_container'>
 
         <div className="message_div">
-          <h2 id="signin_message">Start your journey to building strong habits</h2>
-          <p id="account_question">Already Have An Account?
-            <button id="login_button" onClick={routeLogin}>Log In</button>
-          </p>
-          <button id="back_buton" onClick={routeLanding}>&lt; Back</button>
+          <div className='message_wrapper'>
+            <h2 id="signin_message">Start your journey to building strong habits</h2>
+            <p id="account_question">Already Have An Account?
+              <button id="login_button" onClick={routeLogin}>Log In</button>
+            </p>
+            <button id="back_buton" onClick={routeLanding}>&lt; Back</button>
+          </div>
         </div>
 
         <div className="signin_div">
-          <h2 id="signin_header">Create Your Account</h2>
-          <form id="signin_form" action="#" method="post" onSubmit={handleSubmit}>
-            <label id="username_label">Username</label>
-            <input id="username_input" type="text" placeholder="At least 3 characters" onChange={changeUsername}/>
-            <small id="username_error">{error['username'] !== 'true' ? "Username must be at least 3 characters." : ""}</small>
-            <small id="email_error">{error['usermsg']}</small>
-            <label id="email_label">Email</label>
-            <input id="email_input" type="email" placeholder="Enter your email" onChange={changeEmail}/>
-            <small id="email_error">{error['email'] !== 'true' ? "Must provide a valid email." : ""}</small>
-            <small id="email_error">{error['emailmsg']}</small>
-            <label id="password_label">Password</label>
-            <input id="password_input" type="password" placeholder="Must be at least 8 characters" onChange={changePassword}/>
-            <small id="password_error">{error['password'] !== 'true' ? "Password must be at least 8 characters." : ""}</small>
-            <label id="confirm_password_label">Confirm Password</label>
-            <input id="confirm_password_input" type="password" placeholder="Confirm your password" onChange={changeConfirmPassword}/>
-            <small id="confirm_password_error">{error['confirmPassword'] !== 'true' ? "Passwords do not match." : ""}</small>
-            <button id="create_account_button" type='submit'>Continue</button>
-          </form>
+          <div className='signin_wrapper'>
+          <ToastContainer />
+            <h2 id="signin_header">Create Your Account</h2>
+            <form id="signin_form" action="#" method="post" onSubmit={handleSubmit}>
+              <label id="username_label">Username</label>
+              <input id="username_input" type="text" placeholder="At least 3 characters" onChange={changeUsername} required/>
+              <small id="username_error">{error['username'] !== 'true' ? "Username must be at least 3 characters." : ""}</small>
+              <small id="email_error">{error['usermsg']}</small>
+              <label id="email_label">Email</label>
+              <input id="email_input" type="email" placeholder="Enter your email" onChange={changeEmail} required/>
+              <small id="email_error">{error['email'] !== 'true' ? "Must provide a valid email." : ""}</small>
+              <small id="email_error">{error['emailmsg']}</small>
+              <label id="password_label">Password</label>
+              <input id="password_input" type="password" placeholder="Must be at least 8 characters" onChange={changePassword} required/>
+              <small id="password_error">{error['password'] !== 'true' ? "Password must be at least 8 characters." : ""}</small>
+              <label id="confirm_password_label">Confirm Password</label>
+              <input id="confirm_password_input" type="password" placeholder="Confirm your password" onChange={changeConfirmPassword} required/>
+              <small id="confirm_password_error">{error['confirmPassword'] !== 'true' ? "Passwords do not match." : ""}</small>
+              <button id="create_account_button" type='submit'>Continue</button>
+            </form>
+          </div>
         </div>
 
     </div>

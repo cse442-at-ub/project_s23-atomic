@@ -5,7 +5,7 @@
         // create connection
 		// this is the database I used to test locally
 		// servername, username, password, database name.
-		// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
+		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
 
 		// this is our groups database
 		// $conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
@@ -14,11 +14,15 @@
 		// the database will have one table for now
 		// users table: holds id (int), username, email, password, good_habits, bad_habits, and dates
 		// good_habits and bad_habits is a json object that holds all the habits as objects
-		// habits in log and users table should have a universal style in the application
+		// habits in users table should have a universal style in the application
 		// for example one habit will contain other information
-		// 'drink water' : {'counter': 0, 'total': 8, details: '', category:''}
+		// "Drink Water": {'counter': 0, 'total': 8, 'details': '8 glasses a day is recommended for gut and skin health.','category':'health,'days':{}}
 		// counter will be incremented up to the total number when logged by the user
-		// dates will look something like {"2023:3:13":{'drink water' : {'counter': 0, 'total': 8, details: '', category:''}}}
+		// days will look something like "Days": {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {date: [date], counter: 0}}
+		// where each integer key represents the day of the week and each value represents the counter for that day
+		// the key 0 represents the current day and holds the current key and counter in order to correctly track days
+		// on a new day, the counter information from key 0 will be moved up to 1 and 0 will be replaced with the new date and so on
+		// this will represent a queue structure
 		
 		// Check connection
 		if ($conn->connect_error) {

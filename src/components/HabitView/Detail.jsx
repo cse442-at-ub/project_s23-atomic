@@ -2,44 +2,71 @@ import React from 'react';
 import './detail.css';
 import Navbar from '../Homepage/Navbar';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link} from "react-router-dom";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-//need to pass in correct habit information to this component 
-// added will be a boolean to keep track of when a user gets sent to the page
-// if true, user came from choosing a preset habit and a success message will be displayed
-// if false, regular habit information will be displayed
-function Detail(title, category, details, counter, total, added){
+function Detail(){
 
     const navigate = useNavigate();
-    const location = useLocation();
+    // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
+    //need to pass in correct habit information to this component 
+    // added will be a boolean to keep track of when a user gets sent to the page
+    // if true, user came from editing or adding/creating a new habit and a success message will be displayed
+    // if false, regular habit information will be displayed with no success message
+    // we use useLocation to get this state
+    const { state } = useLocation();
 
-    const [user, setUser] = useState(0);
+    // notify user that habit was successfully added if coming from creating/adding habit
+    const notify = () => {
+        toast.success('New Habit Added!', {
+            position: "top-right",
+            autoClose: 1050,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+    };
+
+    useEffect(() => {
+        let error = true;
+        if(state.added && error){
+            notify();
+            error = false;
+        }
+      }, [state.added]);
 
     return(
         <div className="detail_wrapper">
             <Navbar />
             <div className='info_container'>
+                <ToastContainer limit={1}/>
                 <Link to="/homepage" className='back_link'>&lt; Back to Home</Link>
                 <div className='column_1'>
-                    <h1 className="detail--title">Sleep 6-8 Hours</h1>
+                    <h1 className="detail-title">{state.title}</h1>
                     <button className='edit_button'>Edit</button>
                 </div>
                 <div className='column_2'>
-                    <label id='category_label'>Category</label>
-                    <label>Details</label>
-                    <div id="detail_box">Details</div>
+                    <p id='category_label'>{state.category}</p>
+                    <p>Details</p>
+                    <div id="detail_box">
+                        <p>{state.details}</p>
+                    </div>
                 </div>
                 <div className='column_3'>
                     <div className='counter_info'>
                         <div className='counter_button'>
-                            <button>-</button>
-                            Counter
-                            <button>+</button>
+                            <button id="minus_btn">-</button>
+                            <label>{state.counter}</label>
+                            <button id="plus_btn">+</button>
                         </div>
-                        <label> / total</label>
+                        <label> / {state.total}</label>
                     </div>
-                    <button>Delete</button>
+                    <button id="delete_button">Delete</button>
                 </div>
             </div>
         </div>    

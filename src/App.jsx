@@ -13,19 +13,21 @@ import ChooseHabits from './components/Registration/ChooseHabits';
 import Landing from './components/Landing/Landing'
 import HomeMain from './components/Homepage/HomeMain';
 import Statistics from './components/Statistics/Stats';
-import Settings from './components/Settings/settings'
-import Information from './components/Information/Info'
-import CreateNew from './components/CreateNew/create'
-import Options from './components/CreateNew/Options'
-import Suggestions from './components/CreateNew/Suggestions'
-import Detail from './components/HabitView/Detail'
+import Settings from './components/Settings/settings';
+import Information from './components/Information/Info';
+import CreateNew from './components/CreateNew/create';
+import Options from './components/CreateNew/Options';
+import Suggestions from './components/CreateNew/Suggestions';
+import Detail from './components/HabitView/Detail';
+
+import {HabitProvider} from './components/contexts/HabitContext';
 
 function App() {
   return (
     // BrowserRouter is used to route and display components at certain paths
     <BrowserRouter>
     <div className="App">
-
+      <HabitProvider>
       {/* // defines what path display which component */}
       <Routes>
         <Route path="/~argraca" element={<Landing />} />
@@ -41,8 +43,8 @@ function App() {
         <Route path="/options" element={<Options />} />
         <Route path="/suggestions" element={<Suggestions />} />
         <Route path="/detail" element={<Detail />} />
-      </Routes>    
-
+      </Routes>  
+      </HabitProvider>  
     </div>
     </BrowserRouter>
   );
