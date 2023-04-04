@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  color: rgba(79, 98, 194, 0.75);;
+  color: rgba(79, 98, 194, 0.75);
 
   min-height: 100vh; /* Make sure elements extend to bottom of page */
 }

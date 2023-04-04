@@ -1,6 +1,7 @@
 import React, { useState, useNavigate } from "react";
 
 import "./login.css"
+import { Link } from "react-router-dom";
 
 import LoginCharacter from "../../assets/images/login-character.png"
 
@@ -68,7 +69,8 @@ function Login() {
     return(
         <>
         <div id="login-back-link">
-            <a href="/">&lt; Back</a>
+            <Link to="/">&lt; Back</Link>
+            {/* <a href="/">&lt; Back</a> */}
         </div>
         <div className="login-container">
             <div id="login-main">

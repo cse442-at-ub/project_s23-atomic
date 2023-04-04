@@ -3,8 +3,13 @@ import './choose.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import { useContext } from 'react'
+import HabitContext from '../contexts/HabitContext'
+
 
 function ChooseHabits() {
+    // preset objects from HabitContext
+    const {good_habits, bad_habits, user, setUser} = useContext(HabitContext);
 
     // use navigate uses Router to navigate to different paths
     const navigate = useNavigate();
@@ -21,28 +26,6 @@ function ChooseHabits() {
     const routeSignup = () =>{ 
         let path = `/signup`; 
         navigate(path);
-    }
-
-    // hard coded habits that will be added to database
-    // all habits should share this format
-    let good_habits = {
-        "Sleep 6-8 Hours": {'counter': 0, 'total': 1, 'details': 'Getting enough sleep is vital to your health.', 'category': 'Wellness'},
-        "Eat Breakfast": {'counter': 0, 'total': 1, 'details': 'Eating breakfast everyday starts your day.','category':'Wellness'},
-        "Drink Water": {'counter': 0, 'total': 8, 'details': '8 glasses a day is recommended for gut and skin health.','category':'Wellness'},
-        "Exercise": {'counter': 0, 'total': 1, 'details': 'Exercise for at least 30 minutes a day. Go on a walk!','category':'Wellness'},
-        "Meditate": {'counter': 0, 'total': 1, 'details': 'Ground your mind daily. Tap in.','category':'Wellness'},
-        "Journal": {'counter': 0, 'total': 1, 'details': 'Put whats on your mind on paper. It will help.','category':'Wellness'},
-        "Read": {'counter': 0, 'total': 1, 'details': 'Pick up a good book. Reading 20 minutes a day is ideal.','category':'Wellness'},
-        "Clean": {'counter': 0, 'total': 1, 'details': 'Clean your room. Or do the dishes. Clean something.','category':'Wellness'}
-    }
-
-    let bad_habits = {
-        "Smoke": {'counter': 0, 'total': 14, 'details': 'Smoking is hard to stop. Take small steps and try smoking less every day.', 'category': 'Wellness'},
-        "Drink Alcohol": {'counter': 0, 'total': 5, 'details': 'Drink responsibly.','category':'Wellness'},
-        "Drink Coffee": {'counter': 0, 'total': 3, 'details': 'Who wouldve thought? Lower your caffeine intake.','category':'Wellness'},
-        "Eat Junk Food": {'counter': 0, 'total': 8, 'details': 'Lower your junk food intake. You can do it.','category':'Wellness'},
-        "Sit All Day": {'counter': 0, 'total': 1, 'details': 'Sitting is addicting. Go on a short walk or get up and clean.','category':'Wellness'},
-        "Bite Nails": {'counter': 0, 'total': 5, 'details': 'A habit since childhood. Small steps.','category':'Wellness'},
     }
 
     // state variable to track whether correct number of habits was chosen
@@ -122,7 +105,6 @@ function ChooseHabits() {
         await axios({
         method: "post",
         url: "http://localhost:8000/addhabit.php",
-        // url: "https://www-student.cse.buffalo.edu/~argraca/addhabit.php",
         data: {
             id: state.user,
             good_habits: good_habits_object,
@@ -133,6 +115,17 @@ function ChooseHabits() {
             console.log("success");
             console.log(response.data)
             // console.log(response.config.data);
+
+            // users info in context state
+            setUser({
+                ...user,
+                id: state.user,
+                good: good_habits_object,
+                bad: bad_habits_object
+            })
+            // save id in session
+            sessionStorage.setItem('id',state.user);
+
             routeHome();
         }).catch(function (error) {
             console.log("failed to send post request");
@@ -147,7 +140,7 @@ function ChooseHabits() {
         event.preventDefault();   
         
         if (habitCounter < 3) {
-            console.log(state.user)
+            // console.log(state.user)
             setHabitBool(false); 
         } else {
             // console.log(habitList);

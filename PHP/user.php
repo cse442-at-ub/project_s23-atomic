@@ -1,7 +1,5 @@
 <?php
-// this file will add habits to the database 
-// objects need to be correctly sent from react components, they will not be modified here, only replacing whats already in the database
-
+// this file is for getting a users information
 		header('Access-Control-Allow-Origin: *');
 		header('Access-Control-Allow-Headers: Content-Type');
 
@@ -28,7 +26,6 @@
 		// this will represent a queue structure
 
 		
-		
 		// Check connection
 		if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -43,18 +40,21 @@
 
 		// want to encode the objects in json to store in database
 		$id = (int)$data['id'];
-		$good = json_encode($data['good_habits'],JSON_FORCE_OBJECT);
-		$bad = json_encode($data['bad_habits'],JSON_FORCE_OBJECT);
 
 		// want to pull out users information from users table using id
 		$query = "SELECT * FROM users WHERE id = '{$id}'";
 		$result = mysqli_query($conn,$query);
 		$row = $result->fetch_assoc();
-		
-		// now add habit and date objects into users table
-		$sql = "UPDATE users SET `good_habits` = '$good', `bad_habits` = '$bad' WHERE `id` = '$id'";
+        
+        // pull out data we need from database
+        $username = $row["username"];
+        $good_habits = $row["good_habits"];
+        $bad_habits = $row["bad_habits"];
+
+        $return_data = json_encode(array("id" => $id, "username" => $username, "good_habits"=>$good_habits, "bad_habits"=>$bad_habits), JSON_FORCE_OBJECT);
+        
         if(mysqli_query($conn, $sql)){
-            echo "Records added successfully.\n";
+            echo $return_data;
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }

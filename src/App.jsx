@@ -13,21 +13,23 @@ import ChooseHabits from './components/Registration/ChooseHabits';
 import Landing from './components/Landing/Landing'
 import HomeMain from './components/Homepage/HomeMain';
 import Statistics from './components/Statistics/Stats';
-import Settings from './components/Settings/settings'
-import Information from './components/Information/Info'
-import CreateNew from './components/CreateNew/create'
+import Settings from './components/Settings/settings';
+import Information from './components/Information/Info';
+import CreateNew from './components/CreateNew/create';
+import Options from './components/CreateNew/Options';
+import Suggestions from './components/CreateNew/Suggestions';
+import Detail from './components/HabitView/Detail';
+
+import {HabitProvider} from './components/contexts/HabitContext';
 
 function App() {
   return (
     // BrowserRouter is used to route and display components at certain paths
     <BrowserRouter>
     <div className="App">
-
+      <HabitProvider>
       {/* // defines what path display which component */}
-      {/* may need to change to work with php, but can be used for frontend testing purposes */}
       <Routes>
-        {/* // root usually is  path / so redirect / path to correct root path */}
-        {/* <Route path='/' element={<Navigate to='/~argraca' />} /> */}
         <Route path="/~argraca" element={<Landing />} />
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
@@ -38,24 +40,11 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/information" element={<Information />} />
         <Route path="/create" element={<CreateNew />} />
-      </Routes>    
-
-
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-
+        <Route path="/options" element={<Options />} />
+        <Route path="/suggestions" element={<Suggestions />} />
+        <Route path="/detail" element={<Detail />} />
+      </Routes>  
+      </HabitProvider>  
     </div>
     </BrowserRouter>
   );
