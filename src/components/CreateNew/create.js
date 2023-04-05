@@ -1,5 +1,5 @@
 import React from "react"
-import Navbar from "./Navbar"
+import Navbar from "../Homepage/Navbar";
 import './createpage.css'
 
 export default function create() {

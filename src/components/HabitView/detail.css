@@ -32,6 +32,10 @@
     margin-left: 10%;
     margin-right: 10%;
 }
+.back_link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 
 .column_1 {
     display: flex;
@@ -49,7 +53,7 @@
 }
 .column_1 h1 {
     color: black;
-    font-weight: 100;
+    font-weight: 600;
     padding: 0px;
     width: 70%;
     text-align: left;
@@ -219,4 +223,5 @@
 }
 #delete_button:active {
     transform: translateY(3px);
+    box-shadow: 0 0  7px #202344;
 }

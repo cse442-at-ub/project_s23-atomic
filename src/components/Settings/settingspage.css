@@ -230,21 +230,6 @@ border-radius: 20px 20px 0px 0px;
     top: 280px;
 }
 
-.createButton{
-    /* Button */
-
-    position: absolute;
-    width: 210px;
-    height: 65px;
-    left: 120px;
-    top: 155px;
-
-    background: #4F62C2;
-    border-radius: 20px;
-    font-size: xx-large;
-    color: #FFFFFF;
-}
-
 .nav--homeButton{
     padding: 0;
     border: none;

@@ -42,7 +42,10 @@
     transform: translateY(-6px);
     border-radius: 13px;
     cursor: pointer;
-    box-shadow: inset 0 0  13px #ffb432;
+}
+.preset_option_container:active {
+    transform: translateY(0px);
+    box-shadow: inset 0 0  15px rgb(56, 67, 124);
 }
 
 .custom_option_container {
@@ -55,7 +58,10 @@
     transform: translateY(-6px);
     border-radius: 13px;
     cursor: pointer;
-    box-shadow: inset 0 0  13px #ffb432;
+}
+.custom_option_container:active{
+    transform: translateY(0px);
+    box-shadow: inset 0 0  15px rgb(56, 67, 124);
 }
 
 .border {
@@ -99,7 +105,7 @@
         word-wrap: normal;
         border-right: none;
         font-size: 12px;
-        margin: 10px;
+        margin: 35px;
     }
     .custom_option_container {
         width: 80%;
@@ -107,7 +113,7 @@
         word-wrap: normal;
         border-left: none;
         font-size: 12px;
-        margin: 10px;
+        margin: 35px;
     }
     .border {
         height: 1vw;

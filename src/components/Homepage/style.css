@@ -21,7 +21,7 @@ background: #F69335;
 
 }
 
-.nav--homeButton:hover{
+.nav--homeButton:hover {
     cursor: pointer;
 }
 
@@ -134,7 +134,18 @@ top: 25px;
 }
 
 .date_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 65%;
     margin-top: 8%;
+    margin-left: 7%;
+}
+.date_container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
 .schoolHabitsList{
@@ -241,16 +252,23 @@ border-radius: 20px 20px 0px 0px;
 .createButton{
     /* Button */
 
-    position: absolute;
     width: 210px;
     height: 65px;
-    left: 120px;
-    top: 155px;
 
     background: #4F62C2;
     border-radius: 20px;
+    border: none;
     font-size: xx-large;
     color: #FFFFFF;
+    font-family: Inter, sans-serif;
+}
+.createButton:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 0px #514e4e;
+}
+.createButton:active{
+    box-shadow: 0px 0px 0px 0px #000000;
+    transform: translateX(4px) translateY(4px);
 }
 
 .nav--homeButton{
@@ -263,4 +281,10 @@ border-radius: 20px 20px 0px 0px;
     padding: 0;
     border: none;
     background: none
+}
+
+#username_label {
+    font-size: 40px;
+    color: white;
+    font-weight: 700;
 }

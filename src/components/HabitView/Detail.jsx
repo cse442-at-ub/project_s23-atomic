@@ -23,7 +23,7 @@ function Detail(){
         toast.success('New Habit Added!', {
             position: "top-right",
             autoClose: 1050,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
@@ -51,7 +51,7 @@ function Detail(){
                 </div>
                 <div className='column_2'>
                     <p id='category_label'>{state.category}</p>
-                    <p>Details</p>
+                    <p style={{fontWeight:"bold"}}>Details</p>
                     <div id="detail_box">
                         <p>{state.details}</p>
                     </div>
