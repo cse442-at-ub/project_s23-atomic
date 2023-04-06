@@ -31,7 +31,7 @@ export default function Navbar() {
             <img src={gear} className="nav--settings" alt="settings icon"/>
         </button>
         </Link>
-        <h2 id="username_label">{user.username !== "" ? user.username : ""}</h2>
+        <h2 id="nav_username_label">{user.username !== "" ? user.username : ""}</h2>
     </nav>
     )
 }

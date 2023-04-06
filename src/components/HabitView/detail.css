@@ -97,10 +97,16 @@
     width: 80%;
     color: black;
 }
+.category_container{
+    display: flex;
+    flex-direction: row;
+}
 #category_label{
     background-color: orange;
     width: 130px;
     height: 50px;
+
+    margin-right: 20px;
 
     border-radius: 20px;
     text-align: center;

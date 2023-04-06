@@ -12,6 +12,7 @@ function Signin() {
   const navigate = useNavigate();
   const routeChooseHabits = (id) =>{ 
       let path = `/choose-habit`; 
+      sessionStorage.setItem("id", id);
       navigate(path, {state: {user: id}});
   }
   const routeLogin = () =>{
