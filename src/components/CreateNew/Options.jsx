@@ -11,7 +11,7 @@ function Options(){
     let user = (sessionStorage.getItem("id"));
 
     const handlePreset = () => {
-        sessionStorage.setItem("id", user)
+        sessionStorage.setItem("id", 5)
         navigate('/suggestions');
     }
 

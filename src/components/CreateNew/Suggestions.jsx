@@ -43,9 +43,11 @@ function Suggestions(){
         // bad habits will have the value "1"
         if (type === 0){
             habit = good_habits[habit_title];
+            // add habit to user's good habits
             addGoodHabit(habit);
         }else{
             habit = bad_habits[habit_title];
+            // add habit to user's bad habits
             addBadHabit(habit);
         }
         console.log(user)
@@ -55,7 +57,7 @@ function Suggestions(){
 
     const submit = async(info) => {
         // console.log(user.id)
-        console.log(sessionStorage.getItem("id"))
+        // console.log(sessionStorage.getItem("id"))
         const update = await sendHabits(sessionStorage.getItem("id"),user.good,user.bad);
         if (update){
             routeDetail(info);

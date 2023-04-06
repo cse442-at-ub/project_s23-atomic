@@ -7,10 +7,10 @@
     margin-right: 20px;
 }
 .options_title_container h2 {
-    font-size: 3.5em;
+    font-size: 50px;
     font-weight: 700;
     color: rgba(79, 98, 194);
-    margin: 10px;
+    margin: 10px 0px 20px 0px; 
     height: 130px;
     padding: 0;
 }
@@ -34,7 +34,7 @@
 }
 .preset_option_container {
     width: 40%;
-    height: 35vw;
+    height: scale(35vw, 35vw);
     word-wrap: normal;
     padding: 16px;
 }
@@ -50,7 +50,7 @@
 
 .custom_option_container {
     width: 40%;
-    height: 35vw;
+    height: scale(35vw, 35vw);
     word-wrap: normal;
     padding: 16px;
 }
@@ -65,7 +65,7 @@
 }
 
 .border {
-    height: 35vw;
+    height: scale(35vw, 35vw);
     border: 3px solid rgba(79, 98, 194);
 }
 
@@ -83,7 +83,7 @@
     font-size: 2.5em;
     font-weight: 400;
     color: rgba(79, 98, 194, 0.75);
-    margin: 10px;
+    margin: 20px 10px 10px 10px;
     padding: 0;
 }
 
@@ -118,6 +118,60 @@
     .border {
         height: 1vw;
         border-bottom: 2px solid rgba(79, 98, 194);
+    }
+    #description {
+        margin: 10px 10px 10px 10px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #link {
+        margin-top: 15%;
+    }
+    .options_title_container h2 {
+        font-size: 44px;
+        height: scale(35vw, 35vw);
+    }
+    #description {
+        margin: 30px 10px 10px 10px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #link {
+        margin-top: 30%;
+    }
+    .options_title_container  {
+        margin-top: 5%;
+        display: flex;
+        flex-direction: column;
+    }
+    .options_title_container h2 {
+        font-size: 2.9em;
+        height: scale(35vw, 35vw);
+    }
+    .preset_option_container {
+        width: 80%;
+        height: 50%;
+        word-wrap: normal;
+        border-right: none;
+        font-size: 12px;
+        margin: 35px;
+    }
+    .custom_option_container {
+        width: 80%;
+        height: 50%;
+        word-wrap: normal;
+        border-left: none;
+        font-size: 12px;
+        margin: 35px;
+    }
+    .border {
+        height: 1vw;
+        border-bottom: 2px solid rgba(79, 98, 194);
+    }
+    #description {
+        margin: 30px 10px 10px 10px;
     }
 }
 

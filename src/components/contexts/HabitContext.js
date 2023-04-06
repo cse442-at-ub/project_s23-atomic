@@ -117,14 +117,21 @@ export const HabitProvider = ({ children }) => {
    // will replace user object with correct information
    // makes a get request to user.php with userid
    const getUserData = async(userid) => {
+      let good_object = {};
+      let bad_object = {};
+      let username = "";
+
       await axios
       .get("http://localhost:8000/user.php?userid="+ userid)
       .then(function (response) {
          // successful call will replace user object with correct information
-         console.log("success");
-         console.log(response.data)
+         // console.log("success");
+         // console.log(response.data)
 
          const result_object = (response.data).split("\n");
+         username = result_object[1];
+         good_object = JSON.parse(result_object[2]);
+         bad_object = JSON.parse(result_object[3]);
          // console.log(result_object[0]);
          // console.log(result_object[1]);
          // console.log(JSON.parse(result_object[2]));
@@ -133,17 +140,24 @@ export const HabitProvider = ({ children }) => {
          setUser({
             ...user,
             id: userid,
-            username: result_object[1],
-            good: JSON.parse(result_object[2]),
-            bad: JSON.parse(result_object[3])
+            username: username,
+            good: good_object,
+            bad: bad_object
         });
-
+        
       })
       .catch(function (error) {
             console.log("failed to send post request");
             console.log(error);
             console.log("error is "+ error.msg);
          });
+
+         return {
+            id: userid,
+            username: username,
+            good: good_object,
+            bad: bad_object
+         };
       };
 
    // replaces habits in users database so it contains new habits

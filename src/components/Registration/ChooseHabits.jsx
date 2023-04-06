@@ -1,7 +1,7 @@
 import React from 'react';
 import './choose.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useContext } from 'react'
 import HabitContext from '../contexts/HabitContext'
@@ -148,6 +148,10 @@ function ChooseHabits() {
             makePost();
         }
     }
+
+    useEffect(() => {
+        document.title = "Choose Your Habits";  
+    }, []);
 
     return (
         <div className='choose_habits_container'>
