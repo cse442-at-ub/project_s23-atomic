@@ -130,6 +130,20 @@ export default function HomeMain() {
             }
         }
     }
+
+    // function that checks if a list is empty
+    const checkEmpty = (list) => {
+        let count = 0;
+        list.forEach((item) => {
+            if(item === undefined) {
+                count++;
+            }
+        })
+        if(count === list.length) {
+            return true;
+        }
+        return false;
+    }
             
 
     // use effect will run once after the component renders because of the empty dependency array
@@ -194,15 +208,15 @@ export default function HomeMain() {
 
             <div className="habit_container">
                 
-                {goodHealth.length !== 0 && badHealth.length !== 0 ? (
+                {!checkEmpty(goodHealth) || !checkEmpty(badHealth) ? (
                 <div className="habit_list">
                     <div className="category_title">Health</div>
-                    {goodHealth.length !== 0 ? (
+                    {!checkEmpty(goodHealth) ? (
                         <div className="habit_list_wrapper">
                             {goodHealth}
                         </div>
                     ) : null }
-                    {badHealth.length !== 0 ? (
+                    {!checkEmpty(badHealth) ? (
                     <div className="bad_habit_list_wrapper">
                         {badHealth}
                     </div>
@@ -210,15 +224,15 @@ export default function HomeMain() {
                 </div>
                 ) : null }
 
-                {goodWork.length !== 0 && badWork.length !== 0 ? (
+                {!checkEmpty(goodWork) || !checkEmpty(badWork) ? (
                 <div className="habit_list">
                     <div className="category_title">Work</div>
-                    {goodWork.length !== 0 ? (
+                    {!checkEmpty(goodWork) ? (
                     <div className="habit_list_wrapper">
                         {goodWork}
                     </div>
                     ) : null }
-                    {badWork.length !== 0 ? (
+                    {!checkEmpty(badWork) ? (
                     <div className="bad_habit_list_wrapper">
                         {badWork}
                     </div>
@@ -226,15 +240,15 @@ export default function HomeMain() {
                 </div>
                 ) : null }
 
-                {goodSchool.length !== 0 && badSchool.length !== 0 ? (
+                {!checkEmpty(goodSchool) || !checkEmpty(badSchool) ? (
                 <div className="habit_list">
                     <div className="category_title">School</div>
-                    {goodSchool.length !== 0 ? (
+                    {!checkEmpty(goodSchool) ? (
                     <div className="habit_list_wrapper">
                         {goodSchool}
                     </div>
                     ) : null }
-                    {badSchool.length !== 0 ? (
+                    {!checkEmpty(badSchool) ? (
                     <div className="bad_habit_list_wrapper">
                         {badSchool}
                     </div>
@@ -242,15 +256,15 @@ export default function HomeMain() {
                 </div>
                 ) : null }
                 
-                {goodSocial.length !== 0 && badSocial.length !== 0 ? (
+                {!checkEmpty(goodSocial) || !checkEmpty(badSocial)  ? (
                 <div className="habit_list">
                     <div className="category_title">Social</div>
-                    {goodSocial.length !== 0 ? (
+                    {!checkEmpty(goodSocial) ? (
                     <div className="habit_list_wrapper">
                         {goodSocial}
                     </div>
                     ) : null }
-                    {badSocial.length !== 0 ? (
+                    {!checkEmpty(badSocial) ? (
                     <div className="bad_habit_list_wrapper">
                         {badSocial}
                     </div>
@@ -258,15 +272,15 @@ export default function HomeMain() {
                 </div>
                 ) : null }
 
-                {goodFamily.length !== 0 && badFamily.length !== 0 ? (
+                {!checkEmpty(goodFamily) || !checkEmpty(badFamily) ? (
                 <div className="habit_list">
                     <div className="category_title">Family</div>
-                    {goodFamily.length !== 0 ? (
+                    {!checkEmpty(goodFamily) ? (
                     <div className="habit_list_wrapper">
                         {goodFamily}
                     </div>
                     ) : null }
-                    {badFamily.length !== 0 ? (
+                    {!checkEmpty(badFamily) ? (
                     <div className="bad_habit_list_wrapper">
                         {badFamily}
                     </div>
@@ -274,15 +288,15 @@ export default function HomeMain() {
                 </div>
                 ) : null }
 
-                {goodMisc.length !== 0 && badMisc.length !== 0 ? (
+                {!checkEmpty(goodMisc) || !checkEmpty(badMisc) ? (
                 <div className="habit_list">
                     <div className="category_title">Misc.</div>
-                    {goodMisc.length !== 0 ? (
+                    {!checkEmpty(goodMisc) ? (
                     <div className="habit_list_wrapper">
                         {goodMisc}
                     </div>
                     ) : null }
-                    {badMisc.length !== 0 ? (
+                    {!checkEmpty(badMisc) ? (
                     <div className="bad_habit_list_wrapper">
                         {badMisc}
                     </div>

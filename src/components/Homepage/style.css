@@ -39,9 +39,9 @@
 .habit_container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-evenly;
-    align-items: center;
+    /* align-items: center; */
 
     width: 100%;
     margin-top: 3%;
@@ -49,7 +49,7 @@
 }
 .habit_list {
     width: 30em;
-    height: 50em;
+    /* height: 50em; */
 
     margin-top: -10px;
     margin: 10px;
@@ -62,7 +62,7 @@
     height: 60px;
 
     background-color: #F69335;
-    position: absolute;
+    position: relative;
 
     display: flex;
     justify-content: center;
@@ -77,7 +77,7 @@
     margin-bottom: 10px;
 }
 .habit_list_wrapper {
-    /* width: 30em; */
+    width: 100%;
     height: 23.5em;
 
     background-color: #FFFFFF;
@@ -86,15 +86,17 @@
     flex-direction: column;
     justify-content: space-between;
 
-    margin-top: 60px;
+    margin-top: -10px;
+    margin-bottom: 11px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 
     overflow-y: scroll;
+    overflow-x: hidden;
     position: relative;
 }
 .bad_habit_list_wrapper {
-    /* width: 30em; */
+    width: 100%;
     height: 23.5em;
 
     background-color: rgba(196, 71, 71, 0.787);
@@ -104,10 +106,12 @@
     justify-content: space-between;
 
     margin-top: -10px;
+    margin-bottom: 11px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 
     overflow-y: scroll;
+    overflow-x: hidden;
     position: relative;
 }
 
@@ -121,21 +125,16 @@
     margin-bottom: 15px;
     margin-left: 7%;
 }
-.habit_item h3 {
-    width: 100%;
-    text-align: left;
-}
 
 .habit_title {
-    text-align: center;
-    width: 100%;
+    text-align: left;
     margin: 12px;
-    font-size: 35px;
+    font-size: 1.9vw;
     font-weight: 600;
     /* color: rgba(79, 98, 194); */
     color: black;
 }
 .habit_title:hover {
     cursor: pointer;
-    transform: translateX(20px);
+    transform: translateX(5px);
 }
