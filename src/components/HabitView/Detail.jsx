@@ -55,8 +55,8 @@ function Detail(){
                 </div>
                 <div className='column_2'>
                     <div className='category_container'>
-                        <p id='category_label'>{state.category}</p>
-                        <p id='category_label'>{state.type}</p>
+                        <p id='category_label' className={state.category}>{state.category}</p>
+                        <p id='category_label' className={state.type}>{state.type}</p>
                     </div>
                     <p style={{fontWeight:"bold"}}>Details</p>
                     <div id="detail_box">

@@ -102,7 +102,7 @@
     flex-direction: row;
 }
 #category_label{
-    background-color: orange;
+    /* background-color: orange; */
     width: 130px;
     height: 50px;
 
@@ -230,4 +230,35 @@
 #delete_button:active {
     transform: translateY(3px);
     box-shadow: 0 0  7px #202344;
+}
+
+/* We Want to Display different colors for different categories */
+/* className will match the category title to pull correct CSS */
+.Health {
+    background-color: orange;
+}
+.School {
+    background-color: #6ebbff;
+}
+.Work {
+    background-color: #b26eff;
+}
+.Family {
+    background-color: #ff80f0;
+}
+.Misc {
+    background-color: #6756ff;
+}
+.Social {
+    background-color: #fff787;
+}
+
+/* we want to display different colors for different types */
+/* className will match the type title to pull correct CSS */
+
+.Harmful {
+    background-color: #ff9b9b;
+}
+.Good {
+    background-color: #96ffab;
 }

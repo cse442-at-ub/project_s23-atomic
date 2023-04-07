@@ -35,6 +35,10 @@ function Suggestions(){
         toast.error('Error Adding Habit',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
     }
 
+    const notifyExists = ()=>{
+        toast.error('Habit Already Exists',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
+    }
+
     const getHabit = (event) => {
         const habit_title = event.target.innerHTML;
         const type = event.target.value;
@@ -46,16 +50,27 @@ function Suggestions(){
         if (type === 0){
             pos = "Good";
             habit = good_habits[habit_title];
-            // add habit to user's good habits
-            addGoodHabit(habit);
+            console.log(user.good[habit_title])
+            if (user.good[habit_title] !== undefined){
+                console.log("habit exists")
+                notifyExists();
+            } else {
+                // add habit to user's good habits
+                addGoodHabit(habit);
+                submit(habit, pos)
+            }
         }else{
             pos = "Harmful";
             habit = bad_habits[habit_title];
-            // add habit to user's bad habits
-            addBadHabit(habit);
+            if (user.bad[habit_title] !== undefined){
+                notifyExists();
+            } else {
+                // add habit to user's bad habits
+                addBadHabit(habit);
+                submit(habit, pos)
+            }
         }
         console.log(user)
-        submit(habit, pos)
 
     }
 
@@ -74,7 +89,7 @@ function Suggestions(){
         <div className="preset_container">
             <Navbar />
             <div className="overall_list_container">
-                <ToastContainer />
+                <ToastContainer limit={1}/>
                 <div className='top_page'>
                     <Link to="/options" className='sug_back_link'>&lt; Back</Link>
                     <h1>Pick From Our Options!</h1>
