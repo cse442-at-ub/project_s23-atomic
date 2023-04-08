@@ -129,10 +129,11 @@
 .habit_title {
     text-align: left;
     margin: 12px;
-    font-size: 1.9vw;
+    font-size: 1.9rem;
     font-weight: 600;
     /* color: rgba(79, 98, 194); */
     color: black;
+    word-wrap: normal;
 }
 .habit_title:hover {
     cursor: pointer;
