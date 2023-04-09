@@ -18,15 +18,16 @@ function Suggestions(){
     // if true, user came from editing or adding/creating a new habit and a success message will be displayed
     // if false, regular habit information will be displayed with no success message
     // we use useLocation to get this state
-    const routeDetail = (habit) => {
+    const routeDetail = (habit, type) => {
         const n = habit["title"];
         const c = habit["category"];
         const d = habit["details"];
         const sum = habit["counter"];
         const t = habit["total"];
         const path = '/detail';
+        
         sessionStorage.setItem("added","true")
-        navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t, added: true}});
+        navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t,type: type, added: true}});
     }
 
     // use toastify to notify user on error for username or email that's already in use
@@ -34,31 +35,51 @@ function Suggestions(){
         toast.error('Error Adding Habit',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
     }
 
+    const notifyExists = ()=>{
+        toast.error('Habit Already Exists',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
+    }
+
     const getHabit = (event) => {
         const habit_title = event.target.innerHTML;
         const type = event.target.value;
+        let pos = "";
         let habit = {}
         console.log(type)
         // good habits will not have a value, so type should equal 0
         // bad habits will have the value "1"
         if (type === 0){
+            pos = "Good";
             habit = good_habits[habit_title];
-            addGoodHabit(habit);
+            console.log(user.good[habit_title])
+            if (user.good[habit_title] !== undefined){
+                console.log("habit exists")
+                notifyExists();
+            } else {
+                // add habit to user's good habits
+                addGoodHabit(habit);
+                submit(habit, pos)
+            }
         }else{
+            pos = "Harmful";
             habit = bad_habits[habit_title];
-            addBadHabit(habit);
+            if (user.bad[habit_title] !== undefined){
+                notifyExists();
+            } else {
+                // add habit to user's bad habits
+                addBadHabit(habit);
+                submit(habit, pos)
+            }
         }
         console.log(user)
-        submit(habit)
 
     }
 
-    const submit = async(info) => {
+    const submit = async(info, type) => {
         // console.log(user.id)
-        console.log(sessionStorage.getItem("id"))
+        // console.log(sessionStorage.getItem("id"))
         const update = await sendHabits(sessionStorage.getItem("id"),user.good,user.bad);
         if (update){
-            routeDetail(info);
+            routeDetail(info, type);
         }else{
             notify();
         }
@@ -68,7 +89,7 @@ function Suggestions(){
         <div className="preset_container">
             <Navbar />
             <div className="overall_list_container">
-                <ToastContainer />
+                <ToastContainer limit={1}/>
                 <div className='top_page'>
                     <Link to="/options" className='sug_back_link'>&lt; Back</Link>
                     <h1>Pick From Our Options!</h1>

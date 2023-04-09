@@ -1,7 +1,7 @@
 import React from 'react';
 import './sign-in.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,7 @@ function Signin() {
   const navigate = useNavigate();
   const routeChooseHabits = (id) =>{ 
       let path = `/choose-habit`; 
+      sessionStorage.setItem("id", id);
       navigate(path, {state: {user: id}});
   }
   const routeLogin = () =>{
@@ -207,6 +208,10 @@ function Signin() {
   }
 
   handleErrors();
+
+  useEffect(() => {
+    document.title = "Sign Up";  
+}, []);
 
   // return the JSX for the Signin component
   return (
