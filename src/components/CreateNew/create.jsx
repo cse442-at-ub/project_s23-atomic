@@ -1,10 +1,16 @@
-import React from "react"
-import Navbar from "./Navbar"
+import React from "react";
 
-import './createpage.css' // Why is this needed for this page. For some reason it influences the background color.
+import { useContext } from 'react'
+import HabitContext from '../contexts/HabitContext';
+
+import Navbar from "../Homepage/Navbar";
+
+import './createpage.css'; // Why is this needed for this page. For some reason it influences the background color.
 import "./create.css"
 
-export default function create() {
+function Create() {
+    const {user, good_habits, bad_habits,addGoodHabit,addBadHabit,sendHabits} = useContext(HabitContext);
+
     return (
     <div id="create-container">
         <h2>Create New Habit</h2>
@@ -17,6 +23,7 @@ export default function create() {
         </div>
         <div id="details">
             <h5>Details</h5>
+            <input type="text" />
         </div>
         <div id="counter">
             <h5>Counter</h5>
@@ -25,3 +32,5 @@ export default function create() {
     </div>
     );
 };
+
+export default Create;
