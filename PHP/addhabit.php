@@ -6,7 +6,7 @@
        // create connection
 		// this is the database I used to test locally
 		// servername, username, password, database name.
-		// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
+		$conn = mysqli_connect("localhost:3306", "root", "password", "testdb"); 
 		// this is our groups database
 		// $conn = mysqli_connect("oceanus.cse.buffalo.edu:3306 ", "karlitho", "50308831", "cse442_2023_spring_team_q_db"); //servername, username, pass, db.
 
