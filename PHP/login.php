@@ -27,12 +27,6 @@
 		echo "Connected successfully\n";
 	}
 
-	// if(isset($_COOKIE["cookieboy"]))
-	// {
-	// 	echo $_COOKIE["cookieboy"]; //if cookie is already set, user should not be able to access login page, they should be redirected to homepage.
-	// 	echo "\ncookie already set\n";
-	// }
-
 	// save information that came from post request
 	$data = $_POST;
 	// save information that was sent
@@ -45,22 +39,13 @@
 			$result = mysqli_query($conn,$query);
 			return $result;
 		}
-		// function passwordverify($conn,$input) {
-		// 	$query = "SELECT id FROM users WHERE username = '{$input}'";
-		// 	$result = mysqli_query($conn,$query);
-		// 	$row = $result->fetch_assoc();
-		// 	if (password_verify($password, $row["password"])){
-		// 		return 0;
-		// 	}
-		// 	return 1;
-		// }
 	// if account is unique, add to database, if not return message of what is not unique 
 	if(mysqli_num_rows(usernameExists($conn,$username)) != 1){
 		// this will send back Username message, login ReactJS component will pull this message and deal with it 
 		echo "Invalid\n";
 	} else{
 		// this will send back Success message, login ReactJS component will pull this message and deal with it
-		$query = "SELECT id FROM users WHERE username = '{$username}'";
+		$query = "SELECT * FROM users WHERE username = '{$username}'";
 		$result = mysqli_query($conn,$query);
 		$row = $result->fetch_assoc();
 		if (password_verify($password, $row["password"])){
