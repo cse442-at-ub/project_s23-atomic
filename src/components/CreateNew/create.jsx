@@ -27,7 +27,8 @@ function Create() {
         title: "",
         counter: 0,
         details: "",
-        category: ""
+        category: "",
+        type: 0
     });
     const setTitle = (event) => {
         setHabit({ ...habit, title: event.target.value });
@@ -42,25 +43,80 @@ function Create() {
         setHabit({ ...habit, category: event.target.value });
     };
     
+    const submitHandler = (event) => {
+        console.log("Create Habit submitHandler() called");
+        event.preventDefault();
+        if (habit.type === 0) { // If habit is GOOD
+            const type = "good"
+            addGoodHabit(habit);
+            // submit(habit, type);
+        } else if (habit.type === 1) { // If habit is BAD
+            const type = "bad"
+            addGoodHabit(habit);
+            // submit(habit, type);
+        } 
+    }
+
+    // const submit = async(info, type) => {
+    //     // console.log(user.id)
+    //     // console.log(sessionStorage.getItem("id"))
+    //     const update = await sendHabits(sessionStorage.getItem("id"),user.good,user.bad);
+    //     if (update){
+    //         routeDetail(info, type);
+    //     }else{
+    //         notify();
+    //     }
+    // }
+
     return (
-    <div id="create-container">
-        <h2>Create New Habit</h2>
-        <div id="categories">
-            <h5>Category</h5>
-        </div>
-        <div id="title">
-            <h5>Title</h5>
-            <input onChange={setTitle} type="text" />
-        </div>
-        <div id="details">
-            <h5>Details</h5>
-            <input onChange={setDetails} type="text" />
-        </div>
-        <div id="counter">
-            <h5>Counter</h5>
-        </div>
-    <Navbar/>
-    </div>
+        <>
+            <div id="create-container">
+                <Navbar/>
+                <h2>Create New Habit</h2>
+                <form onSubmit={submitHandler}>
+                    <div id="categories">
+                        <h5>Category</h5>
+                        <select name="" id="" onClick={setCategory} required>
+                            <option value="none"></option>
+                            <option value="health">Health</option>
+                            <option value="work">Work</option>
+                            <option value="school">School</option>
+                            <option value="social">Social</option>
+                            <option value="misc">Misc</option>
+                            <option value="family">Family</option>
+                        </select>
+                        <br />
+                        <select name="" id="" onClick={setCategory} required>
+                        <option value="none"></option>
+                            <option value="good">Good</option>
+                            <option value="bad">Bad</option>
+                        </select>
+                    </div>
+                    <div id="title">
+                        <h5>Title</h5>
+                        <input onChange={setTitle} type="text" required/>
+                    </div>
+                    <div id="details">
+                        <h5>Details</h5>
+                        <input onChange={setDetails} type="text"/>
+                    </div>
+                    <div id="counter">
+                        <h5>Counter</h5>
+                        <input
+                            type="number" onChange={setCounter} required
+                            // Only allow numbers. If a keypress is not a number, do nothing.
+                            // onKeyDown={(event) => {
+                            //     if (!/[0-9]/.test(event.key)) {
+                            //     event.preventDefault();
+                            //     }
+                            // }}
+                        />
+                    </div>
+                    <br />
+                    <input type="submit" />
+                </form>
+            </div>
+        </>
     );
 };
 
