@@ -5,7 +5,7 @@
         // create connection
 		// this is the database I used to test locally
 		// servername, username, password, database name.
-		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
+		$conn = mysqli_connect("localhost:3306", "root", "Cutforvader#19", "testTable"); 
 
 		// this is our groups database
 		// $conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.

@@ -2,8 +2,8 @@
 
 $dbhost = "localhost";
 $dbuser = "root";
-$dbpass = "";
-$dbname = "login_sample_db";
+$dbpass = "Cutforvader#19";
+$dbname = "testTable";
 
 if(!$con = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname))
 {
