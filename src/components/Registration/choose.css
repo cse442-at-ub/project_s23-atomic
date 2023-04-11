@@ -124,6 +124,12 @@
     margin: 15px;
 }
 
+.habit_group label {
+    cursor: pointer;
+    padding: 5px;
+    margin: 15px;
+}
+
 .button_group {
     display: flex;
     align-items: stretch;
