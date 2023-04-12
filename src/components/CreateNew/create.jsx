@@ -16,7 +16,7 @@ function Create() {
     const {user, good_habits, bad_habits,addGoodHabit,addBadHabit,sendHabits} = useContext(HabitContext);
     const navigate = useNavigate();
 
-    // const test = { 
+    // const exampleHabit = { 
     //     "title":"Sleep 6-8 Hours",
     //     "counter": 0,
     //     "total": 1,
@@ -51,14 +51,22 @@ function Create() {
         console.log("Create Habit submitHandler() called");
         event.preventDefault();
 
+        // Obtain current_date
+        let separator = "/"
+        let newDate = new Date();
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+
         // Create habit JSON Object
         const habitObj = {};
         habitObj["title"] = habit.title;
-        habitObj["details"] = habit.details;
         habitObj["counter"] = habit.counter;
         habitObj["total"] = 0;
+        habitObj["details"] = habit.details;
         habitObj["category"] = habit.category;
-        habitObj["Days"] = {};
+        habitObj["Days"] = {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} };
 
         console.log("habitObj was created as: " + JSON.stringify(habitObj));
         
