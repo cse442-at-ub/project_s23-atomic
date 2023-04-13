@@ -30,6 +30,7 @@ function Create() {
         counter: 0,
         details: "",
         category: "",
+        type: ""
     });
     const setTitle = (event) => {
         setHabit({ ...habit, title: event.target.value });
@@ -84,6 +85,7 @@ function Create() {
         // console.log(sessionStorage.getItem("id"))
         const update = await sendHabits(sessionStorage.getItem("id"),user.good,user.bad);
         if (update){
+            console.log("About to run routeDetail()");
             routeDetail(info, type);
         }else{
             notify();
@@ -99,6 +101,8 @@ function Create() {
         const path = '/detail';
         
         sessionStorage.setItem("added","true")
+
+        console.log("About to run navigate");
         navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t,type: type, added: true}});
     }
 
