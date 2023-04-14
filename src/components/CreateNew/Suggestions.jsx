@@ -50,7 +50,7 @@ function Suggestions(){
         if (type === 0){
             pos = "Good";
             habit = good_habits[habit_title];
-            console.log(user.good[habit_title])
+            // console.log(user.good[habit_title])
             if (user.good[habit_title] !== undefined){
                 console.log("habit exists")
                 notifyExists();
