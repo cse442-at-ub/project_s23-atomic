@@ -29,8 +29,8 @@ function Create() {
         title: "",
         counter: 0,
         details: "",
-        category: "",
-        type: ""
+        category: "health",
+        type: "good"
     });
     const setTitle = (event) => {
         setHabit({ ...habit, title: event.target.value });
@@ -73,9 +73,11 @@ function Create() {
         
         if (habit.type === "good") { // If habit is GOOD
             addGoodHabit(habitObj);
+            console.log("About to call submit()");
             submit(habitObj, habit.type);
         } else if (habit.type === "bad") { // If habit is BAD
             addBadHabit(habitObj);
+            console.log("About to call submit()");
             submit(habitObj, habit.type);
         } 
     }
@@ -102,7 +104,7 @@ function Create() {
         
         sessionStorage.setItem("added","true")
 
-        console.log("About to run navigate");
+        console.log("About to run navigate()");
         navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t,type: type, added: true}});
     }
 
@@ -120,7 +122,6 @@ function Create() {
                     <div id="categories">
                         <h5>Category</h5>
                         <select name="" id="" onClick={setCategory} required>
-                            <option value="none"></option>
                             <option value="health">Health</option>
                             <option value="work">Work</option>
                             <option value="school">School</option>
@@ -130,7 +131,6 @@ function Create() {
                         </select>
                         <br />
                         <select name="" id="" onClick={setType} required>
-                        <option value="none"></option>
                             <option value="good">Good</option>
                             <option value="bad">Bad</option>
                         </select>

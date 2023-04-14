@@ -52,12 +52,14 @@
 		$row = $result->fetch_assoc();
 		
 		// now add habit and date objects into users table
-		$sql = "UPDATE users SET `good_habits` = '$good', `bad_habits` = '$bad' WHERE `id` = '$id'";
-        if(mysqli_query($conn, $sql)){
+		$stmt = $conn->prepare("UPDATE users SET `good_habits` = ?, `bad_habits` = ? WHERE `id` = ?");
+		$stmt->bind_param("bbi", $good, $bad, $id); 
+
+		if ($stmt->execute()) {
             echo "Records added successfully.\n";
-        } else{
-            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-        }
+		} else {
+			echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		}
 
 		// Close connection
 		mysqli_close($conn);
