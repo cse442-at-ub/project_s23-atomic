@@ -116,8 +116,8 @@ export default function HomeMain() {
                                     <div className='counter_info'>
                                         <div className='counter_button'>
                                             <button id="minus_btn">-</button>
-                                            <label>{obj[habit].counter}</label>
-                                            <button id="plus_btn">+</button>
+                                            <label>{obj[habit].counter}</label>         
+                                            <button id="plus_btn" value={obj[habit].title} onClick={increment()}>+</button>
                                         </div>
                                         <label> / {obj[habit].total}</label>
                                     </div>
@@ -193,6 +193,15 @@ export default function HomeMain() {
         }, 200)
         return () => clearInterval(interval)
      })
+
+     const increment = (event) => {
+        //setTcounter(tcounter+1);
+        //const title = event.target.value;
+        //console.log(title);
+        //updateHabit(state.id, state.type, state.title);
+        //console.log(input)
+        //return input;
+    };
    
     return (
         <div className="mainContainer">

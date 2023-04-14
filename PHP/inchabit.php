@@ -6,7 +6,7 @@
 	    // create connection
 	    // this is the database I used to test locally
 	    // servername, username, password, database name.
-	    $conn = mysqli_connect("localhost:3306", "root", "Cutforvader#19", "testTable"); 
+	    $conn = mysqli_connect("localhost:3306", "root", "", "testTable"); 
 
 		if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -23,13 +23,19 @@
 		$habit = (string)$data['habit'];
 
 
-		$good = mysql_query("SELECT good_habits FROM users WHERE id = '{$id}'");
-		$bad = mysql_query("SELECT bad_habits FROM users WHERE id = '{$id}'");
+		$good = mysql_query("SELECT good_habits FROM users WHERE id = '{$id}'");		//grabs good habits from database
+		$bad = mysql_query("SELECT bad_habits FROM users WHERE id = '{$id}'");			//grabs bad habits from database
 
-		$pgood = json_decode($good, true);
-		$pbad = json_decode($bad, true);
+		$pgood = json_decode($good, true);			//php object of good_habits column from user
+		$pbad = json_decode($bad, true);			//php object of bad_habits column from user
 
-		if ($pgood->$habit)
+		//checks if habit to be incremented is in good_habits
+		if (var_dump(isset($pgood->{$habit}))){
+			incr = 
+		}else{
+			
+		}
+
 
 
 
