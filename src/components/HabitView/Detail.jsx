@@ -10,6 +10,10 @@ import 'react-toastify/dist/ReactToastify.css';
 function Detail(){
 
     const navigate = useNavigate();
+    const routeHome = () =>{
+        let path = '/homepage'
+        navigate(path)
+    }
     // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
     //need to pass in correct habit information to this component 
     // added will be a boolean to keep track of when a user gets sent to the page
@@ -23,7 +27,7 @@ function Detail(){
         toast.success('New Habit Added!', {
             position: "top-right",
             autoClose: 1050,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
@@ -44,14 +48,17 @@ function Detail(){
             <Navbar />
             <div className='info_container'>
                 <ToastContainer limit={1}/>
-                <Link to="/homepage" className='back_link'>&lt; Back to Home</Link>
+                <div className='back_link' onClick={routeHome}>&lt; Back to Home</div>
                 <div className='column_1'>
                     <h1 className="detail-title">{state.title}</h1>
                     <button className='edit_button'>Edit</button>
                 </div>
                 <div className='column_2'>
-                    <p id='category_label'>{state.category}</p>
-                    <p>Details</p>
+                    <div className='category_container'>
+                        <p id='category_label' className={state.category}>{state.category}</p>
+                        <p id='category_label' className={state.type}>{state.type}</p>
+                    </div>
+                    <p style={{fontWeight:"bold"}}>Details</p>
                     <div id="detail_box">
                         <p>{state.details}</p>
                     </div>
