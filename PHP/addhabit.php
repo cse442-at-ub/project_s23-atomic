@@ -8,10 +8,10 @@
 		// create connection
 		// this is the database I used to test locally
 		// servername, username, password, database name.
-		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
+		// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
 
 		// this is our groups database
-		// $conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
+		$conn = mysqli_connect("oceanus.cse.buffalo.edu", "wrenmart", "50347405", "cse442_2023_spring_team_q_db"); //servername, username, pass, db.
 
 
 		// the database will have one table for now
@@ -52,12 +52,14 @@
 		$row = $result->fetch_assoc();
 		
 		// now add habit and date objects into users table
-		$sql = "UPDATE users SET `good_habits` = '$good', `bad_habits` = '$bad' WHERE `id` = '$id'";
-        if(mysqli_query($conn, $sql)){
+		$stmt = $conn->prepare("UPDATE users SET `good_habits` = ?, `bad_habits` = ? WHERE `id` = ?");
+		$stmt->bind_param("bbi", $good, $bad, $id); 
+
+		if ($stmt->execute()) {
             echo "Records added successfully.\n";
-        } else{
-            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-        }
+		} else {
+			echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		}
 
 		// Close connection
 		mysqli_close($conn);

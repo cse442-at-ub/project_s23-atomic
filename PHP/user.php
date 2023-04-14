@@ -6,10 +6,10 @@
 		// create connection
 		// this is the database I used to test locally
 		// servername, username, password, database name.
-		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
+		// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
 
 		// this is our groups database
-		// $conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
+		$conn = mysqli_connect("oceanus.cse.buffalo.edu", "wrenmart", "50347405", "cse442_2023_spring_team_q_db"); //servername, username, pass, db.
 
 		// Check connection
 		if ($conn->connect_error) {
@@ -22,23 +22,40 @@
 		$id = (int)htmlspecialchars($_GET["userid"]);
 
 		// want to pull out users information from users table using id
-		$query = "SELECT * FROM users WHERE id = '{$id}'";
-		$result = mysqli_query($conn,$query);
-		
-		// if user found in database then pull out data
-        if($result){
-			$row = $result->fetch_assoc();
-			// pull out data we need from database
-			$username = $row["username"];
-			$good_habits = $row["good_habits"];
-			$bad_habits = $row["bad_habits"];
+		$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+		$stmt->bind_param("i", $id); 
 
-			echo $username . "\n";
-			echo $good_habits . "\n";
-			echo $bad_habits . "\n";
-        } else{
+		if ($stmt->execute()) {
+			($result){
+				$row = $result->fetch_assoc();
+				// pull out data we need from database
+				$username = $row["username"];
+				$good_habits = $row["good_habits"];
+				$bad_habits = $row["bad_habits"];
+	
+				echo $username . "\n";
+				echo $good_habits . "\n";
+				echo $bad_habits . "\n";
+			}
+		} else {
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-        }
+		}
+
+		
+		// // if user found in database then pull out data
+        // if($result){
+		// 	$row = $result->fetch_assoc();
+		// 	// pull out data we need from database
+		// 	$username = $row["username"];
+		// 	$good_habits = $row["good_habits"];
+		// 	$bad_habits = $row["bad_habits"];
+
+		// 	echo $username . "\n";
+		// 	echo $good_habits . "\n";
+		// 	echo $bad_habits . "\n";
+        // } else{
+        //     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+        // }
 
 		// Close connection
 		mysqli_close($conn);

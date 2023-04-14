@@ -5,10 +5,10 @@
         // create connection
 		// this is the database I used to test locally
 		// servername, username, password, database name.
-		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
+		// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
 
 		// this is our groups database
-		// $conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
+		$conn = mysqli_connect("oceanus.cse.buffalo.edu", "wrenmart", "50347405", "cse442_2023_spring_team_q_db"); //servername, username, pass, db.
 
 
 		// the database will have one table for now
@@ -43,14 +43,24 @@
 		// functions to check if email or usernames exist in database
 		// prevent duplicate accounts
 		function emailExists($conn,$input) {
-			$query = "SELECT * FROM users WHERE email = '{$input}'";
-			$result = mysqli_query($conn,$query);
-			return $result;
+			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+			$stmt->bind_param("s", $input); 
+
+			if ($stmt->execute()) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 		function usernameExists($conn,$input) {
-			$query = "SELECT * FROM users WHERE username = '{$input}'";
-			$result = mysqli_query($conn,$query);
-			return $result;
+			$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+			$stmt->bind_param("s", $input); 
+
+			if ($stmt->execute()) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		// if account is unique, add to database, if not return message of what is not unique 
