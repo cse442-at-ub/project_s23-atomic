@@ -17,6 +17,7 @@ $sql = "SELECT email FROM users";
 $result = $conn->query($sql);
 
 // Loop through the email addresses and send an email to each one
+
 while ($row = $result->fetch_assoc()) {
   $to = $row['email'];
   $subject = "Reminder from Habit Tracker!";
