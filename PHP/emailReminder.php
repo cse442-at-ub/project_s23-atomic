@@ -1,38 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Send Email Reminder</title>
-</head>
-<body>
-	<?php
-	if(isset($_POST['submit'])) {
-		$recipient_email = $_POST['recipient_email'];
-		$subject = $_POST['subject'];
-		$message = $_POST['message'];
-		$headers = "From: Atomic_Habits@example.com\r\n";
-		$headers .= "Reply-To: yourname@example.com\r\n";
-		$headers .= "CC: anotheremail@example.com\r\n";
-		$headers .= "BCC: hiddenemail@example.com\r\n";
-		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-Type: text/html; charset=utf-8\r\n";
-		if(mail($recipient_email, $subject, $message, $headers)) {
-			echo "<p>Reminder sent to $recipient_email</p>";
-		} else {
-			echo "<p>Error sending reminder</p>";
-		}
-	}
-	?>
-	<form method="post" action="">
-		<label for="recipient_email">Recipient's Email:</label>
-		<input type="email" name="recipient_email" required>
-		<br>
-		<label for="subject">Subject:</label>
-		<input type="text" name="subject" required>
-		<br>
-		<label for="message">Message:</label>
-		<textarea name="message" rows="10" cols="50" required></textarea>
-		<br>
-		<input type="submit" name="submit" value="Send Reminder">
-	</form>
-</body>
-</html>
+<?php
+// Set up database connection
+$host = "";
+$username = "";
+$password = "";
+$dbname = "";
+$conn = mysqli_connect($host, $username, $password, $dbname);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Set up email sending
+$from_email = "atomic@habits.com";
+$from_name = "Atomic Habits";
+$subject = "Reminder: Check and Do Your Habits";
+$message = "Hi there,\n\nDon't forget to check and do your daily habits today!\n\nBest regards,\nYour Name";
+
+// Get all users' email addresses
+$sql = "SELECT email FROM users";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $to_email = $row["email"];
+        // Send email reminder to user
+        $headers = "From: " . $from_name . " <" . $from_email . ">\r\n";
+        if (mail($to_email, $subject, $message, $headers)) {
+            echo "Reminder email sent to " . $to_email . "<br>";
+        } else {
+            echo "Error sending email to " . $to_email . "<br>";
+        }
+    }
+} else {
+    echo "No users found.";
+}
+
+// Close database connection
+mysqli_close($conn);
+?>
