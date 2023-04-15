@@ -208,6 +208,23 @@ function Signin() {
 
   handleErrors();
 
+  // function to call the php script to send reminders
+  function sendReminderEmails() {
+    fetch('emailReminder.php')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to send reminder emails');
+        }
+        console.log('Reminder emails sent successfully');
+      })
+      .catch(error => {
+        console.error('Error sending reminder emails:', error);
+      });
+  }
+
+  sendReminderEmails();
+  
+
   // return the JSX for the Signin component
   return (
     <div className='signin_container'>
