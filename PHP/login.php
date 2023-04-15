@@ -6,9 +6,9 @@
 	// create connection
 	// this is the database I used to test locally
 	// servername, username, password, database name.
-	$conn = mysqli_connect("localhost:3306", "root", "password", "testdb"); 
+	// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
 	// this is our groups database
-	// $conn = mysqli_connect("oceanus.cse.buffalo.edu:3306 ", "karlitho", "50308831", "cse442_2023_spring_team_q_db"); //servername, username, pass, db.
+	$conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
 
 
 	// the database will have one table for now
@@ -34,26 +34,41 @@
 	$password = mysqli_real_escape_string($conn,$data["password"]);
 
 	// functions to check if email or usernames exist in database
-		function usernameExists($conn,$input) {
-			$query = "SELECT * FROM users WHERE username = '{$input}'";
-			$result = mysqli_query($conn,$query);
-			return $result;
+	function usernameExists($conn,$input) {
+		$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+		$stmt->bind_param("s", $input);
+		$stmt->execute();
+
+		$result = $stmt->get_result(); // get the mysqli result
+		$row = $result->fetch_assoc(); // fetch data
+
+		// if row exists, return true, else return false
+		if ($row) {
+			return true;
+		} else {
+			return false;
 		}
-	// if account is unique, add to database, if not return message of what is not unique 
-	if(mysqli_num_rows(usernameExists($conn,$username)) != 1){
+	}
+	// if username doesn't exist in database, send back error message
+	if(!usernameExists($conn,$username)){
 		// this will send back Username message, login ReactJS component will pull this message and deal with it 
-		echo "Invalid\n";
+		echo "Invalid Username\n";
 	} else{
 		// this will send back Success message, login ReactJS component will pull this message and deal with it
-		$query = "SELECT * FROM users WHERE username = '{$username}'";
-		$result = mysqli_query($conn,$query);
-		$row = $result->fetch_assoc();
+		$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+
+		$result = $stmt->get_result(); // get the mysqli result
+		$row = $result->fetch_assoc(); // fetch data
+
 		if (password_verify($password, $row["password"])){
-			echo $row["id"];
+			echo $row["id"]."\n";
+			echo $username."\n";
 			echo "\nRecords checked successfully.\n";
 		}
 		else{
-			echo "Invalid\n";
+			echo "Invalid Password\n";
 		}
 	}
 	// Close connection
