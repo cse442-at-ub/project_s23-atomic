@@ -77,3 +77,26 @@ input[type="submit"]:active {
 .login-form-field{
     margin: 20px 0px;
 }
+
+.back_button{
+    background: rgba(79, 98, 194, 0.75);
+    border-radius: 10px;
+
+    align-content: center;
+    justify-content: center;
+
+    width: 200px;
+    height: 64px;
+
+    margin-top: 35px;
+
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    cursor: pointer;
+
+    color: #FFFFFF;
+}

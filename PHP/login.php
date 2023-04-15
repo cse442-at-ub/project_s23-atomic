@@ -1,100 +1,62 @@
 <?php 
 
-session_start();
+	// header('Access-Control-Allow-Origin: http://localhost:3000'); // Connects to front-end
+	header('Access-Control-Allow-Origin: *');
+		
+	// create connection
+	// this is the database I used to test locally
+	// servername, username, password, database name.
+	$conn = mysqli_connect("localhost:3306", "root", "password", "testdb"); 
+	// this is our groups database
+	// $conn = mysqli_connect("oceanus.cse.buffalo.edu:3306 ", "karlitho", "50308831", "cse442_2023_spring_team_q_db"); //servername, username, pass, db.
 
-	include("connection.php");
-	include("functions.php");
 
+	// the database will have one table for now
+	// users table: holds id (int), username, email, password, good_habits, bad_habits, and dates
+	// good_habits and bad_habits is a json object that holds all the habits as objects
+	// habits in log and users table should have a universal style in the application
+	// for example one habit will contain other information
+	// 'drink water' : {'counter': 0, 'total': 8, details: '', category:''}
+	// counter will be incremented up to the total number when logged by the user
+	// dates will look something like {"2023:3:13":{'drink water' : {'counter': 0, 'total': 8, details: '', category:''}}}
+	
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}else{
+		echo "Connected successfully\n";
+	}
 
-	if($_SERVER['REQUEST_METHOD'] == "POST")
-	{
-		//something was posted
-		$user_name = $_POST['user_name'];
-		$password = $_POST['password'];
+	// save information that came from post request
+	$data = $_POST;
+	// save information that was sent
+	$username = mysqli_real_escape_string($conn,$data["username"]);
+	$password = mysqli_real_escape_string($conn,$data["password"]);
 
-		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
-		{
-
-			//read from database
-			$query = "select * from users where user_name = '$user_name' limit 1";
-			$result = mysqli_query($con, $query);
-
-			if($result)
-			{
-				if($result && mysqli_num_rows($result) > 0)
-				{
-
-					$user_data = mysqli_fetch_assoc($result);
-					
-					if($user_data['password'] === $password)
-					{
-
-						$_SESSION['user_id'] = $user_data['user_id'];
-						header("Location: index.php");
-						die;
-					}
-				}
-			}
-			
-			echo "wrong username or password!";
-		}else
-		{
-			echo "wrong username or password!";
+	// functions to check if email or usernames exist in database
+		function usernameExists($conn,$input) {
+			$query = "SELECT * FROM users WHERE username = '{$input}'";
+			$result = mysqli_query($conn,$query);
+			return $result;
+		}
+	// if account is unique, add to database, if not return message of what is not unique 
+	if(mysqli_num_rows(usernameExists($conn,$username)) != 1){
+		// this will send back Username message, login ReactJS component will pull this message and deal with it 
+		echo "Invalid\n";
+	} else{
+		// this will send back Success message, login ReactJS component will pull this message and deal with it
+		$query = "SELECT * FROM users WHERE username = '{$username}'";
+		$result = mysqli_query($conn,$query);
+		$row = $result->fetch_assoc();
+		if (password_verify($password, $row["password"])){
+			echo $row["id"];
+			echo "\nRecords checked successfully.\n";
+		}
+		else{
+			echo "Invalid\n";
 		}
 	}
+	// Close connection
+	mysqli_close($conn);
 
 ?>
-
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-</head>
-<body>
-
-	<style type="text/css">
-	
-	#text{
-
-		height: 25px;
-		border-radius: 5px;
-		padding: 4px;
-		border: solid thin #aaa;
-		width: 100%;
-	}
-
-	#button{
-
-		padding: 10px;
-		width: 100px;
-		color: white;
-		background-color: lightblue;
-		border: none;
-	}
-
-	#box{
-
-		background-color: grey;
-		margin: auto;
-		width: 300px;
-		padding: 20px;
-	}
-
-	</style>
-
-	<div id="box">
-		
-		<form method="post">
-			<div style="font-size: 20px;margin: 10px;color: white;">Login</div>
-
-			<input id="text" type="text" name="user_name"><br><br>
-			<input id="text" type="password" name="password"><br><br>
-
-			<input id="button" type="submit" value="Login"><br><br>
-
-			<a href="signup.php">Click to Signup</a><br><br>
-		</form>
-	</div>
-</body>
-</html>
