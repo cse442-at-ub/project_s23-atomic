@@ -1,38 +1,34 @@
 <?php
-// Set up database connection
-$host = "";
+// Connect to the database
+$servername = "";
 $username = "";
 $password = "";
 $dbname = "";
-$conn = mysqli_connect($host, $username, $password, $dbname);
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
 }
 
-// Set up email sending
-$from_email = "atomic@habits.com";
-$from_name = "Atomic Habits";
-$subject = "Reminder: Check and Do Your Habits";
-$message = "Hi there,\n\nDon't forget to check and do your daily habits today!\n\nBest regards,\nYour Name";
-
-// Get all users' email addresses
+// Fetch email addresses from the database
 $sql = "SELECT email FROM users";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $to_email = $row["email"];
-        // Send email reminder to user
-        $headers = "From: " . $from_name . " <" . $from_email . ">\r\n";
-        if (mail($to_email, $subject, $message, $headers)) {
-            echo "Reminder email sent to " . $to_email . "<br>";
-        } else {
-            echo "Error sending email to " . $to_email . "<br>";
-        }
-    }
-} else {
-    echo "No users found.";
+$result = $conn->query($sql);
+
+// Loop through the email addresses and send an email to each one
+while ($row = $result->fetch_assoc()) {
+  $to = $row['email'];
+  $subject = "Reminder from Habit Tracker!";
+  $message = "Don't forget to log your habits on Habit Tracker!";
+  $headers = "From: Atomic-habits@example.com\r\n";
+
+  mail($to, $subject, $message, $headers);
 }
 
-// Close database connection
-mysqli_close($conn);
+// Sleep for 6 hours
+sleep(6 * 60 * 60);
+
+// Close the database connection
+$conn->close();
 ?>
