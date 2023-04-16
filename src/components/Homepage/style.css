@@ -129,8 +129,7 @@
 .habit_title {
     text-align: left;
     margin: 12px;
-    /* font-size: 1.9rem; */
-    font-size: calc(1.6rem + 0.4vw);
+    font-size: 1.9rem;
     font-weight: 600;
     /* color: rgba(79, 98, 194); */
     color: black;

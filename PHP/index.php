@@ -4,11 +4,6 @@ session_start();
 	include("connection.php");
 	include("functions.php");
 
-	if(!isset($_COOKIE["cookieboy"]))
-	{
-		header("Location: login.php");
-	} //checks if cookie is already set, if not you are redirected to login page. 
-
 	$user_data = check_login($con);
 
 ?>

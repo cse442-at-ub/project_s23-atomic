@@ -8,7 +8,7 @@
 		// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
 
 		// this is our groups database
-		$conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
+		$conn = mysqli_connect("oceanus.cse.buffalo.edu", "wrenmart", "50347405", "cse442_2023_spring_team_q_db"); //servername, username, pass, db.
 
 
 		// the database will have one table for now
@@ -45,13 +45,8 @@
 		function emailExists($conn,$input) {
 			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 			$stmt->bind_param("s", $input); 
-			$stmt->execute();
 
-			$result = $stmt->get_result(); // get the mysqli result
-			$row = $result->fetch_assoc(); // fetch data
-
-			// if row exists, return true, else return false
-			if ($row) {
+			if ($stmt->execute()) {
 				return true;
 			} else {
 				return false;
@@ -60,13 +55,8 @@
 		function usernameExists($conn,$input) {
 			$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
 			$stmt->bind_param("s", $input); 
-			$stmt->execute();
 
-			$result = $stmt->get_result(); // get the mysqli result
-			$row = $result->fetch_assoc(); // fetch data	
-
-			// if row exists, return true, else return false
-			if ($row) {
+			if ($stmt->execute()) {
 				return true;
 			} else {
 				return false;
@@ -74,29 +64,22 @@
 		}
 
 		// if account is unique, add to database, if not return message of what is not unique 
-		if (emailExists($conn,$email) && $email != "") {
+		if (mysqli_num_rows(emailExists($conn,$email)) != 0) {
 			// this will send back Email message, signin ReactJS component will pull this message and deal with it 
 			echo "Email\n";
-		} else if(usernameExists($conn,$username) && $username != ""){
+		} else if(mysqli_num_rows(usernameExists($conn,$username)) != 0){
 			// this will send back Username message, signin ReactJS component will pull this message and deal with it 
 			echo "Username\n";
-		} else if ($username != "" && $email != "" and $password != ""){
+		} else{
 			// insert into database
 			// only inserting registration values, next page will allow user to choose habits, which will be added in the database 
 			// in another php file
-			$sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-			$prep = $conn->prepare($sql);
-			$prep->bind_param("sss", $username, $email, $hashed_password);
-			
-			if($prep->execute()){
-				
+			$sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
+			if(mysqli_query($conn, $sql)){
 				// want to save user id to send back
-				$stmtprep = $conn->prepare("SELECT id FROM users WHERE username = ?");
-				$stmtprep->bind_param("s", $username);
-				$stmtprep->execute();
-				$result = $stmtprep->get_result();
+				$query = "SELECT id FROM users WHERE username = '{$username}'";
+				$result = mysqli_query($conn,$query);
 				$row = $result->fetch_assoc();
-
 				echo $row["id"];
 				echo "\nRecords added successfully.\n";
 			} else{
