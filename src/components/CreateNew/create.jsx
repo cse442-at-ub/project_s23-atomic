@@ -27,7 +27,7 @@ function Create() {
 
     const [habit, setHabit] = useState({
         title: "",
-        counter: 0,
+        total: 0,
         details: "",
         category: "Health",
         type: "good"
@@ -63,8 +63,8 @@ function Create() {
         // Create habit JSON Object
         const habitObj = {};
         habitObj["title"] = habit.title;
-        habitObj["counter"] = habit.counter;
-        habitObj["total"] = 0;
+        habitObj["counter"] = 0;
+        habitObj["total"] = habit.counter;
         habitObj["details"] = habit.details;
         habitObj["category"] = habit.category;
         habitObj["Days"] = {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} };
