@@ -22,12 +22,14 @@
 		$id = (int)htmlspecialchars($_GET["userid"]);
 
 		// want to pull out users information from users table using id
-		$query = "SELECT * FROM users WHERE id = '{$id}'";
-		$result = mysqli_query($conn,$query);
-		
-		// if user found in database then pull out data
-        if($result){
+		$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+		$stmt->bind_param("i", $id); 
+
+		if ($stmt->execute()) {
+
+			$result = $stmt->get_result();
 			$row = $result->fetch_assoc();
+
 			// pull out data we need from database
 			$username = $row["username"];
 			$good_habits = $row["good_habits"];
@@ -36,9 +38,9 @@
 			echo $username . "\n";
 			echo $good_habits . "\n";
 			echo $bad_habits . "\n";
-        } else{
+		} else {
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-        }
+		}
 
 		// Close connection
 		mysqli_close($conn);
