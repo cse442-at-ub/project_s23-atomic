@@ -50,7 +50,7 @@ function Suggestions(){
         if (type === 0){
             pos = "Good";
             habit = good_habits[habit_title];
-            console.log(user.good[habit_title])
+            // console.log(user.good[habit_title])
             if (user.good[habit_title] !== undefined){
                 console.log("habit exists")
                 notifyExists();
@@ -200,7 +200,7 @@ function Suggestions(){
                                 <li onClick={getHabit} value="1">Drink Coffee</li>
                                 <li onClick={getHabit} value="1">Eat Junk Food</li>
                                 <li onClick={getHabit} value="1">Sit All Day</li>
-                                <li onClick={getHabit} value="1">Bite Your Nails</li>
+                                <li onClick={getHabit} value="1">Bite Nails</li>
                                 <li onClick={getHabit} value="1">Skip A Meal</li>
                                 <li onClick={getHabit} value="1">Multitask</li>
                                 <li onClick={getHabit} value="1">Criticize Yourself</li>
