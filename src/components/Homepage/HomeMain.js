@@ -79,7 +79,7 @@ export default function HomeMain() {
     var day = days[ currDate.getDay() ];
     var month = months[ currDate.getMonth() ];
 
-    const {good_habits, bad_habits, user, setUser, getUserData} = useContext(HabitContext);
+    const {good_habits, bad_habits, user, setUser, getUserData, sendHabits} = useContext(HabitContext);
 
     const getCateogries = () => {
         if (user.good !== {}) {
@@ -116,8 +116,8 @@ export default function HomeMain() {
                                     <div className='counter_info'>
                                         <div className='counter_button'>
                                             <button id="minus_btn">-</button>
-                                            <label>{obj[habit].counter}</label>
-                                            <button id="plus_btn">+</button>
+                                            <label>{obj[habit].counter}</label>         
+                                            <button id="plus_btn" className={obj[habit].title} value ={obj[habit].counter}onClick={increment}>+</button>
                                         </div>
                                         <label> / {obj[habit].total}</label>
                                     </div>
@@ -193,6 +193,79 @@ export default function HomeMain() {
         }, 200)
         return () => clearInterval(interval)
      })
+
+     
+     const increment = async(event) => {
+
+        const title = event.target.className;
+        let tcounter = event.target.value
+
+        console.log(tcounter);
+
+        const data = await getUserData(sessionStorage.getItem("id"));
+        let thisuser = data
+
+        if(thisuser.bad[title] === null){
+            const Days ={
+                0: tcounter + 1,
+                1: thisuser.good[title]["Days"][1],
+                2: thisuser.good[title]["Days"][2],
+                3: thisuser.good[title]["Days"][3],
+                4: thisuser.good[title]["Days"][4],
+                5: thisuser.good[title]["Days"][5],
+                6: thisuser.good[title]["Days"][6],
+                7: thisuser.good[title]["Days"][7],
+            }
+            const habit = {
+                Days,
+                title: thisuser.good[title]["title"],
+                total: thisuser.good[title]["total"],
+                //+ 1 properly updates counter
+                counter: tcounter + 1,
+                details: thisuser.good[title]["details"],
+                category: thisuser.good[title]["category"],
+            }
+            //console.log(state.type)
+        
+            delete thisuser.good[title]
+            console.log("altered good object =", thisuser.good)
+
+            const rslt ={
+                ...thisuser.good,
+                [title] : habit
+            }
+            sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
+        }else{
+            const Days ={
+                0: tcounter + 1,
+                1: thisuser.bad[title]["Days"][1],
+                2: thisuser.bad[title]["Days"][2],
+                3: thisuser.bad[title]["Days"][3],
+                4: thisuser.bad[title]["Days"][4],
+                5: thisuser.bad[title]["Days"][5],
+                6: thisuser.bad[title]["Days"][6],
+                7: thisuser.bad[title]["Days"][7],
+            }
+            const habit = {
+                Days,
+                title: thisuser.bad[title]["title"],
+                total: thisuser.bad[title]["total"],
+                //+ 1 properly updates counter
+                counter: tcounter + 1,
+                details: thisuser.bad[title]["details"],
+                category: thisuser.bad[title]["category"],
+            }
+            delete thisuser.bad[title]
+            console.log("altered bad object =", thisuser.bad)
+
+            const rslt ={
+                ...thisuser.bad,
+                [title] : habit
+            }
+            sendHabits(sessionStorage.getItem("id"), thisuser.good, rslt)
+        }
+
+    };
    
     return (
         <div className="mainContainer">
