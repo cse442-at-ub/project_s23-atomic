@@ -29,7 +29,7 @@ function Create() {
         title: "",
         counter: 0,
         details: "",
-        category: "health",
+        category: "Health",
         type: "good"
     });
     const setTitle = (event) => {
@@ -70,14 +70,15 @@ function Create() {
         habitObj["Days"] = {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} };
 
         console.log("habitObj was created as: " + JSON.stringify(habitObj));
+        console.log("habit.type was : " + habit.type);
         
         if (habit.type === "good") { // If habit is GOOD
+            console.log("logging as a Good habit");
             addGoodHabit(habitObj);
-            console.log("About to call submit()");
             submit(habitObj, habit.type);
         } else if (habit.type === "bad") { // If habit is BAD
+            console.log("logging as a Bad habit");
             addBadHabit(habitObj);
-            console.log("About to call submit()");
             submit(habitObj, habit.type);
         } 
     }
@@ -122,12 +123,12 @@ function Create() {
                     <div id="categories">
                         <h5>Category</h5>
                         <select name="" id="" onClick={setCategory} required>
-                            <option value="health">Health</option>
-                            <option value="work">Work</option>
-                            <option value="school">School</option>
-                            <option value="social">Social</option>
-                            <option value="misc">Misc</option>
-                            <option value="family">Family</option>
+                            <option value="Health">Health</option>
+                            <option value="Work">Work</option>
+                            <option value="School">School</option>
+                            <option value="Social">Social</option>
+                            <option value="Misc">Misc</option>
+                            <option value="Family">Family</option>
                         </select>
                         <br />
                         <select name="" id="" onClick={setType} required>

@@ -26,17 +26,15 @@
 		$stmt->bind_param("i", $id); 
 
 		if ($stmt->execute()) {
-			($result){
-				$row = $result->fetch_assoc();
-				// pull out data we need from database
-				$username = $row["username"];
-				$good_habits = $row["good_habits"];
-				$bad_habits = $row["bad_habits"];
-	
-				echo $username . "\n";
-				echo $good_habits . "\n";
-				echo $bad_habits . "\n";
-			}
+			$row = $result->fetch_assoc();
+			// pull out data we need from database
+			$username = $row["username"];
+			$good_habits = $row["good_habits"];
+			$bad_habits = $row["bad_habits"];
+
+			echo $username . "\n";
+			echo $good_habits . "\n";
+			echo $bad_habits . "\n";
 		} else {
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 		}
