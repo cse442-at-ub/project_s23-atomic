@@ -82,54 +82,148 @@ function Detail(){
 
 
     const increment = async() => {
-        console.log(state.title);
+        //console.log(state.title);
         setTcounter(tcounter+1);
         const data = await getUserData(sessionStorage.getItem("id"));
         let thisuser = data
-        console.log(thisuser.good)
-        console.log("originals =", thisuser.good[state.title])
-        console.log(tcounter)
+        // console.log(thisuser.good)
+        // console.log("originals =", thisuser.good[state.title])
+        // console.log(tcounter)
 
         //copy of original habit but with updated counter
-        const temp = {
-            Days: thisuser.good[state.title]["Days"],
-            title: thisuser.good[state.title]["title"],
-            total: thisuser.good[state.title]["total"],
-            //+ 1 properly updates counter
-            counter: tcounter + 1,
-            details: thisuser.good[state.title]["details"],
-            category: thisuser.good[state.title]["category"],
-        }
-        console.log("temp =", temp)
-        //thisuser.good[state.title]['counter'] = ;
-        //updateCounter(thisuser.good[state.title], state.title, tcounter);
-        //let insert = [thisuser.good]
-        //sendHabits(state.id, insert, thisuser.bad);
-        delete thisuser.good[state.title]
-        console.log("altered good object =", thisuser.good)
-        //console.log(thisuser.good[state.title]["title"])
-        //const tt = thisuser.good[state.title]["title"]
+        if(state.type === "Good"){
+            const Days ={
+                0: tcounter + 1,
+                1: thisuser.good[state.title]["Days"][1],
+                2: thisuser.good[state.title]["Days"][2],
+                3: thisuser.good[state.title]["Days"][3],
+                4: thisuser.good[state.title]["Days"][4],
+                5: thisuser.good[state.title]["Days"][5],
+                6: thisuser.good[state.title]["Days"][6],
+                7: thisuser.good[state.title]["Days"][7],
+            }
+            const habit = {
+                Days,
+                title: thisuser.good[state.title]["title"],
+                total: thisuser.good[state.title]["total"],
+                //+ 1 properly updates counter
+                counter: tcounter + 1,
+                details: thisuser.good[state.title]["details"],
+                category: thisuser.good[state.title]["category"],
+            }
+            console.log(state.type)
         
+            delete thisuser.good[state.title]
+            console.log("altered good object =", thisuser.good)
 
-        const rslt ={
-            ...thisuser.good,
-            temp,
+            const rslt ={
+                ...thisuser.good,
+                [state.title] : habit
+            }
+            sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
+        }else{
+            const Days ={
+                0: tcounter + 1,
+                1: thisuser.bad[state.title]["Days"][1],
+                2: thisuser.bad[state.title]["Days"][2],
+                3: thisuser.bad[state.title]["Days"][3],
+                4: thisuser.bad[state.title]["Days"][4],
+                5: thisuser.bad[state.title]["Days"][5],
+                6: thisuser.bad[state.title]["Days"][6],
+                7: thisuser.bad[state.title]["Days"][7],
+            }
+            const habit = {
+                Days,
+                title: thisuser.bad[state.title]["title"],
+                total: thisuser.bad[state.title]["total"],
+                //+ 1 properly updates counter
+                counter: tcounter + 1,
+                details: thisuser.bad[state.title]["details"],
+                category: thisuser.bad[state.title]["category"],
+            }
+            delete thisuser.bad[state.title]
+            console.log("altered bad object =", thisuser.bad)
+
+            const rslt ={
+                ...thisuser.bad,
+                [state.title] : habit
+            }
+            sendHabits(sessionStorage.getItem("id"), thisuser.good, rslt)
         }
-        sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
-
-        console.log("final good object =", rslt)
-
-
-
+        //console.log("final good object =", rslt)
     };
-    const decrement = () => {
-        setTcounter(tcounter-1)
-        state.counter = tcounter
+    const decrement = async() => {
+        setTcounter(tcounter-1);
+        const data = await getUserData(sessionStorage.getItem("id"));
+        let thisuser = data
+        if (tcounter > 0){
+            if(state.type === "Good"){
+                const Days ={
+                    0: tcounter - 1,
+                    1: thisuser.good[state.title]["Days"][1],
+                    2: thisuser.good[state.title]["Days"][2],
+                    3: thisuser.good[state.title]["Days"][3],
+                    4: thisuser.good[state.title]["Days"][4],
+                    5: thisuser.good[state.title]["Days"][5],
+                    6: thisuser.good[state.title]["Days"][6],
+                    7: thisuser.good[state.title]["Days"][7],
+                }
+                const habit = {
+                    Days,
+                    title: thisuser.good[state.title]["title"],
+                    total: thisuser.good[state.title]["total"],
+                    //+ 1 properly updates counter
+                    counter: tcounter - 1,
+                    details: thisuser.good[state.title]["details"],
+                    category: thisuser.good[state.title]["category"],
+                }
+                console.log(state.type)
+            
+                delete thisuser.good[state.title]
+                console.log("altered good object =", thisuser.good)
+    
+                const rslt ={
+                    ...thisuser.good,
+                    [state.title] : habit
+                }
+                sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
+            }else{
+                const Days ={
+                    0: tcounter - 1,
+                    1: thisuser.bad[state.title]["Days"][1],
+                    2: thisuser.bad[state.title]["Days"][2],
+                    3: thisuser.bad[state.title]["Days"][3],
+                    4: thisuser.bad[state.title]["Days"][4],
+                    5: thisuser.bad[state.title]["Days"][5],
+                    6: thisuser.bad[state.title]["Days"][6],
+                    7: thisuser.bad[state.title]["Days"][7],
+                }
+                const habit = {
+                    Days,
+                    title: thisuser.bad[state.title]["title"],
+                    total: thisuser.bad[state.title]["total"],
+                    //+ 1 properly updates counter
+                    counter: tcounter - 1,
+                    details: thisuser.bad[state.title]["details"],
+                    category: thisuser.bad[state.title]["category"],
+                }
+                delete thisuser.bad[state.title]
+                console.log("altered bad object =", thisuser.bad)
+    
+                const rslt ={
+                    ...thisuser.bad,
+                    [state.title] : habit
+                }
+                sendHabits(sessionStorage.getItem("id"), thisuser.good, rslt)
+            }
+        }else{
+            setTcounter(0)
+        }
     };
 
-    if (tcounter < 0){
-        setTcounter(0)
-    };
+    // if (tcounter < 0){
+    //     setTcounter(0)
+    // };
 
     useEffect(() => {
         if (sessionStorage.getItem("added") === "true"){
