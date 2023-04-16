@@ -27,6 +27,7 @@
     right: 25%;
 
     background: #FFFFFF;
+    overflow-y: auto;
 }
 #choose_habits_header {
     font-style: normal;
@@ -79,6 +80,8 @@
     padding: 0%;
     text-align: left;
     margin-left: 25px;
+    color: rgba(79, 98, 194);
+    font-weight: 600;
 }
 
 #habit_label {
@@ -91,10 +94,12 @@
 
 .habit_group {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
     padding: 0%;
     margin: 0px;
+    width: 100%;
+    height: 100%;
 }
 
 .habit_group ul {
@@ -119,6 +124,12 @@
     margin: 15px;
 }
 
+.habit_group label {
+    cursor: pointer;
+    padding: 5px;
+    margin: 15px;
+}
+
 .button_group {
     display: flex;
     align-items: stretch;
@@ -130,6 +141,7 @@
     width: 100%;
     padding: 0%;
     margin-right: 80px;
+    margin-left: 30%;
     margin-bottom: 2%;
 
     font-family: 'Inter', sans-serif;
@@ -140,6 +152,7 @@
     height: 45px;
     cursor: pointer;
     margin: 10px;
+    border: none;
 
     font-style: normal;
     font-size: 24px;
@@ -148,4 +161,25 @@
 
     background: rgba(79, 98, 194, 0.75);
     border-radius: 8px;
+}
+
+.button_group button:hover {
+    transform: translateX(3px)
+}
+.button_group button:active {
+    transform: translateY(3px)
+}
+
+@media screen and (max-width: 600px) {
+    .habit_group ul {
+        column-count: 1;
+        margin-left: 0px;
+    }
+    .button_group {
+        margin-right: 10px;
+    }
+    .button_group button {
+        width: 60px;
+        font-size: 14px;
+    }
 }

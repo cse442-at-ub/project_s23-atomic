@@ -1,10 +1,15 @@
 import React from 'react';
 import './choose.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import { useContext } from 'react'
+import HabitContext from '../contexts/HabitContext'
+
 
 function ChooseHabits() {
+    // preset objects from HabitContext
+    const {good_habits, bad_habits, user, setUser} = useContext(HabitContext);
 
     // use navigate uses Router to navigate to different paths
     const navigate = useNavigate();
@@ -15,34 +20,12 @@ function ChooseHabits() {
     // useLocation is used to get that state
     const { state } = useLocation();
     const routeHome = () =>{ 
-        let path = `/homepage`; 
+        let path = `/CSE442-542/2023-Spring/cse-442q/homepage`; 
         navigate(path);
     }
     const routeSignup = () =>{ 
-        let path = `/signup`; 
+        let path = `/CSE442-542/2023-Spring/cse-442q/signup`; 
         navigate(path);
-    }
-
-    // hard coded habits that will be added to database
-    // all habits should share this format
-    let good_habits = {
-        "Sleep 6-8 Hours": {'counter': 0, 'total': 1, 'details': 'Getting enough sleep is vital to your health.', 'category': 'Wellness'},
-        "Eat Breakfast": {'counter': 0, 'total': 1, 'details': 'Eating breakfast everyday starts your day.','category':'Wellness'},
-        "Drink Water": {'counter': 0, 'total': 8, 'details': '8 glasses a day is recommended for gut and skin health.','category':'Wellness'},
-        "Exercise": {'counter': 0, 'total': 1, 'details': 'Exercise for at least 30 minutes a day. Go on a walk!','category':'Wellness'},
-        "Meditate": {'counter': 0, 'total': 1, 'details': 'Ground your mind daily. Tap in.','category':'Wellness'},
-        "Journal": {'counter': 0, 'total': 1, 'details': 'Put whats on your mind on paper. It will help.','category':'Wellness'},
-        "Read": {'counter': 0, 'total': 1, 'details': 'Pick up a good book. Reading 20 minutes a day is ideal.','category':'Wellness'},
-        "Clean": {'counter': 0, 'total': 1, 'details': 'Clean your room. Or do the dishes. Clean something.','category':'Wellness'}
-    }
-
-    let bad_habits = {
-        "Smoke": {'counter': 0, 'total': 14, 'details': 'Smoking is hard to stop. Take small steps and try smoking less every day.', 'category': 'Wellness'},
-        "Drink Alcohol": {'counter': 0, 'total': 5, 'details': 'Drink responsibly.','category':'Wellness'},
-        "Drink Coffee": {'counter': 0, 'total': 3, 'details': 'Who wouldve thought? Lower your caffeine intake.','category':'Wellness'},
-        "Eat Junk Food": {'counter': 0, 'total': 8, 'details': 'Lower your junk food intake. You can do it.','category':'Wellness'},
-        "Sit All Day": {'counter': 0, 'total': 1, 'details': 'Sitting is addicting. Go on a short walk or get up and clean.','category':'Wellness'},
-        "Bite Nails": {'counter': 0, 'total': 5, 'details': 'A habit since childhood. Small steps.','category':'Wellness'},
     }
 
     // state variable to track whether correct number of habits was chosen
@@ -121,8 +104,8 @@ function ChooseHabits() {
         let bad_habits_object = makeObject(habitList.habitsToStop, false);
         await axios({
         method: "post",
-        url: "http://localhost:8000/addhabit.php",
-        // url: "https://www-student.cse.buffalo.edu/~argraca/addhabit.php",
+        //url: "http://localhost:8000/addhabit.php",
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/addhabit.php",
         data: {
             id: state.user,
             good_habits: good_habits_object,
@@ -133,6 +116,17 @@ function ChooseHabits() {
             console.log("success");
             console.log(response.data)
             // console.log(response.config.data);
+
+            // users info in context state
+            setUser({
+                ...user,
+                id: state.user,
+                good: good_habits_object,
+                bad: bad_habits_object
+            })
+            // save id in session
+            sessionStorage.setItem('id',state.user);
+
             routeHome();
         }).catch(function (error) {
             console.log("failed to send post request");
@@ -147,7 +141,7 @@ function ChooseHabits() {
         event.preventDefault();   
         
         if (habitCounter < 3) {
-            console.log(state.user)
+            // console.log(state.user)
             setHabitBool(false); 
         } else {
             // console.log(habitList);
@@ -155,6 +149,10 @@ function ChooseHabits() {
             makePost();
         }
     }
+
+    useEffect(() => {
+        document.title = "Choose Your Habits";  
+    }, []);
 
     return (
         <div className='choose_habits_container'>
@@ -168,36 +166,36 @@ function ChooseHabits() {
                     <div className="habit_group">
                         <ul>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Sleep 6-8 Hours"/>
-                                <label id="habit_label">Sleep 6-8 Hours</label>
+                                <input onClick={addHabit} id="habit_input_1" type="checkbox" value="Sleep 6-8 Hours"/>
+                                <label htmlFor="habit_input_1" id="habit_label">Sleep 6-8 Hours</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Eat Breakfast"/>
-                                <label id="habit_label">Eat Breakfast</label>
+                                <input onClick={addHabit} id="habit_input_2" type="checkbox" value="Eat Breakfast"/>
+                                <label htmlFor="habit_input_2" id="habit_label">Eat Breakfast</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Drink Water"/>
-                                <label id="habit_label">Drink Water</label>
+                                <input onClick={addHabit} id="habit_input_3" type="checkbox" value="Drink Water"/>
+                                <label htmlFor="habit_input_3" id="habit_label">Drink Water</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Exercise"/>
-                                <label id="habit_label">Exercise</label>
+                                <input onClick={addHabit} id="habit_input_4" type="checkbox" value="Exercise"/>
+                                <label htmlFor="habit_input_4" id="habit_label">Exercise</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Meditate"/>
-                                <label id="habit_label">Meditate</label>
+                                <input onClick={addHabit} id="habit_input_5" type="checkbox" value="Meditate"/>
+                                <label htmlFor="habit_input_5" id="habit_label">Meditate</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Journal"/>
-                                <label id="habit_label">Journal</label>
+                                <input onClick={addHabit} id="habit_input_6" type="checkbox" value="Journal"/>
+                                <label htmlFor="habit_input_6" id="habit_label">Journal</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Read"/>
-                                <label id="habit_label">Read</label>
+                                <input onClick={addHabit} id="habit_input_7" type="checkbox" value="Read"/>
+                                <label htmlFor="habit_input_7" id="habit_label">Read</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Clean"/>
-                                <label id="habit_label">Clean</label>
+                                <input onClick={addHabit} id="habit_input_8" type="checkbox" value="Clean"/>
+                                <label htmlFor="habit_input_8" id="habit_label">Clean</label>
                             </li>
                         </ul>
                     </div>
@@ -205,28 +203,28 @@ function ChooseHabits() {
                     <div className="habit_group">
                         <ul>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Smoke"/>
-                                <label id="habit_label">Smoke</label>
+                                <input onClick={addHabitToStop} id="habit_input_9" type="checkbox" value="Smoke"/>
+                                <label htmlFor="habit_input_9" id="habit_label">Smoke</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Drink Alcohol"/>
-                                <label id="habit_label">Drink Alcohol</label>
+                                <input onClick={addHabitToStop} id="habit_input_10" type="checkbox" value="Drink Alcohol"/>
+                                <label htmlFor="habit_input_10" id="habit_label">Drink Alcohol</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Drink Coffee"/>
-                                <label id="habit_label">Drink Coffee</label>
+                                <input onClick={addHabitToStop} id="habit_input_11" type="checkbox" value="Drink Coffee"/>
+                                <label htmlFor="habit_input_11" id="habit_label">Drink Coffee</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Eat Junk Food"/>
-                                <label id="habit_label">Eat Junk Food</label>
+                                <input onClick={addHabitToStop} id="habit_input_12" type="checkbox" value="Eat Junk Food"/>
+                                <label htmlFor="habit_input_12" id="habit_label">Eat Junk Food</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Sit All Day"/>
-                                <label id="habit_label">Sit All Day</label>
+                                <input onClick={addHabitToStop} id="habit_input_13" type="checkbox" value="Sit All Day"/>
+                                <label htmlFor="habit_input_13" id="habit_label">Sit All Day</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Bite Nails"/>
-                                <label id="habit_label">Bite Nails</label>
+                                <input onClick={addHabitToStop} id="habit_input_14" type="checkbox" value="Bite Nails"/>
+                                <label htmlFor="habit_input_14" id="habit_label">Bite Nails</label>
                             </li>
                         </ul>
                     </div>
