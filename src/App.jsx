@@ -30,19 +30,19 @@ function App() {
       <HabitProvider>
       {/* // defines what path display which component */}
       <Routes>
-        <Route path="/~argraca" element={<Landing />} />
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signin />} />
-        <Route path="/choose-habit" element={<ChooseHabits />} />   
-        <Route path="/homepage" element={<HomeMain />} />
-        <Route path="/statistics" element={<Statistics />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/information" element={<Information />} />
-        <Route path="/create" element={<CreateNew />} />
-        <Route path="/options" element={<Options />} />
-        <Route path="/suggestions" element={<Suggestions />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/" element={<Landing />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/" element={<Landing />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/login" element={<Login />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/signup" element={<Signin />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/choose-habit" element={<ChooseHabits />} />   
+        <Route path="/CSE442-542/2023-Spring/cse-442q/homepage" element={<HomeMain />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/statistics" element={<Statistics />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/settings" element={<Settings />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/information" element={<Information />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/create" element={<CreateNew />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/options" element={<Options />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/suggestions" element={<Suggestions />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/detail" element={<Detail />} />
       </Routes>  
       </HabitProvider>  
     </div>

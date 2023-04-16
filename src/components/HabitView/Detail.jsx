@@ -13,7 +13,7 @@ function Detail(){
 
     const navigate = useNavigate();
     const routeHome = () =>{
-        let path = '/homepage'
+        let path = '/CSE442-542/2023-Spring/cse-442q/homepage'
         navigate(path)
     }
     // any page that routes to this page should send in state param values (title, category, details, counter, total, added)

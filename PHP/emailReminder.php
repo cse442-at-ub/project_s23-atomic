@@ -1,9 +1,9 @@
 <?php
 // Connect to the database
-$servername = "";
+$servername = "oceanus.cse.buffalo.edu:3306";
 $username = "";
 $password = "";
-$dbname = "";
+$dbname = "cse442_2023_spring_team_q_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

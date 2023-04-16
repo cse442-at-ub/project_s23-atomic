@@ -11,7 +11,7 @@ export default function Navbar() {
     const {user} = useContext(HabitContext);
 
     let navigate = useNavigate()
-    const routeHome = () => {navigate('/homepage')}
+    const routeHome = () => {navigate('/CSE442-542/2023-Spring/cse-442q/homepage')}
  
     return (
     <nav>
@@ -20,13 +20,13 @@ export default function Navbar() {
             <h2 className="nav--title">Atomic</h2>
             <h3 className="nav--subtitle"> Habits For Life </h3>
         </button>
-        <Link to="/statistics">
+        <Link to="/CSE442-542/2023-Spring/cse-442q/statistics">
             <button className="nav--stats"> Statistics</button>
         </Link>
-        <Link to="/information">
+        <Link to="/CSE442-542/2023-Spring/cse-442q/information">
             <button className="nav--info"> Information</button>
         </Link>
-        <Link to="/settings">
+        <Link to="/CSE442-542/2023-Spring/cse-442q/settings">
         <button className="nav--settingsButton">
             <img src={gear} className="nav--settings" alt="settings icon"/>
         </button>

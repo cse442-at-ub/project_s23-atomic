@@ -8,11 +8,11 @@ function Landing() {
     // use navigate uses Router to navigate to different paths
     const navigate = useNavigate();
     const routeSignup = () =>{ 
-        let path = `/signup`; 
+        let path = `/CSE442-542/2023-Spring/cse-442q/signup`; 
         navigate(path);
     }
       const routeLogin = () =>{ 
-        let path = `/login`; 
+        let path = `/CSE442-542/2023-Spring/cse-442q/login`; 
         navigate(path);
     }
 

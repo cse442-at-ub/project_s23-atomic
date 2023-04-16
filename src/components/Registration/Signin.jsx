@@ -11,16 +11,16 @@ function Signin() {
   // use navigate uses Router to navigate to different paths
   const navigate = useNavigate();
   const routeChooseHabits = (id) =>{ 
-      let path = `/choose-habit`; 
+      let path = `/CSE442-542/2023-Spring/cse-442q/choose-habit`; 
       sessionStorage.setItem("id", id);
       navigate(path, {state: {user: id}});
   }
   const routeLogin = () =>{
-    let path = '/login'
+    let path = '/CSE442-542/2023-Spring/cse-442q/login'
     navigate(path)
   }
   const routeLanding = () =>{
-    let path = '/~argraca'
+    let path = '/CSE442-542/2023-Spring/cse-442q/'
     navigate(path)
   }
 
@@ -140,7 +140,8 @@ function Signin() {
   const makePost = async() => {
     await axios({
       method: "post",
-      url: "http://localhost:8000/insert.php",
+      //url: "http://localhost:8000/insert.php",
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/insert.php",
       data: {
         username: username,
         email: email,

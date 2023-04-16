@@ -11,7 +11,7 @@ export default function HomeMain() {
     const navigate = useNavigate();
 
     const routeCreate = () => {
-        navigate('/options');
+        navigate('/CSE442-542/2023-Spring/cse-442q/options');
     }
 
     const routeDetail = (habit, type) => {
@@ -20,7 +20,7 @@ export default function HomeMain() {
         const d = habit["details"];
         const sum = habit["counter"];
         const t = habit["total"];
-        const path = '/detail';
+        const path = '/CSE442-542/2023-Spring/cse-442q/detail';
         sessionStorage.setItem("added","false")
         navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t, type: type, added: false}});
     }

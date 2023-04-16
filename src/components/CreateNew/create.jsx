@@ -101,7 +101,7 @@ function Create() {
         const d = habit["details"];
         const sum = habit["counter"];
         const t = habit["total"];
-        const path = '/detail';
+        const path = '/CSE442-542/2023-Spring/cse-442q/detail';
         
         sessionStorage.setItem("added","true")
 

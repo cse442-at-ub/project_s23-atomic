@@ -12,11 +12,11 @@ function Options(){
 
     const handlePreset = () => {
         sessionStorage.setItem("id", user)
-        navigate('/suggestions');
+        navigate('/CSE442-542/2023-Spring/cse-442q/suggestions');
     }
 
     const handleCustom = () => {
-        navigate('/create');
+        navigate('/CSE442-542/2023-Spring/cse-442q/create');
     }
 
 

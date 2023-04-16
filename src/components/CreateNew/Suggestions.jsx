@@ -24,7 +24,7 @@ function Suggestions(){
         const d = habit["details"];
         const sum = habit["counter"];
         const t = habit["total"];
-        const path = '/detail';
+        const path = '/CSE442-542/2023-Spring/cse-442q/detail';
         
         sessionStorage.setItem("added","true")
         navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t,type: type, added: true}});

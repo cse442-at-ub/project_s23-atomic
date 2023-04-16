@@ -122,7 +122,8 @@ export const HabitProvider = ({ children }) => {
       let username = "";
 
       await axios
-      .get("http://localhost:8000/user.php?userid="+ userid)
+      //.get("http://localhost:8000/user.php?userid="+ userid)
+      .get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/user.php?userid="+ userid)
       .then(function (response) {
          // successful call will replace user object with correct information
          // console.log("success");
@@ -167,7 +168,8 @@ export const HabitProvider = ({ children }) => {
       let userid = 0;
 
       await axios
-      .get("http://localhost:8000/returnid.php?userid="+ username)
+      //.get("http://localhost:8000/returnid.php?userid="+ username)
+      .get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/returnid.php?userid="+ username)
       .then(function (response) {
          // successful call will replace user object with correct information
          // console.log("success");
@@ -210,7 +212,8 @@ export const HabitProvider = ({ children }) => {
       let result = true;
       await axios({
          method: "post",
-         url: "http://localhost:8000/addhabit.php",
+         //url: "http://localhost:8000/addhabit.php",
+         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/addhabit.php",
          data: {
             id: id,
             good_habits: g,

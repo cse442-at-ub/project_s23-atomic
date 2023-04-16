@@ -20,11 +20,11 @@ function ChooseHabits() {
     // useLocation is used to get that state
     const { state } = useLocation();
     const routeHome = () =>{ 
-        let path = `/homepage`; 
+        let path = `/CSE442-542/2023-Spring/cse-442q/homepage`; 
         navigate(path);
     }
     const routeSignup = () =>{ 
-        let path = `/signup`; 
+        let path = `/CSE442-542/2023-Spring/cse-442q/signup`; 
         navigate(path);
     }
 
@@ -104,7 +104,8 @@ function ChooseHabits() {
         let bad_habits_object = makeObject(habitList.habitsToStop, false);
         await axios({
         method: "post",
-        url: "http://localhost:8000/addhabit.php",
+        //url: "http://localhost:8000/addhabit.php",
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/addhabit.php",
         data: {
             id: state.user,
             good_habits: good_habits_object,
