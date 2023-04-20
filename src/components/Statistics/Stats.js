@@ -1,15 +1,20 @@
 import React from "react"
-import { Link } from "react-router-dom";
 import Navbar from "../Homepage/Navbar";
+import HabitContext from "../contexts/HabitContext";
+import Chart from 'chart.js/auto';
+import {useState, useEffect, useContext} from "react";
 import './statspage.css'
 
 export default function Stats() {
+    const {user, getUserData} = useContext(HabitContext);
+
     return (
-    <div className="statsContainer">
-    <Link to="/CSE442-542/2023-Spring/cse-442q/create">
-    <button className="createButton">Create New</button>   
-    </Link> 
-    <Navbar/>
-    </div>
+        <div className="statsContainer">
+            <Navbar />
+            <div className="statsContent">
+                <h1>Statistics</h1>
+                
+            </div>
+        </div>
     );
 };
