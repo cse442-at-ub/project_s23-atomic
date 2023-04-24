@@ -116,12 +116,12 @@ function Create() {
 
     return (
         <>
+            <Navbar/>
             <div id="create-container">
-                <Navbar/>
                 <h2>Create New Habit</h2>
                 <form onSubmit={submitHandler}>
                     <div id="categories">
-                        <h5>Category</h5>
+                        <h3>Category</h3>
                         <select name="" id="" onClick={setCategory} required>
                             <option value="Health">Health</option>
                             <option value="Work">Work</option>
@@ -130,22 +130,22 @@ function Create() {
                             <option value="Misc">Misc</option>
                             <option value="Family">Family</option>
                         </select>
-                        <br />
                         <select name="" id="" onClick={setType} required>
                             <option value="good">Good</option>
                             <option value="bad">Bad</option>
                         </select>
                     </div>
                     <div id="title">
-                        <h5>Title</h5>
+                        <h3>Title</h3>
                         <input onChange={setTitle} type="text" required/>
                     </div>
                     <div id="details">
-                        <h5>Details</h5>
-                        <input onChange={setDetails} type="text"/>
+                        <h3>Details</h3>
+                        {/* <input onChange={setDetails} type="text"/> */}
+                        <textarea onChange={setDetails} name="details" rows="4"></textarea>
                     </div>
                     <div id="counter">
-                        <h5>Counter</h5>
+                        <h3>Counter</h3>
                         <input
                             type="number" onChange={setCounter} required
                             // Only allow numbers. If a keypress is not a number, do nothing.
@@ -156,8 +156,9 @@ function Create() {
                             // }}
                         />
                     </div>
-                    <br />
-                    <input type="submit" />
+                    <div id="create-submit-div">
+                        <input type="submit" />
+                    </div>
                 </form>
             </div>
         </>

@@ -1,3 +1,42 @@
 #create-container {
+    margin: 100px 30% 50px 30%;
+
     text-align: left;
+}
+
+#create-container h2 {
+    padding: 25px 0px 5px 0px;
+    margin: 0px;
+}
+
+#create-container h3 {
+    margin: 20px 0px 5px 0px;
+}
+
+/* Rest of Font Sizes */
+#create-container h3, #create-container select, #create-container input, #create-container textarea {
+    font-size: 24px;
+}
+
+#create-container textarea {
+    font-family: 'Inter', sans-serif;
+    padding: 10px 15px;
+}
+
+#create-container input[type="submit"] {
+    width: 50%;
+
+    margin: 75px 0px;
+}
+
+#details textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: 0px;
+
+    background-color: #ffc79997;
+}
+
+#create-submit-div {
+    text-align: center;
 }
