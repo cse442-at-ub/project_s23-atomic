@@ -1,0 +1,104 @@
+nav {
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+
+    width: 100%;
+    height: 100px;
+    top: 0px;
+    z-index: 1;
+
+    background: #F69335;
+}
+
+.app_logo_div {
+    display: flex;
+    flex-direction: row;
+    font-size: 40px;
+    padding: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    text-align:left;
+
+    height: 100%;
+    width: 100%;
+
+    margin-left: 35px;
+}
+
+.app_logo_div :hover {
+    cursor: pointer;
+}
+
+#name_nav{
+    display: flex;
+    flex-direction: column;
+}
+
+.app_logo_div label{
+    margin-left: 22px;
+    align-items:flex-start;
+    justify-content: flex-start;
+    color: white;
+}
+#sub_label{
+    font-size: 18px;
+}
+
+.nav_button_div {
+    display : flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    width : 100%;
+
+}
+
+.nav_button_div p {
+    margin: 20px;
+    cursor: pointer;
+
+    font-size: 34px;
+    color: white;
+}
+
+.profile_nav_div {
+    display : flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    width : 100%;
+    margin-right: 35px;
+}
+
+.profile_nav_div img {
+
+    height: 50px;
+    width: 50px;
+
+    border-radius: 50%;
+    border: 2px solid white;
+
+    margin-left: 10px;
+    margin-right: 25px;
+}
+
+.profile_nav_div h2 {
+    font-size: 34px;
+    color: white;
+}
+.profile_nav_div h2:hover {
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 600px) {
+    
+}

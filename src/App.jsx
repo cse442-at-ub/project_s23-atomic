@@ -13,7 +13,6 @@ import ChooseHabits from './components/Registration/ChooseHabits';
 import Landing from './components/Landing/Landing'
 import HomeMain from './components/Homepage/HomeMain';
 import Statistics from './components/Statistics/Stats';
-import Settings from './components/Settings/settings';
 import Information from './components/Information/Info';
 import CreateNew from './components/CreateNew/create';
 import Options from './components/CreateNew/Options';
@@ -31,13 +30,12 @@ function App() {
       {/* // defines what path display which component */}
       <Routes>
         <Route path="/CSE442-542/2023-Spring/cse-442q/" element={<Landing />} />
-        <Route path="/CSE442-542/2023-Spring/cse-442q/" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/login" element={<Login />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/signup" element={<Signin />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/choose-habit" element={<ChooseHabits />} />   
         <Route path="/CSE442-542/2023-Spring/cse-442q/homepage" element={<HomeMain />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/statistics" element={<Statistics />} />
-        <Route path="/CSE442-542/2023-Spring/cse-442q/settings" element={<Settings />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/information" element={<Information />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/create" element={<CreateNew />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/options" element={<Options />} />

@@ -43,6 +43,7 @@ function Detail(){
         await axios({
            method: "post",
            url: "http://localhost:8000/updatehabit.php",
+        // url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/updatehabit.php",
            data: {
               id: id,
               counter: tcounter,

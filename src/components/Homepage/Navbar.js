@@ -1,9 +1,9 @@
 import React from "react"
 import logo from '../../assets/images/atomic_logo.png'
-import gear from '../../assets/images/gearIcon.png'
-import {Link, useNavigate} from 'react-router-dom'
+import avatar from '../../assets/images/avatar.png'
+import {useNavigate} from 'react-router-dom'
 import {useContext} from 'react'
-import './style.css';
+import './navbar.css'
 import HabitContext from "../contexts/HabitContext";
 
 
@@ -12,26 +12,27 @@ export default function Navbar() {
 
     let navigate = useNavigate()
     const routeHome = () => {navigate('/CSE442-542/2023-Spring/cse-442q/homepage')}
+
+    const routeStatistics = () => {navigate('/CSE442-542/2023-Spring/cse-442q/statistics')}
+    const routeFAQ = () => {navigate('/CSE442-542/2023-Spring/cse-442q/information')}
  
     return (
     <nav>
-        <button className="nav--homeButton" onClick={routeHome}>
-            <img src={logo} className="nav--logo" alt="atomic icon"/>
-            <h2 className="nav--title">Atomic</h2>
-            <h3 className="nav--subtitle"> Habits For Life </h3>
-        </button>
-        <Link to="/CSE442-542/2023-Spring/cse-442q/statistics">
-            <button className="nav--stats"> Statistics</button>
-        </Link>
-        <Link to="/CSE442-542/2023-Spring/cse-442q/information">
-            <button className="nav--info"> Information</button>
-        </Link>
-        <Link to="/CSE442-542/2023-Spring/cse-442q/settings">
-        <button className="nav--settingsButton">
-            <img src={gear} className="nav--settings" alt="settings icon"/>
-        </button>
-        </Link>
-        <h2 id="nav_username_label">{user.username !== "" ? user.username : ""}</h2>
+        <div className='app_logo_div' onClick={routeHome}>
+            <img src={logo} alt="atom logo" style={{width: 65, height: 65}}></img>
+            <div id="name_nav">
+                <label>Atomic</label>
+                <label id="sub_label">Habits for Life</label>
+            </div>
+        </div>
+        <div className='nav_button_div'>
+            <p onClick={routeStatistics}>Statistics</p>
+            <p onClick={routeFAQ}>FAQ</p>
+        </div>
+        <div className='profile_nav_div'>
+            <img src={avatar} alt="avatar" style={{width: 85, height: 80}}></img>
+            <h2 id="nav_username_label">{user.username !== "" ? user.username : ""}</h2>
+        </div>
     </nav>
     )
 }

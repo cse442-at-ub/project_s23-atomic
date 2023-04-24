@@ -117,7 +117,7 @@ export default function HomeMain() {
                                         <div className='counter_button'>
                                             <button id="minus_btn">-</button>
                                             <label>{obj[habit].counter}</label>         
-                                            <button id="plus_btn" className={obj[habit].title} value ={obj[habit].counter}onClick={increment}>+</button>
+                                            <button id="plus_btn" className={obj[habit].title} value ={obj[habit].counter} onClick={increment}>+</button>
                                         </div>
                                         <label> / {obj[habit].total}</label>
                                     </div>
@@ -188,7 +188,7 @@ export default function HomeMain() {
                     fillLists(user.bad, "Misc", setBadMisc,"bad");
                 }   
            } else {
-              console.log("No posts");
+              console.log("No Habits");
            }
         }, 200)
         return () => clearInterval(interval)
