@@ -16,6 +16,10 @@ function Detail(){
         let path = '/CSE442-542/2023-Spring/cse-442q/homepage'
         navigate(path)
     }
+    const routeEditHabit = () =>{
+        let path = '/CSE442-542/2023-Spring/cse-442q/edit'
+        navigate(path)
+    }
     // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
     //need to pass in correct habit information to this component 
     // added will be a boolean to keep track of when a user gets sent to the page
@@ -240,7 +244,7 @@ function Detail(){
                 <div className='back_link' onClick={routeHome}>&lt; Back to Home</div>
                 <div className='column_1'>
                     <h1 className="detail-title">{state.title}</h1>
-                    <button className='edit_button'>Edit</button>
+                    <button className='edit_button' onClick={() => routeEditHabit()}>Edit</button>
                 </div>
                 <div className='column_2'>
                     <div className='category_container'>
