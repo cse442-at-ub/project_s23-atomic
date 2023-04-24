@@ -20,6 +20,21 @@ function Detail(){
         let path = '/CSE442-542/2023-Spring/cse-442q/edit'
         navigate(path)
     }
+
+    // This is for navigating to the Edit page
+    const routeDetail = (habit, type) => {
+        const n = habit["title"];
+        const c = habit["category"];
+        const d = habit["details"];
+        const sum = habit["counter"];
+        const t = habit["total"];
+        const path = '/CSE442-542/2023-Spring/cse-442q/edit';
+        
+        sessionStorage.setItem("added","true")
+        navigate(path, {state:{title:n, category:c, details:d, counter:sum, total:t, type:type}});
+    }
+
+
     // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
     //need to pass in correct habit information to this component 
     // added will be a boolean to keep track of when a user gets sent to the page

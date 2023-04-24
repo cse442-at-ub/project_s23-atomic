@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useLocation } from "react";
 
-import { useContext } from 'react'
-import HabitContext from '../contexts/HabitContext';
 import { toast } from 'react-toastify';
-
 import { useNavigate } from "react-router-dom";
 
-
+import HabitContext from '../contexts/HabitContext';
 import Navbar from "../Homepage/Navbar";
 
 import '../CreateNew/createpage.css'; // Why is this needed for this page. For some reason it influences the background color.
@@ -25,6 +22,12 @@ function Edit() {
     //     "Days":{7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} }
     // }
 
+    // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
+    // need to pass in correct habit information to this component 
+    // we use useLocation to get this state
+    const { state } = useLocation();
+
+    // TODO: set the initial state of the habit you are editing
     const [habit, setHabit] = useState({
         title: "",
         total: 0,
