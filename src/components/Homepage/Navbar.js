@@ -1,13 +1,36 @@
 import React from "react"
 import logo from '../../assets/images/atomic_logo.png'
-import avatar from '../../assets/images/avatar.png'
+
+import cat from '../../assets/profilepics/cat.jpeg'
+import hamster from '../../assets/profilepics/hamster.JPG'
+import hoopla from '../../assets/profilepics/hoopla.jpeg'
+import joker from '../../assets/profilepics/joker.jpeg'
+import lisa from '../../assets/profilepics/lisa.JPG'
+import sandy from '../../assets/profilepics/sandy.jpeg'
+import sniff from '../../assets/profilepics/sniff.png'
+
+// import avatar from '../../assets/images/avatar.png'
 import {useNavigate} from 'react-router-dom'
-import {useContext} from 'react'
+import {useContext, useState, useEffect} from 'react'
 import './navbar.css'
 import HabitContext from "../contexts/HabitContext";
 
-
 export default function Navbar() {
+
+    // array of avatars
+    const avatars = [cat, hamster, hoopla, joker, lisa, sandy, sniff]
+    // will be used to generate a random avatar index for profile picture
+    const [randomNumber, setRandomNumber] = useState(0)
+    // generate a random number to be used as an index for the avatars array
+    const genNumber = () => {
+        var num = Math.floor(Math.random() * avatars.length);
+        setRandomNumber(num);
+    }
+
+    useEffect(() => {
+        genNumber();
+    }, [])
+
     const {user,setUser} = useContext(HabitContext);
 
     let navigate = useNavigate()
@@ -34,7 +57,7 @@ export default function Navbar() {
             <p onClick={routeFAQ}>FAQ</p>
         </div>
         <div className='profile_nav_div'>
-            <img src={avatar} alt="avatar" style={{width: 85, height: 80}}></img>
+            <img src={avatars[randomNumber]} alt="avatar" style={{width: 85, height: 80}}></img>
             <div className='nav_dropdown'>
                 <h2 id="nav_username_label">{user.username !== "" ? user.username : ""}</h2>
                 <div className='nav_logout'>

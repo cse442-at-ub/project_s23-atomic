@@ -41,11 +41,13 @@ export default function Stats() {
     // function to set the habit type
     const setHabitTypeFunc = (event) => {
         setHabitType(event.target.value);
+        setHabit("Choose A Habit")
         console.log(habitType);
     }
     // function to set the habit
     const setHabitFunc = (event) => {
         setHabit(event.target.value)
+        setHabitType(habitType)
         console.log(habit);
     }
 
@@ -99,6 +101,14 @@ export default function Stats() {
             } else {
                 const habitData = await Promise.all(
                     Object.keys(user.good[habit].Days).map((num) => {
+                        if (num === "0") {
+                            return (
+                                {
+                                    day: "Day 0",
+                                    logs: 0
+                                }
+                            )
+                        } else
                         return (
                             {
                                 day: "Day " + num,
@@ -214,13 +224,23 @@ export default function Stats() {
 
         }, 700)
         return () => clearInterval(interval)
-     })
+    })
+
+    // use effect will run every time the habit type changes
+    useEffect(() => {
+        getData();
+        setChartData();
+        getHabits();
+    }, [habitType])
+    
+
+    // use effect will run once to set the title of the page
 
     useEffect(() => {
         document.title = "Statistics";
     }, []);
 
-    
+
     return (
         <div className="stats_wrapper">
             <Navbar />

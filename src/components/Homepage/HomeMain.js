@@ -109,6 +109,7 @@ export default function HomeMain() {
             if(categories.includes(category)) {
                 const buildList = await Promise.all(
                     Object.keys(obj).map((habit) => {
+                        // console.log(obj[habit])
                         if(obj[habit].category === category) {
                             return (
                                 <div className="habit_item">
