@@ -33,6 +33,11 @@ nav {
     margin-left: 35px;
 }
 
+.app_logo_div img {
+    height: 60px;
+    width: 65px;
+}
+
 .app_logo_div :hover {
     cursor: pointer;
 }
@@ -84,8 +89,8 @@ nav {
 
 .profile_nav_div img {
 
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 85px;
 
     border-radius: 50%;
     border: 2px solid white;
@@ -99,7 +104,7 @@ nav {
     color: white;
 }
 .profile_nav_div h2:hover {
-    cursor: pointer;
+    cursor:pointer;
 }
 
 .nav_dropdown {
@@ -142,5 +147,37 @@ nav {
 
 
 @media screen and (max-width: 600px) {
+
+    .app_logo_div {
+        font-size: 14px;
+    }
+
+    .app_logo_div img {
+        height: 30px;
+        width: 30px;
+        margin: 0px;
+        
+    }
+
+    .app_logo_div label {
+        font-size: 14px;
+    }
+    #sub_label {
+        font-size: 10px;
+    }
+
+    .app_button_div p {
+        font-size: 20px;
+    }
+
+    .profile_nav_div img {
+        height: 40px;
+        width: 40px;
+        margin: 5px;
+    }
+
+    .profile_nav_div h2 {
+        font-size: 20px;
+    }
     
 }

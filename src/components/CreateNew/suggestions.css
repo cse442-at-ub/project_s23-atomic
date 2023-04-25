@@ -32,6 +32,8 @@
     text-align: left;
     text-decoration: none;
     color: rgba(79, 98, 194);
+
+    width: 8%;
 }
 .sug_back_link:hover{
     text-decoration: underline;

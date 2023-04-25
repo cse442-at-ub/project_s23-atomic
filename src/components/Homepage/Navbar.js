@@ -46,7 +46,7 @@ export default function Navbar() {
     return (
     <nav>
         <div className='app_logo_div' onClick={routeHome}>
-            <img src={logo} alt="atom logo" style={{width: 65, height: 65}}></img>
+            <img src={logo} alt="atom logo"></img>
             <div id="name_nav">
                 <label>Atomic</label>
                 <label id="sub_label">Habits for Life</label>
@@ -57,7 +57,7 @@ export default function Navbar() {
             <p onClick={routeFAQ}>FAQ</p>
         </div>
         <div className='profile_nav_div'>
-            <img src={avatars[randomNumber]} alt="avatar" style={{width: 85, height: 80}}></img>
+            <img src={avatars[randomNumber]} alt="avatar"></img>
             <div className='nav_dropdown'>
                 <h2 id="nav_username_label">{user.username !== "" ? user.username : ""}</h2>
                 <div className='nav_logout'>

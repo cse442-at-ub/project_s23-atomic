@@ -8,11 +8,11 @@
 		// servername, username, password, database name.
 		// $conn = mysqli_connect("oceanus.cse.buffalo.edu:3306", "argraca", "50301883", "cse442_2023_spring_team_q_db"); 
 
-		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
+		// $conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
 
 
 		// this is our groups database
-		// $conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
+		$conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
 
 		// Check connection
 		if ($conn->connect_error) {
