@@ -168,8 +168,8 @@ export const HabitProvider = ({ children }) => {
       let userid = 0;
 
       await axios
-      //.get("http://localhost:8000/returnid.php?userid="+ username)
-      .get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/returnid.php?userid="+ username)
+      .get("http://localhost:8000/returnid.php?userid="+ username)
+      // .get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/returnid.php?userid="+ username)
       .then(function (response) {
          // successful call will replace user object with correct information
          // console.log("success");

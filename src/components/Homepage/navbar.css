@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 nav {
     display : flex;
     flex-direction: row;
@@ -10,6 +12,8 @@ nav {
     height: 100px;
     top: 0px;
     z-index: 1;
+
+    font-family: 'Inter', sans-serif;
 
     background: #F69335;
 }
@@ -48,7 +52,7 @@ nav {
     font-size: 18px;
 }
 
-.nav_button_div {
+.app_button_div {
     display : flex;
     flex-direction: row;
 
@@ -59,7 +63,7 @@ nav {
 
 }
 
-.nav_button_div p {
+.app_button_div p {
     margin: 20px;
     cursor: pointer;
 
@@ -96,6 +100,44 @@ nav {
 }
 .profile_nav_div h2:hover {
     cursor: pointer;
+}
+
+.nav_dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav_logout {
+    display: none;
+    position: absolute;
+    background-color: #F69335;
+    min-width: 160px;
+    height: 55px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+    z-index: 1;
+}
+
+.nav_logout p {
+    color: white;
+    display: block;
+
+    font-size: 30px;
+    text-align: center;
+    margin: 5px;
+
+}
+
+.nav_logout p:hover {
+    cursor: pointer;
+}
+
+.nav_dropdown:hover .nav_logout {
+    display: block;
+}
+
+.nav_dropdown:hover .nav_button_div p {
+    color: #F69335;
 }
 
 

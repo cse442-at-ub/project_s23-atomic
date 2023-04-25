@@ -88,7 +88,7 @@ function Login() {
       // console.log("cookie exists")
       // get users data from database and store in context
       const request = await getID(userID);
-      // console.log(request)
+      console.log(request)
       // set correct session storage id
       sessionStorage.setItem("id", request.id);
       navigate("/CSE442-542/2023-Spring/cse-442q/homepage");

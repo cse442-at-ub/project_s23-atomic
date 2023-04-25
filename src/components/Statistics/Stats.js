@@ -220,6 +220,7 @@ export default function Stats() {
         document.title = "Statistics";
     }, []);
 
+    
     return (
         <div className="stats_wrapper">
             <Navbar />
