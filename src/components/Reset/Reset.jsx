@@ -1,5 +1,5 @@
 import React from "react";
-import "./login.css"
+import "./reset.css"
 import axios from 'axios';
 import { useContext, useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import HabitContext from '../contexts/HabitContext'
 
 import LoginCharacter from "../../assets/images/login-character.png"
 
-function Login() {
+function Reset() {
   const {getUserData, getID} = useContext(HabitContext);
 
   // use toastify to notify user on error for username or email that's already in use
@@ -40,66 +40,15 @@ function Login() {
     }   
   }
 
-  function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
-
-  function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) === 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  } 
-
   // use navigate uses Router to navigate to different paths
   const navigate = useNavigate();
-  const routeHomepage = (id) =>{ 
-      let path = '/CSE442-542/2023-Spring/cse-442q/homepage'; 
+  const routeLogin = (id) =>{ 
+      let path = '/CSE442-542/2023-Spring/cse-442q/login'; 
       navigate(path, {state: {user: id}});
   }
   const routeLanding = () =>{
     let path = '/CSE442-542/2023-Spring/cse-442q/';
     navigate(path)
-  }
-
-  const routeReset = () =>{
-    let path = '/CSE442-542/2023-Spring/cse-442q/reset';
-    navigate(path)
-  }
-
-  useEffect(() => {
-    checkCookie();
-  }, []);
-
-  // check if user is already logged in
-  const checkCookie = async() => {
-
-    var userID = getCookie('uid');
-
-    // console.log(userID)
-    if(userID !== ""){
-      // console.log("cookie exists")
-      // get users data from database and store in context
-      const request = await getID(userID);
-      // console.log(request)
-      // set correct session storage id
-      sessionStorage.setItem("id", request.id);
-      window.location = "/CSE442-542/2023-Spring/cse-442q/homepage";
-    }
-
-
   }
 
   // state variables for the form inputs: username, email, password, and confirm password
@@ -152,8 +101,8 @@ function Login() {
         sessionStorage.setItem('id', data[1]);
         const user_info = await getUserData(data[1]);
 
-        setCookie("uid", username, 1);
-        routeHomepage(parseInt(data[1]));
+        // setCookie("uid", username, 1);
+        // routeHomepage(parseInt(data[1]));
       }
     }).catch(function (error) {
       console.log("failed to send post request");
@@ -170,7 +119,7 @@ function Login() {
       <div className="login-container">
           <div id="login-main">
               <div id="login-greeting">
-                  <h2>Let's sign in!</h2>
+                  <h2>Let's Reset!</h2>
                   <img src={LoginCharacter} alt="login-character" />
               </div>
               <div id="login-form">
@@ -184,7 +133,19 @@ function Login() {
                     </div>
                     <div className="login-form-field">
                         <label>
-                            <h6>Password</h6>
+                            <h6>Current Password</h6>
+                            <input type="password" name="password" size="30" onChange={changePassword}/>
+                        </label>
+                    </div>
+                    <div className="login-form-field">
+                        <label>
+                            <h6>New Password</h6>
+                            <input type="password" name="password" size="30" onChange={changePassword}/>
+                        </label>
+                    </div>
+                    <div className="login-form-field">
+                        <label>
+                            <h6>Re-Enter New Password</h6>
                             <input type="password" name="password" size="30" onChange={changePassword}/>
                         </label>
                     </div>
@@ -192,9 +153,6 @@ function Login() {
                         <input type="submit" value="Submit"/>
                     </div>
                 </form>
-                <div id="login-submit">
-                        <input type="submit" value="Reset Password" onClick={routeReset}/>
-                    </div>
               </div>
           </div>
       </div>
@@ -202,4 +160,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default Reset;

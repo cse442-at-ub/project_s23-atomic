@@ -19,6 +19,7 @@ import CreateNew from './components/CreateNew/create';
 import Options from './components/CreateNew/Options';
 import Suggestions from './components/CreateNew/Suggestions';
 import Detail from './components/HabitView/Detail';
+import Reset from './components/Reset/Reset';
 
 import {HabitProvider} from './components/contexts/HabitContext';
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/CSE442-542/2023-Spring/cse-442q/options" element={<Options />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/suggestions" element={<Suggestions />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/detail" element={<Detail />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/reset" element={<Reset />} />
       </Routes>  
       </HabitProvider>  
     </div>
