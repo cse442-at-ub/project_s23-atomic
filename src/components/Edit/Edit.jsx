@@ -26,14 +26,15 @@ function Edit() {
     // need to pass in correct habit information to this component 
     // we use useLocation to get this state
     const { state } = useLocation();
+    console.log("State incoming was: " + JSON.stringify(state));
 
     // TODO: set the initial state of the habit you are editing
     const [habit, setHabit] = useState({
-        title: "",
-        total: 0,
-        details: "",
-        category: "Health",
-        type: "good"
+        title: state.title,
+        total: state.total,
+        details: state.details,
+        category: state.category,
+        type: state.type
     });
     const setTitle = (event) => {
         setHabit({ ...habit, title: event.target.value });
@@ -75,11 +76,11 @@ function Edit() {
         console.log("habitObj was created as: " + JSON.stringify(habitObj));
         console.log("habit.type was : " + habit.type);
         
-        if (habit.type === "good") { // If habit is GOOD
+        if (habit.type === "Good") { // If habit is GOOD
             console.log("logging as a Good habit");
             addGoodHabit(habitObj);
             submit(habitObj, habit.type);
-        } else if (habit.type === "bad") { // If habit is BAD
+        } else if (habit.type === "Harmful") { // If habit is BAD
             console.log("logging as a Bad habit");
             addBadHabit(habitObj);
             submit(habitObj, habit.type);
@@ -125,7 +126,7 @@ function Edit() {
                 <form onSubmit={submitHandler}>
                     <div id="categories">
                         <h5>Category</h5>
-                        <select name="" id="" onClick={setCategory} required>
+                        <select name="" id="" onClick={setCategory} defaultValue={state.category} required>
                             <option value="Health">Health</option>
                             <option value="Work">Work</option>
                             <option value="School">School</option>
@@ -134,23 +135,23 @@ function Edit() {
                             <option value="Family">Family</option>
                         </select>
                         <br />
-                        <select name="" id="" onClick={setType} required>
-                            <option value="good">Good</option>
-                            <option value="bad">Bad</option>
+                        <select name="" id="" onClick={setType} defaultValue={state.type} required>
+                            <option value="Good">Good</option>
+                            <option value="Harmful">Bad</option>
                         </select>
                     </div>
                     <div id="title">
                         <h5>Title</h5>
-                        <input onChange={setTitle} type="text" required/>
+                        <input onChange={setTitle} type="text" defaultValue={state.title} required/>
                     </div>
                     <div id="details">
                         <h5>Details</h5>
-                        <input onChange={setDetails} type="text"/>
+                        <input onChange={setDetails} type="text"  defaultValue={state.details}/>
                     </div>
                     <div id="counter">
                         <h5>Counter</h5>
                         <input
-                            type="number" onChange={setCounter} required
+                            type="number" onChange={setCounter}  defaultValue={state.total} required
                             // Only allow numbers. If a keypress is not a number, do nothing.
                             // onKeyDown={(event) => {
                             //     if (!/[0-9]/.test(event.key)) {
