@@ -16,23 +16,12 @@ function Detail(){
         let path = '/CSE442-542/2023-Spring/cse-442q/homepage'
         navigate(path)
     }
-    const routeEditHabit = () =>{
-        let path = '/CSE442-542/2023-Spring/cse-442q/edit'
-        navigate(path)
-    }
 
-    // This is for navigating to the Edit page
-    const routeDetail = (habit, type) => {
-        const n = habit["title"];
-        const c = habit["category"];
-        const d = habit["details"];
-        const sum = habit["counter"];
-        const t = habit["total"];
-        const path = '/CSE442-542/2023-Spring/cse-442q/edit';
-        
-        sessionStorage.setItem("added","true")
-        navigate(path, {state:{title:n, category:c, details:d, counter:sum, total:t, type:type}});
-    }
+    // Used preliminarly before routeDetail data transfer was written
+    // const routeEditHabit = () =>{
+    //     let path = '/CSE442-542/2023-Spring/cse-442q/edit'
+    //     navigate(path)
+    // }
 
 
     // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
@@ -42,6 +31,22 @@ function Detail(){
     // if false, regular habit information will be displayed with no success message
     // we use useLocation to get this state
     const { state } = useLocation();
+
+    // This is for navigating to the Edit page
+    // It gets saves the data that this Detail.jsx directly recieves from the first routDetail() call
+    const routeEdit = () => {
+        const n = state.title;
+        const c = state.category;
+        const d = state.details;
+        const sum = state.counter;
+        const t = state.total;
+        const type = state.type;
+        const path = '/CSE442-542/2023-Spring/cse-442q/edit';
+        
+        sessionStorage.setItem("added","true")
+        navigate(path, {state:{title:n, category:c, details:d, counter:sum, total:t, type:type}});
+    }
+
 
     // notify user that habit was successfully added if coming from creating/adding habit
     const notify = () => {
@@ -259,7 +264,7 @@ function Detail(){
                 <div className='back_link' onClick={routeHome}>&lt; Back to Home</div>
                 <div className='column_1'>
                     <h1 className="detail-title">{state.title}</h1>
-                    <button className='edit_button' onClick={() => routeEditHabit()}>Edit</button>
+                    <button className='edit_button' onClick={() => routeEdit()}>Edit</button>
                 </div>
                 <div className='column_2'>
                     <div className='category_container'>
