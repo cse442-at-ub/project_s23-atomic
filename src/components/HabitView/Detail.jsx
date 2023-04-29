@@ -81,7 +81,6 @@ function Detail(){
         })
     }
 
-
     const increment = async() => {
         //console.log(state.title);
         setTcounter(tcounter+1);
@@ -133,7 +132,7 @@ function Detail(){
             sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
         }else{
             const Days ={
-                0: tcounter + 1,
+                0: day0,
                 1: thisuser.bad[state.title]["Days"][1],
                 2: thisuser.bad[state.title]["Days"][2],
                 3: thisuser.bad[state.title]["Days"][3],
@@ -166,10 +165,22 @@ function Detail(){
         setTcounter(tcounter-1);
         const data = await getUserData(sessionStorage.getItem("id"));
         let thisuser = data
+
+        let separator = "/"
+        let newDate = new Date();
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+
+        const day0={
+            date: current_date,
+            counter: tcounter-1
+        }
         if (tcounter > 0){
             if(state.type === "Good"){
                 const Days ={
-                    0: tcounter - 1,
+                    0: day0,
                     1: thisuser.good[state.title]["Days"][1],
                     2: thisuser.good[state.title]["Days"][2],
                     3: thisuser.good[state.title]["Days"][3],
@@ -199,7 +210,7 @@ function Detail(){
                 sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
             }else{
                 const Days ={
-                    0: tcounter - 1,
+                    0: day0,
                     1: thisuser.bad[state.title]["Days"][1],
                     2: thisuser.bad[state.title]["Days"][2],
                     3: thisuser.bad[state.title]["Days"][3],

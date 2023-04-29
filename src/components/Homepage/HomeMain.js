@@ -79,7 +79,7 @@ export default function HomeMain() {
     var day = days[ currDate.getDay() ];
     var month = months[ currDate.getMonth() ];
 
-    const {good_habits, bad_habits, user, setUser, getUserData, sendHabits} = useContext(HabitContext);
+    const {good_habits, bad_habits, user, setUser, getUserData, sendHabits, moveQueue, current_date} = useContext(HabitContext);
 
     const getCateogries = () => {
         if (user.good !== {}) {
@@ -149,6 +149,7 @@ export default function HomeMain() {
 
     // use effect will run once after the component renders because of the empty dependency array
     useEffect(() => {
+        // set the title of the page
         document.title = "Home";  
     }, [])
 
@@ -158,11 +159,19 @@ export default function HomeMain() {
             // call the getUserData function from HabitContext.js to get the user data
             // makes get request to backend to get user data
             const data = await getUserData(sessionStorage.getItem("id"));
+
+            // // move the queue if necessary
+            // // move queue for good and bad habits
+            // // console.log(current_date)
+            // if nothing needs to be moved, the function will basically do nothing :/
+            const queueGood = await moveQueue(current_date, "Good");
+            const queueBad = await moveQueue(current_date, "Bad");
+
             // set thisUser to the data we received from the backend
             thisUser = data;
             // call the getCateogries function to get the categories the user has
             getCateogries();
-  
+
             if (thisUser.id) {
                 if(categories.includes("Health")) {
                     fillLists(user.good, "Health", setGoodHealth,"good");
@@ -187,7 +196,9 @@ export default function HomeMain() {
                 if(categories.includes("Misc")) {
                     fillLists(user.good, "Misc", setGoodMisc,"good");
                     fillLists(user.bad, "Misc", setBadMisc,"bad");
-                }   
+                } 
+                
+                
            } else {
               console.log("No Habits");
            }

@@ -1,0 +1,34 @@
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+.info-container h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #4f62c2;
+}
+
+.info-container h2 {
+    margin-bottom: 5px;
+}
+
+.info-container img {
+    width: 50%;
+    height: 50%;
+    margin-bottom: 5%;
+}
+
+@media screen and (max-width: 600px) {
+    .info-container {
+        margin-top: 20%;
+    }
+
+    .info-container img {
+        width: 80%;
+        height: 80%;
+    }
+}

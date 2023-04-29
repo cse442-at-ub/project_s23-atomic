@@ -89,8 +89,8 @@ nav {
 
 .profile_nav_div img {
 
-    height: 80px;
-    width: 85px;
+    height: 88px;
+    width: 95px;
 
     border-radius: 50%;
     border: 2px solid white;
@@ -145,11 +145,18 @@ nav {
     color: #F69335;
 }
 
+#current_tab {
+    text-decoration: underline;
+}
 
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 900px) {
 
     .app_logo_div {
         font-size: 14px;
+        width: 70%;
+        margin-left: 10px;
+        padding: 5px;
     }
 
     .app_logo_div img {
@@ -178,6 +185,15 @@ nav {
 
     .profile_nav_div h2 {
         font-size: 20px;
+    }
+
+    .nav_logout p {
+        font-size: 20px;
+    }
+    .nav_logout {
+        height: 40px;
+        min-width: 130px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     }
     
 }

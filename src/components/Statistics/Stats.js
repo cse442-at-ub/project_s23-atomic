@@ -160,8 +160,8 @@ export default function Stats() {
             }
         }
 
-        console.log(data)
-        console.log(chart)
+        // console.log(data)
+        // console.log(chart)
     }
 
     // function to set chart data
@@ -260,7 +260,7 @@ export default function Stats() {
                 ticks: {
                     font: {
                         size: 22,
-                    }
+                    },
                 }
             },
             y: {

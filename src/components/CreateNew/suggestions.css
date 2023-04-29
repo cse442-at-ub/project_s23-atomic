@@ -102,7 +102,7 @@
 
 @media screen and (max-width: 600px) {
     .overall_list_container{
-        margin-top: 16%;
+        margin-top: 23%;
     }
     .list_container {
         margin-top: 10%;
@@ -112,5 +112,9 @@
     .category_wrapper {
         width: 100%;
         height: 100%;
+    }
+
+    .sug_back_link {
+        width: 30%;
     }
 }

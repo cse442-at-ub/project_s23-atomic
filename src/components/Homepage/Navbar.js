@@ -8,6 +8,11 @@ import joker from '../../assets/profilepics/joker.jpeg'
 import lisa from '../../assets/profilepics/lisa.JPG'
 import sandy from '../../assets/profilepics/sandy.jpeg'
 import sniff from '../../assets/profilepics/sniff.png'
+import chillCat from '../../assets/profilepics/chillCat.png'
+import meditate from '../../assets/profilepics/meditate.jpg'
+import patrick from '../../assets/profilepics/patrick.jpg'
+import pepe from '../../assets/profilepics/pepe.jpg'
+import shrek from '../../assets/profilepics/shrek.jpg'
 
 // import avatar from '../../assets/images/avatar.png'
 import {useNavigate} from 'react-router-dom'
@@ -18,7 +23,7 @@ import HabitContext from "../contexts/HabitContext";
 export default function Navbar() {
 
     // array of avatars
-    const avatars = [cat, hamster, hoopla, joker, lisa, sandy, sniff]
+    const avatars = [cat, hamster, hoopla, joker, lisa, sandy, sniff, chillCat, meditate, patrick, pepe, shrek]
     // will be used to generate a random avatar index for profile picture
     const [randomNumber, setRandomNumber] = useState(0)
     // generate a random number to be used as an index for the avatars array
@@ -43,6 +48,14 @@ export default function Navbar() {
         setUser({})
         navigate('/CSE442-542/2023-Spring/cse-442q/')
     }
+
+    const checkPath = (path) => {
+        if (window.location.pathname === "/CSE442-542/2023-Spring/cse-442q/" + path) {
+            return true;
+        }
+        return false;
+    }
+
     return (
     <nav>
         <div className='app_logo_div' onClick={routeHome}>
@@ -53,11 +66,11 @@ export default function Navbar() {
             </div>
         </div>
         <div className='app_button_div'>
-            <p onClick={routeStatistics}>Statistics</p>
-            <p onClick={routeFAQ}>FAQ</p>
+            {checkPath("statistics") ? <p id="current_tab" onClick={routeStatistics}>Statistics</p> : <p onClick={routeStatistics}>Statistics</p>}
+            {checkPath("information") ? <p id="current_tab" onClick={routeFAQ}>FAQ</p> : <p onClick={routeFAQ}>FAQ</p>}
         </div>
         <div className='profile_nav_div'>
-            <img src={avatars[randomNumber]} alt="avatar"></img>
+            <img src={pepe} alt="avatar"></img>
             <div className='nav_dropdown'>
                 <h2 id="nav_username_label">{user.username !== "" ? user.username : ""}</h2>
                 <div className='nav_logout'>
