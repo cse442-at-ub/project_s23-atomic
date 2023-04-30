@@ -35,8 +35,8 @@ function Create() {
     const setTitle = (event) => {
         setHabit({ ...habit, title: event.target.value });
     };
-    const setCounter = (event) => {
-        setHabit({ ...habit, counter: event.target.value });
+    const setTotal = (event) => {
+        setHabit({ ...habit, total: event.target.value });
     };
     const setDetails = (event) => {
         setHabit({ ...habit, details: event.target.value });
@@ -64,7 +64,7 @@ function Create() {
         const habitObj = {};
         habitObj["title"] = habit.title;
         habitObj["counter"] = 0;
-        habitObj["total"] = habit.counter;
+        habitObj["total"] = habit.total;
         habitObj["details"] = habit.details;
         habitObj["category"] = habit.category;
         habitObj["Days"] = {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} };
@@ -145,9 +145,9 @@ function Create() {
                         <textarea onChange={setDetails} name="details" rows="4"></textarea>
                     </div>
                     <div id="counter">
-                        <h3>Counter</h3>
+                        <h3>Daily Goal Counter</h3>
                         <input
-                            type="number" onChange={setCounter} required
+                            type="number" onChange={setTotal} required
                             // Only allow numbers. If a keypress is not a number, do nothing.
                             // onKeyDown={(event) => {
                             //     if (!/[0-9]/.test(event.key)) {

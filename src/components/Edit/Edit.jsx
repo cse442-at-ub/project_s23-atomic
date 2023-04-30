@@ -39,8 +39,8 @@ function Edit() {
     const setTitle = (event) => {
         setHabit({ ...habit, title: event.target.value });
     };
-    const setCounter = (event) => {
-        setHabit({ ...habit, counter: event.target.value });
+    const setTotal = (event) => {
+        setHabit({ ...habit, total: event.target.value });
     };
     const setDetails = (event) => {
         setHabit({ ...habit, details: event.target.value });
@@ -51,7 +51,21 @@ function Edit() {
     const setType = (event) => {
         setHabit({ ...habit, type: event.target.value });
     };
+
+
+    // Checks if the entered data is the same as what it was before
+    // Returns a Boolean
+    const changedValues = () => {
+        const sameCategory = (habit.category === state.category);
+        const sameType = (habit.category === state.category);
+        const sameTitle = (habit.category === state.category);
+        const sameDetails = (habit.category === state.category);
+        const sameTotal = (habit.category === state.category);
+    }
     
+    // Create a new habit obj to replace the old one:
+    // 1) Transfer counter, total, and days data
+    // 2) Then fill in the rest of the info
     const submitHandler = (event) => {
         console.log("Create Habit submitHandler() called");
         event.preventDefault();
@@ -68,7 +82,7 @@ function Edit() {
         const habitObj = {};
         habitObj["title"] = habit.title;
         habitObj["counter"] = 0;
-        habitObj["total"] = habit.counter;
+        habitObj["total"] = habit.total;
         habitObj["details"] = habit.details;
         habitObj["category"] = habit.category;
         habitObj["Days"] = {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} };
@@ -149,9 +163,9 @@ function Edit() {
                         <input onChange={setDetails} type="text"  defaultValue={state.details}/>
                     </div>
                     <div id="counter">
-                        <h5>Counter</h5>
+                        <h5>Daily Goal Counter</h5>
                         <input
-                            type="number" onChange={setCounter}  defaultValue={state.total} required
+                            type="number" onChange={setTotal}  defaultValue={state.total} required
                             // Only allow numbers. If a keypress is not a number, do nothing.
                             // onKeyDown={(event) => {
                             //     if (!/[0-9]/.test(event.key)) {
