@@ -165,14 +165,15 @@ function Detail(){
         setTcounter(tcounter-1);
         const data = await getUserData(sessionStorage.getItem("id"));
         let thisuser = data
-
         let separator = "/"
         let newDate = new Date();
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
         let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
-
+        // console.log(thisuser.good)
+        // console.log("originals =", thisuser.good[state.title])
+        // console.log(tcounter)
         const day0={
             date: current_date,
             counter: tcounter-1
