@@ -54,6 +54,42 @@ function Edit() {
     };
 
 
+    const getDays = () => {
+        var list = null;
+        if (state.type === "Good") {
+            console.log("list is good");
+            list = user.good;
+        } else if (state.type === "Bad") {
+            console.log("list is bad");
+            list = user.bad;
+        } else {
+            console.log("list was instead: " + list);
+        }
+        const title = state.title;
+
+        const retVal = list[title]["Days"];
+        // console.log("getDays(): " + JSON.stringify(retVal));
+        return retVal;
+    }
+
+    const getCounter = () => {
+        var list = null;
+        if (state.type === "Good") {
+            console.log("list is good");
+            list = user.good;
+        } else if (state.type === "Bad") {
+            console.log("list is bad");
+            list = user.bad;
+        } else {
+            console.log("list was instead: " + list);
+        }
+        const title = state.title;
+
+        const retVal = list[title]["counter"];
+        console.log("getDays(): " + retVal);
+        return retVal;
+    }
+
     // Checks if the entered data is the same as what it was before
     // Returns a Boolean
     const changedValues = () => {
@@ -87,11 +123,11 @@ function Edit() {
             // Create habit JSON Object
             const habitObj = {};
             habitObj["title"] = habit.title;
-            habitObj["counter"] = 0;
+            habitObj["counter"] = getCounter();
             habitObj["total"] = habit.total;
             habitObj["details"] = habit.details;
             habitObj["category"] = habit.category;
-            habitObj["Days"] = {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} };
+            habitObj["Days"] = getDays();
 
             console.log("habitObj was created as: " + JSON.stringify(habitObj));
             console.log("habit.type was : " + habit.type);
@@ -178,7 +214,7 @@ function Edit() {
                     </div>
                     <div id="details">
                         <h5>Details</h5>
-                        <input onChange={setDetails} type="text"  defaultValue={state.details}/>
+                        <textarea onChange={setDetails} name="details" defaultValue={state.details} rows="4"></textarea>
                     </div>
                     <div id="counter">
                         <h5>Daily Goal Counter</h5>
@@ -196,7 +232,8 @@ function Edit() {
                         <input type="submit" />
                     </div>
                 </form>
-                <button onClick={() => changedValues()}>Check for changes</button>
+                {/* <button onClick={() => changedValues()}>Check for changes</button> */}
+                <button onClick={() => getCounter()}>Get Counter</button>
             </div>
         </>
     );

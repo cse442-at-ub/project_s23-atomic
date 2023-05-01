@@ -25,6 +25,9 @@
 
     border-radius: 0;
     background-color: #FFF4E2;
+
+    padding: 10px;
+    margin: 5px;
 }
 #create-container input[type="text"]:focus {
     outline: none;
