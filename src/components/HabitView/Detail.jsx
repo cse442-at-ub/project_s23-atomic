@@ -132,7 +132,7 @@ function Detail(){
             sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
         }else{
             const Days ={
-                0: tcounter + 1,
+                0: day0,
                 1: thisuser.bad[state.title]["Days"][1],
                 2: thisuser.bad[state.title]["Days"][2],
                 3: thisuser.bad[state.title]["Days"][3],
