@@ -57,8 +57,13 @@
 
 }
 
+#counter {
+    display: flex;
+    gap: 10px;
+}
 
-#create-submit-div {
+
+.habit-submit-div {
     text-align: center;
 }
 

@@ -161,7 +161,7 @@ function Create() {
                             // }}
                         />
                     </div>
-                    <div id="create-submit-div">
+                    <div className="habit-submit-div">
                         <input type="submit" />
                     </div>
                 </form>

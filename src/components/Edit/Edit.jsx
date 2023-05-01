@@ -207,7 +207,7 @@ function Edit() {
             <Navbar/>
             <div id="create-container">
                 <ToastContainer limit={1}/>
-                <h2>Create New Habit</h2>
+                <h2>Edit Habit</h2>
                 <form onSubmit={submitHandler}>
                     <div id="categories">
                         <div>
@@ -249,7 +249,7 @@ function Edit() {
                             // }}
                         />
                     </div>
-                    <div>
+                    <div className="habit-submit-container">
                         <input type="submit" />
                     </div>
                 </form>
