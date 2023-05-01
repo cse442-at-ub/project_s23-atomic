@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 
-import { toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useLocation} from "react-router-dom";
 
 import HabitContext from '../contexts/HabitContext';
@@ -62,7 +63,9 @@ function Edit() {
         const diffDetails = (habit.details !==  state.details);
         const diffTotal = (habit.total !==  state.total);
 
-        return (diffCategory || diffType || diffTtitle || diffDetails || diffTotal);
+        const retval = (diffCategory || diffType || diffTtitle || diffDetails || diffTotal);
+        console.log("changedValues(): " + retval);
+        return retval;
     }
     
     // Create a new habit obj to replace the old one:
@@ -72,35 +75,39 @@ function Edit() {
         console.log("Create Habit submitHandler() called");
         event.preventDefault();
 
-        // Obtain current_date
-        let separator = "/"
-        let newDate = new Date();
-        let date = newDate.getDate();
-        let month = newDate.getMonth() + 1;
-        let year = newDate.getFullYear();
-        let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+        if (changedValues()) {
+            // Obtain current_date
+            let separator = "/"
+            let newDate = new Date();
+            let date = newDate.getDate();
+            let month = newDate.getMonth() + 1;
+            let year = newDate.getFullYear();
+            let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
 
-        // Create habit JSON Object
-        const habitObj = {};
-        habitObj["title"] = habit.title;
-        habitObj["counter"] = 0;
-        habitObj["total"] = habit.total;
-        habitObj["details"] = habit.details;
-        habitObj["category"] = habit.category;
-        habitObj["Days"] = {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} };
+            // Create habit JSON Object
+            const habitObj = {};
+            habitObj["title"] = habit.title;
+            habitObj["counter"] = 0;
+            habitObj["total"] = habit.total;
+            habitObj["details"] = habit.details;
+            habitObj["category"] = habit.category;
+            habitObj["Days"] = {7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} };
 
-        console.log("habitObj was created as: " + JSON.stringify(habitObj));
-        console.log("habit.type was : " + habit.type);
-        
-        if (habit.type === "Good") { // If habit is GOOD
-            console.log("logging as a Good habit");
-            addGoodHabit(habitObj);
-            submit(habitObj, habit.type);
-        } else if (habit.type === "Harmful") { // If habit is BAD
-            console.log("logging as a Bad habit");
-            addBadHabit(habitObj);
-            submit(habitObj, habit.type);
-        } 
+            console.log("habitObj was created as: " + JSON.stringify(habitObj));
+            console.log("habit.type was : " + habit.type);
+            
+            if (habit.type === "Good") { // If habit is GOOD
+                console.log("logging as a Good habit");
+                addGoodHabit(habitObj);
+                submit(habitObj, habit.type);
+            } else if (habit.type === "Harmful") { // If habit is BAD
+                console.log("logging as a Bad habit");
+                addBadHabit(habitObj);
+                submit(habitObj, habit.type);
+            }
+        } else {
+            failedToEdit();
+        }
     }
 
     const submit = async(info, type) => {
@@ -134,10 +141,15 @@ function Edit() {
         toast.error('Error Adding Habit',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
     }
 
+    const failedToEdit = () => {
+        toast.error('No changes were made',{position: toast.POSITION.TOP_RIGHT, hideProgressBar:true, pauseOnHover:true, theme:"colored"})
+    }
+
     return (
         <>
+            <Navbar/>
             <div id="create-container">
-                <Navbar/>
+                <ToastContainer limit={1}/>
                 <h2>Create New Habit</h2>
                 <form onSubmit={submitHandler}>
                     <div id="categories">
@@ -180,9 +192,11 @@ function Edit() {
                             // }}
                         />
                     </div>
-                    <br />
-                    <input type="submit" />
+                    <div>
+                        <input type="submit" />
+                    </div>
                 </form>
+                <button onClick={() => changedValues()}>Check for changes</button>
             </div>
         </>
     );
