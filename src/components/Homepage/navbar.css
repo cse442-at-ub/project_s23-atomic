@@ -54,7 +54,7 @@ nav {
     color: white;
 }
 #sub_label{
-    font-size: 18px;
+    font-size: 22px;
 }
 
 .app_button_div {
@@ -102,6 +102,12 @@ nav {
 .profile_nav_div h2 {
     font-size: 34px;
     color: white;
+    margin-right: 10px;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-y: scroll;
+    text-align: center;
+
 }
 .profile_nav_div h2:hover {
     cursor:pointer;
@@ -189,6 +195,7 @@ nav {
 
     .nav_logout p {
         font-size: 20px;
+        text-align: center;
     }
     .nav_logout {
         height: 40px;

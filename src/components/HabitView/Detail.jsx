@@ -253,6 +253,11 @@ function Detail(){
         }
       }, []);
 
+    useEffect(() => {
+        // set document title
+        document.title = "Habit Tracker - Details";
+    }, []);
+
     return(
         <div className="detail_wrapper">
             <Navbar />

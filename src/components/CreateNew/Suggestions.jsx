@@ -3,13 +3,13 @@ import './suggestions.css';
 import Navbar from '../Homepage/Navbar';
 import { useContext } from 'react'
 import HabitContext from '../contexts/HabitContext'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Suggestions(){
-    const {user, good_habits, bad_habits,addGoodHabit,addBadHabit,sendHabits} = useContext(HabitContext);
+    const {user, good_habits, bad_habits,addGoodHabit,addBadHabit,sendHabits, getUserData} = useContext(HabitContext);
 
     const navigate = useNavigate();
     // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
@@ -73,6 +73,22 @@ function Suggestions(){
         console.log(user)
 
     }
+
+    // use effect will run every 700 milliseconds to get the user data from the backend
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            // call the getUserData function from HabitContext.js to get the user data
+            // makes get request to backend to get user data
+            const info = await getUserData(sessionStorage.getItem("id"));
+
+        }, 1050)
+        return () => clearInterval(interval)
+    })
+
+    useEffect(() => {
+        // set document title
+        document.title = "Pick From Our Options";
+    }, []);
 
     const submit = async(info, type) => {
         // console.log(user.id)

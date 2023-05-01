@@ -247,7 +247,7 @@ export default function Stats() {
     // use effect will run once to set the title of the page
 
     useEffect(() => {
-        document.title = "Statistics";
+        document.title = "Statistics ";
     }, []);
 
     const alloptions = {

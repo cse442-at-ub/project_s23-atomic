@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import HabitContext from '../contexts/HabitContext';
 import { toast } from 'react-toastify';
 
@@ -113,6 +113,11 @@ function Create() {
     const notify = ()=>{
         toast.error('Error Adding Habit',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
     }
+
+    useEffect(() => {
+        // set document title
+        document.title = "Custom Habit";
+    }, []);
 
     return (
         <>

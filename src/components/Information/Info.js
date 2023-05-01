@@ -1,11 +1,18 @@
 import React from "react"
 import { Link } from "react-router-dom";
 import Navbar from "../Homepage/Navbar";
+import { useEffect } from 'react';
 import './infopage.css'
 
 import meditate from "../../assets/profilepics/meditate.jpg"
 
 export default function Info() {
+
+    useEffect(() => {
+        // set document title
+        document.title = "FAQ";
+    }, []);
+
     return (
         <div>
             <Navbar />
