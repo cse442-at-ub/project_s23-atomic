@@ -7,6 +7,7 @@
 #create-container h2 {
     padding: 25px 0px 5px 0px;
     margin: 0px;
+    text-align: left;
 }
 
 #create-container h3 {
@@ -18,25 +19,48 @@
     font-size: 24px;
 }
 
+#create-container input[type="text"] {
+    border: none;
+    border-bottom: 2px solid black;
+
+    border-radius: 0;
+    background-color: #FFF4E2;
+}
+#create-container input[type="text"]:focus {
+    outline: none;
+    border-bottom: 2px solid rgba(79, 98, 194, 0.75);
+}
+
+
 #create-container textarea {
     font-family: 'Inter', sans-serif;
+
     padding: 10px 15px;
+    width: 100%;
+    border-radius: 10px;
+    border: 0px;
+
+    background-color: #ffc79997;
+    outline-color: rgba(79, 98, 194, 0.75);
+}
+
+#categories {
+    display: flex;
+    gap: 10px;
+}
+
+#create-container select {
+    outline-color: rgba(79, 98, 194, 0.75);
+
+}
+
+
+#create-submit-div {
+    text-align: center;
 }
 
 #create-container input[type="submit"] {
     width: 50%;
 
     margin: 75px 0px;
-}
-
-#details textarea {
-    width: 100%;
-    border-radius: 10px;
-    border: 0px;
-
-    background-color: #ffc79997;
-}
-
-#create-submit-div {
-    text-align: center;
 }

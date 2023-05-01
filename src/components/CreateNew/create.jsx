@@ -121,19 +121,24 @@ function Create() {
                 <h2>Create New Habit</h2>
                 <form onSubmit={submitHandler}>
                     <div id="categories">
-                        <h3>Category</h3>
-                        <select name="" id="" onClick={setCategory} required>
-                            <option value="Health">Health</option>
-                            <option value="Work">Work</option>
-                            <option value="School">School</option>
-                            <option value="Social">Social</option>
-                            <option value="Misc">Misc</option>
-                            <option value="Family">Family</option>
-                        </select>
-                        <select name="" id="" onClick={setType} required>
-                            <option value="good">Good</option>
-                            <option value="bad">Bad</option>
-                        </select>
+                        <div>
+                            <h3>Category</h3>
+                            <select name="" id="" onClick={setCategory} required>
+                                <option value="Health">Health</option>
+                                <option value="Work">Work</option>
+                                <option value="School">School</option>
+                                <option value="Social">Social</option>
+                                <option value="Misc">Misc</option>
+                                <option value="Family">Family</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3>Type</h3>
+                            <select name="" id="" onClick={setType} required>
+                                <option value="Good">Good</option>
+                                <option value="Harmful">Bad</option>
+                            </select>
+                        </div>
                     </div>
                     <div id="title">
                         <h3>Title</h3>

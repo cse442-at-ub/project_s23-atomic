@@ -56,11 +56,13 @@ function Edit() {
     // Checks if the entered data is the same as what it was before
     // Returns a Boolean
     const changedValues = () => {
-        const sameCategory = (habit.category === state.category);
-        const sameType = (habit.category === state.category);
-        const sameTitle = (habit.category === state.category);
-        const sameDetails = (habit.category === state.category);
-        const sameTotal = (habit.category === state.category);
+        const diffCategory = (habit.category !== state.category);
+        const diffType = (habit.type !==  state.type);
+        const diffTtitle = (habit.title !==  state.title);
+        const diffDetails = (habit.details !==  state.details);
+        const diffTotal = (habit.total !==  state.total);
+
+        return (diffCategory || diffType || diffTtitle || diffDetails || diffTotal);
     }
     
     // Create a new habit obj to replace the old one:
@@ -139,20 +141,24 @@ function Edit() {
                 <h2>Create New Habit</h2>
                 <form onSubmit={submitHandler}>
                     <div id="categories">
-                        <h5>Category</h5>
-                        <select name="" id="" onClick={setCategory} defaultValue={state.category} required>
-                            <option value="Health">Health</option>
-                            <option value="Work">Work</option>
-                            <option value="School">School</option>
-                            <option value="Social">Social</option>
-                            <option value="Misc">Misc</option>
-                            <option value="Family">Family</option>
-                        </select>
-                        <br />
-                        <select name="" id="" onClick={setType} defaultValue={state.type} required>
-                            <option value="Good">Good</option>
-                            <option value="Harmful">Bad</option>
-                        </select>
+                        <div>
+                            <h5>Category</h5>
+                            <select name="" id="" onClick={setCategory} defaultValue={state.category} required>
+                                <option value="Health">Health</option>
+                                <option value="Work">Work</option>
+                                <option value="School">School</option>
+                                <option value="Social">Social</option>
+                                <option value="Misc">Misc</option>
+                                <option value="Family">Family</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h5>Type</h5>
+                            <select name="" id="" onClick={setType} defaultValue={state.type} required>
+                                <option value="Good">Good</option>
+                                <option value="Harmful">Bad</option>
+                            </select>
+                        </div>
                     </div>
                     <div id="title">
                         <h5>Title</h5>
