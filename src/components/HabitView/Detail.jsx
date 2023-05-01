@@ -41,10 +41,27 @@ function Detail(){
         const sum = state.counter;
         const t = state.total;
         const type = state.type;
+        const days = getDays();
         const path = '/CSE442-542/2023-Spring/cse-442q/edit';
         
         sessionStorage.setItem("added","true")
-        navigate(path, {state:{title:n, category:c, details:d, counter:sum, total:t, type:type}});
+        navigate(path, {state:{title:n, category:c, details:d, counter:sum, total:t, type:type, days:days}});
+    }
+
+    const getDays = () => {
+        var list = null; // WARNING: This is creating a COPY, not accessing user.good directly
+        if (state.type === "Good") {
+            list = user.good;
+        } else if (state.type === "Bad") {
+            list = user.bad;
+        } else {
+            console.log("list was instead: " + list);
+        }
+        const title = state.title;
+
+        const retVal = list[title]["Days"];
+        // console.log("getDays(): " + JSON.stringify(retVal));
+        return retVal;
     }
 
 

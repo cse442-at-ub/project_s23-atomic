@@ -53,58 +53,20 @@ function Edit() {
         setHabit({ ...habit, type: event.target.value });
     };
 
-
-    const getDays = () => {
-        var list = null;
-        if (state.type === "Good") {
-            list = user.good;
-        } else if (state.type === "Bad") {
-            list = user.bad;
-        } else {
-            console.log("list was instead: " + list);
-        }
-        const title = state.title;
-
-        const retVal = list[title]["Days"];
-        // console.log("getDays(): " + JSON.stringify(retVal));
-        return retVal;
-    }
-
-    const getCounter = () => {
-        var list = null;
-        if (state.type === "Good") {
-            list = user.good;
-        } else if (state.type === "Bad") {
-            list = user.bad;
-        } else {
-            console.log("list was instead: " + list);
-        }
-        const title = state.title;
-
-        console.log(JSON.stringify(user));
-        console.log(JSON.stringify(user.good));
-        // console.log();
-
-        const retVal = user.good[title]["counter"];
-        console.log("getCounter(): " + retVal);
-        return retVal;
-    }
-
     const deleteHabit = () => {
+        console.log("deleteHabit() was called");
+
+        const title = state.title;
         var list = null;
         if (state.type === "Good") {
-            list = user.good;
+            delete user.good[title];
+            sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
         } else if (state.type === "Bad") {
-            list = user.bad;
+            delete user.bad[title];
+            sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
         } else {
             console.log("list was instead: " + list);
         }
-        const title = state.title;
-
-        console.log("list before deletion is: " + JSON.stringify(list));
-
-        delete list[title];
-        console.log("list AFTER deletion is: " + JSON.stringify(list));
     }
 
     // Checks if the entered data is the same as what it was before
@@ -144,11 +106,11 @@ function Edit() {
             // Create habit JSON Object
             const habitObj = {};
             habitObj["title"] = habit.title;
-            habitObj["counter"] = getCounter();
+            habitObj["counter"] = state.counter; // State
             habitObj["total"] = habit.total;
             habitObj["details"] = habit.details;
             habitObj["category"] = habit.category;
-            habitObj["Days"] = getDays();
+            habitObj["Days"] = state.days; // State
 
             console.log("habitObj was created as: " + JSON.stringify(habitObj));
             console.log("habit.type was : " + habit.type);
@@ -253,7 +215,7 @@ function Edit() {
                         <input type="submit" />
                     </div>
                 </form>
-                <button onClick={() => getCounter()}>Get Counter</button>
+                {/* <button onClick={() => getCounter()}>Get Counter</button> */}
                 <button onClick={() => deleteHabit()}>Del habit</button>
                 <button onClick={() => console.log("user.good was: " + JSON.stringify(user.good))}>user.good</button>
             </div>
