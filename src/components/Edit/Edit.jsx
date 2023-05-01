@@ -127,7 +127,7 @@ function Edit() {
                 console.log("logging as a Good habit");
                 addGoodHabit(habitObj);
                 submit(habitObj, habit.type);
-            } else if (habit.type === "Harmful") { // If habit is BAD
+            } else if (habit.type === "Bad") { // If habit is BAD
                 console.log("logging as a Bad habit");
                 addBadHabit(habitObj);
                 submit(habitObj, habit.type);
@@ -195,7 +195,7 @@ function Edit() {
                             <h5>Type</h5>
                             <select name="" id="" onClick={setType} defaultValue={state.type} required>
                                 <option value="Good">Good</option>
-                                <option value="Harmful">Bad</option>
+                                <option value="Bad">Bad</option>
                             </select>
                         </div>
                     </div>

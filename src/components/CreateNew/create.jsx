@@ -136,7 +136,7 @@ function Create() {
                             <h3>Type</h3>
                             <select name="" id="" onClick={setType} required>
                                 <option value="Good">Good</option>
-                                <option value="Harmful">Bad</option>
+                                <option value="Bad">Bad</option>
                             </select>
                         </div>
                     </div>
