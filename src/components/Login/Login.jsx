@@ -91,7 +91,7 @@ function Login() {
       // console.log(request)
       // set correct session storage id
       sessionStorage.setItem("id", request.id);
-      window.location = "/CSE442-542/2023-Spring/cse-442q/homepage";
+      navigate("/CSE442-542/2023-Spring/cse-442q/homepage");
     }
 
 

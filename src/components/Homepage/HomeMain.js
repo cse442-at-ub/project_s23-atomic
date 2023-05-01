@@ -115,7 +115,7 @@ export default function HomeMain() {
                                     <h3 className="habit_title" id={type} onClick={getHabitInfo}>{obj[habit].title}</h3>
                                     <div className='counter_info'>
                                         <div className='counter_button'>
-                                            <button id="minus_btn">-</button>
+                                            <button id="minus_btn" className={obj[habit].title} value ={obj[habit].counter}onClick={decrement}>-</button>
                                             <label>{obj[habit].counter}</label>         
                                             <button id="plus_btn" className={obj[habit].title} value ={obj[habit].counter}onClick={increment}>+</button>
                                         </div>
@@ -197,19 +197,33 @@ export default function HomeMain() {
      })
 
      
-     const increment = async(event) => {
+    const increment = async(event) => {
 
         const title = event.target.className;
-        let tcounter = event.target.value
+        
 
-        console.log(tcounter);
+        //console.log(tcounter);
 
         const data = await getUserData(sessionStorage.getItem("id"));
         let thisuser = data
 
-        if(thisuser.bad[title] === null){
+        if(thisuser.good.hasOwnProperty(title)){
+            let tcounter = thisuser.good[title]["counter"]
+            let separator = "/"
+            let newDate = new Date();
+            let date = newDate.getDate();
+            let month = newDate.getMonth() + 1;
+            let year = newDate.getFullYear();
+            let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+            // console.log(thisuser.good)
+            // console.log("originals =", thisuser.good[state.title])
+            // console.log(tcounter)
+            const day0={
+                date: current_date,
+                counter: tcounter+1
+            }
             const Days ={
-                0: tcounter + 1,
+                0: day0,
                 1: thisuser.good[title]["Days"][1],
                 2: thisuser.good[title]["Days"][2],
                 3: thisuser.good[title]["Days"][3],
@@ -238,8 +252,24 @@ export default function HomeMain() {
             }
             sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
         }else{
+            let tcounter = thisuser.bad[title]["counter"]
+            //const tempInt = string2int(tcounter)
+            //const tempInt = tcounter + 1
+            let separator = "/"
+            let newDate = new Date();
+            let date = newDate.getDate();
+            let month = newDate.getMonth() + 1;
+            let year = newDate.getFullYear();
+            let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+            // console.log(thisuser.good)
+            // console.log("originals =", thisuser.good[state.title])
+            // console.log(tcounter)
+            const day0={
+                date: current_date,
+                counter: tcounter+1
+            }
             const Days ={
-                0: tcounter + 1,
+                0: day0,
                 1: thisuser.bad[title]["Days"][1],
                 2: thisuser.bad[title]["Days"][2],
                 3: thisuser.bad[title]["Days"][3],
@@ -253,7 +283,7 @@ export default function HomeMain() {
                 title: thisuser.bad[title]["title"],
                 total: thisuser.bad[title]["total"],
                 //+ 1 properly updates counter
-                counter: tcounter + 1,
+                counter: tcounter+1,
                 details: thisuser.bad[title]["details"],
                 category: thisuser.bad[title]["category"],
             }
@@ -265,6 +295,113 @@ export default function HomeMain() {
                 [title] : habit
             }
             sendHabits(sessionStorage.getItem("id"), thisuser.good, rslt)
+        }
+
+    };
+
+    const decrement = async(event) => {
+
+        const title = event.target.className;
+        
+
+        //console.log(tcounter);
+
+        const data = await getUserData(sessionStorage.getItem("id"));
+        let thisuser = data
+
+        if(thisuser.good.hasOwnProperty(title)){
+            
+            let tcounter = thisuser.good[title]["counter"]
+            if(tcounter > 0){
+                let separator = "/"
+                let newDate = new Date();
+                let date = newDate.getDate();
+                let month = newDate.getMonth() + 1;
+                let year = newDate.getFullYear();
+                let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+                // console.log(thisuser.good)
+                // console.log("originals =", thisuser.good[state.title])
+                // console.log(tcounter)
+                const day0={
+                    date: current_date,
+                    counter: tcounter-1
+                }
+                const Days ={
+                    0: day0,
+                    1: thisuser.good[title]["Days"][1],
+                    2: thisuser.good[title]["Days"][2],
+                    3: thisuser.good[title]["Days"][3],
+                    4: thisuser.good[title]["Days"][4],
+                    5: thisuser.good[title]["Days"][5],
+                    6: thisuser.good[title]["Days"][6],
+                    7: thisuser.good[title]["Days"][7],
+                }
+                const habit = {
+                    Days,
+                    title: thisuser.good[title]["title"],
+                    total: thisuser.good[title]["total"],
+                    //+ 1 properly updates counter
+                    counter: tcounter - 1,
+                    details: thisuser.good[title]["details"],
+                    category: thisuser.good[title]["category"],
+                }
+            //console.log(state.type)
+        
+                delete thisuser.good[title]
+                console.log("altered good object =", thisuser.good)
+
+                const rslt ={
+                    ...thisuser.good,
+                    [title] : habit
+                }
+                sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
+            }
+        }else{
+            let tcounter = thisuser.bad[title]["counter"]
+            if (tcounter > 0){
+                //const tempInt = string2int(tcounter)
+                //const tempInt = tcounter + 1
+                let separator = "/"
+                let newDate = new Date();
+                let date = newDate.getDate();
+                let month = newDate.getMonth() + 1;
+                let year = newDate.getFullYear();
+                let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+                // console.log(thisuser.good)
+                // console.log("originals =", thisuser.good[state.title])
+                // console.log(tcounter)
+                const day0={
+                    date: current_date,
+                    counter: tcounter-1
+                }
+                const Days ={
+                    0: day0,
+                    1: thisuser.bad[title]["Days"][1],
+                    2: thisuser.bad[title]["Days"][2],
+                    3: thisuser.bad[title]["Days"][3],
+                    4: thisuser.bad[title]["Days"][4],
+                    5: thisuser.bad[title]["Days"][5],
+                    6: thisuser.bad[title]["Days"][6],
+                    7: thisuser.bad[title]["Days"][7],
+                }
+                const habit = {
+                    Days,
+                    title: thisuser.bad[title]["title"],
+                    total: thisuser.bad[title]["total"],
+                   //+ 1 properly updates counter
+                    counter: tcounter-1,
+                    details: thisuser.bad[title]["details"],
+                    category: thisuser.bad[title]["category"],
+                }
+                delete thisuser.bad[title]
+                console.log("altered bad object =", thisuser.bad)
+
+                const rslt ={
+                    ...thisuser.bad,
+                   [title] : habit
+                }
+                sendHabits(sessionStorage.getItem("id"), thisuser.good, rslt)
+            }
         }
 
     };

@@ -91,7 +91,7 @@ function Suggestions(){
             <div className="overall_list_container">
                 <ToastContainer limit={1}/>
                 <div className='top_page'>
-                    <Link to="/options" className='sug_back_link'>&lt; Back</Link>
+                    <Link to="/CSE442-542/2023-Spring/cse-442q/options" className='sug_back_link'>&lt; Back</Link>
                     <h1>Pick From Our Options!</h1>
                 </div>
                 <div className="list_container">

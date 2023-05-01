@@ -24,7 +24,7 @@ function Options(){
         <div className="options_container">
             <Navbar />
             <div id="link">
-                <Link to="/homepage" className='options_back_link'>&lt; Back</Link>
+                <Link to="/CSE442-542/2023-Spring/cse-442q/homepage" className='options_back_link'>&lt; Back</Link>
             </div>
             <div className="options_title_container">
                 <div className="preset_option_container" onClick={handlePreset}>
