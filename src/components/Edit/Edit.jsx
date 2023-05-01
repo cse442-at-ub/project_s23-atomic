@@ -27,7 +27,7 @@ function Edit() {
     // need to pass in correct habit information to this component 
     // we use useLocation to get this state
     const { state } = useLocation();
-    console.log("State incoming was: " + JSON.stringify(state));
+    // console.log("State incoming was: " + JSON.stringify(state));
 
     // TODO: set the initial state of the habit you are editing
     const [habit, setHabit] = useState({
@@ -57,10 +57,8 @@ function Edit() {
     const getDays = () => {
         var list = null;
         if (state.type === "Good") {
-            console.log("list is good");
             list = user.good;
         } else if (state.type === "Bad") {
-            console.log("list is bad");
             list = user.bad;
         } else {
             console.log("list was instead: " + list);
@@ -75,19 +73,38 @@ function Edit() {
     const getCounter = () => {
         var list = null;
         if (state.type === "Good") {
-            console.log("list is good");
             list = user.good;
         } else if (state.type === "Bad") {
-            console.log("list is bad");
             list = user.bad;
         } else {
             console.log("list was instead: " + list);
         }
         const title = state.title;
 
-        const retVal = list[title]["counter"];
-        console.log("getDays(): " + retVal);
+        console.log(JSON.stringify(user));
+        console.log(JSON.stringify(user.good));
+        // console.log();
+
+        const retVal = user.good[title]["counter"];
+        console.log("getCounter(): " + retVal);
         return retVal;
+    }
+
+    const deleteHabit = () => {
+        var list = null;
+        if (state.type === "Good") {
+            list = user.good;
+        } else if (state.type === "Bad") {
+            list = user.bad;
+        } else {
+            console.log("list was instead: " + list);
+        }
+        const title = state.title;
+
+        console.log("list before deletion is: " + JSON.stringify(list));
+
+        delete list[title];
+        console.log("list AFTER deletion is: " + JSON.stringify(list));
     }
 
     // Checks if the entered data is the same as what it was before
@@ -112,6 +129,10 @@ function Edit() {
         event.preventDefault();
 
         if (changedValues()) {
+
+            // First, delete the old habit copy
+            deleteHabit();
+
             // Obtain current_date
             let separator = "/"
             let newDate = new Date();
@@ -232,8 +253,9 @@ function Edit() {
                         <input type="submit" />
                     </div>
                 </form>
-                {/* <button onClick={() => changedValues()}>Check for changes</button> */}
                 <button onClick={() => getCounter()}>Get Counter</button>
+                <button onClick={() => deleteHabit()}>Del habit</button>
+                <button onClick={() => console.log("user.good was: " + JSON.stringify(user.good))}>user.good</button>
             </div>
         </>
     );
