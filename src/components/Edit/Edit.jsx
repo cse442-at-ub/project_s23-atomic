@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,7 @@ import '../CreateNew/createpage.css'; // Why is this needed for this page. For s
 import "../CreateNew/create.css"
 
 function Edit() {
-    const {user, good_habits, bad_habits,addGoodHabit,addBadHabit,sendHabits} = useContext(HabitContext);
+    const {user, good_habits, bad_habits, addGoodHabit, addBadHabit, sendHabits, getUserData} = useContext(HabitContext);
     const navigate = useNavigate();
 
     // const exampleHabit = { 
@@ -68,6 +68,14 @@ function Edit() {
             console.log("list was instead: " + list);
         }
     }
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            const data = await getUserData(sessionStorage.getItem("id"));
+        }, 1000);
+
+        return () => clearInterval(interval)
+    })
 
     // Checks if the entered data is the same as what it was before
     // Returns a Boolean

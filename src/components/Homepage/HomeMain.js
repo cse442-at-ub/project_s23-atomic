@@ -163,7 +163,7 @@ export default function HomeMain() {
             getCateogries();
   
             if (thisUser.id) {
-                console.log("user.good was: " + JSON.stringify(user.good));
+                // console.log("user.good was: " + JSON.stringify(user.good));
 
                 if(categories.includes("Health")) {
                     fillLists(user.good, "Health", setGoodHealth,"good");
