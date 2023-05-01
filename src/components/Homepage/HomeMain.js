@@ -37,7 +37,7 @@ export default function HomeMain() {
             pos = "Good";
             habit = user.good[habit_title];
         } else {
-            pos = "Harmful";
+            pos = "Bad";
             habit = user.bad[habit_title];
         }
         routeDetail(habit, pos);
