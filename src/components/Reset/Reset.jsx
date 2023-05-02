@@ -15,8 +15,8 @@ function Reset() {
 
   // use toastify to notify user on error for username or email that's already in use
   const notify = (error)=>{
-    if(error === "Username"){
-      toast.error('Username Does Not Exist!',{
+    if(error === "Email"){
+      toast.error('Email Does Not Exist!',{
           position: "top-center",
           autoClose: 1050,
           hideProgressBar: true,
@@ -26,42 +26,30 @@ function Reset() {
           progress: undefined,
           theme: "colored",
     })
-    }else{
-      toast.error('Incorrect Password',{
-          position: "top-center",
-          autoClose: 1050,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-      })
-    }   
+    }  
   }
 
   // use navigate uses Router to navigate to different paths
   const navigate = useNavigate();
-  const routeLogin = (id) =>{ 
-      let path = '/CSE442-542/2023-Spring/cse-442q/login'; 
-      navigate(path, {state: {user: id}});
+  const routeresetcode = (id, msg) =>{ 
+      let path = '/CSE442-542/2023-Spring/cse-442q/resetcode'; 
+      navigate(path, {state: {user: id, message: msg}});
   }
+  // const routeresetcode = (id) =>{ 
+  //   let path = '/CSE442-542/2023-Spring/cse-442q/resetcode'; 
+  //   navigate(path, {state: {user: id}});
+  // }
   const routeLanding = () =>{
     let path = '/CSE442-542/2023-Spring/cse-442q/';
     navigate(path)
   }
 
   // state variables for the form inputs: username, email, password, and confirm password
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   // functions to update the state variables when the user types in the form inputs
-  const changeUsername = (event) => { 
-    setUsername(event.target.value);
-  };
-
-  const changePassword = (event) => {
-    setPassword(event.target.value);
+  const changeEmail = (event) => { 
+    setEmail(event.target.value);
   };
 
   // function to handle the form submission
@@ -76,22 +64,18 @@ function Reset() {
   const makePost = async() => {
     await axios({
       method: "post",
-      //url: "http://localhost:8000/login.php"
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/login.php",
+      url: "http://localhost:8000/resetcode.php",
+      //url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/resetcode.php",
       data: {
-        username: username,
-        password: password,
+        email: email
       },
       headers: { "Content-Type": "multipart/form-data" },
     }).then(async function (response) {
       // php echos back message on response, successful response will contain user id
       const data = (response.data).split('\n');
-      if (data[1] === 'Invalid Password'){
-        console.log("invalid password");
-        notify("Password");
-      } else if (data[1] === 'Invalid Username'){
-        console.log("invalid username");
-        notify("Username");
+      if (data[1] === 'Invalid Email'){
+        console.log("invalid Email");
+        notify("Email");
       } else{
         // successful submit will navigate to next page
         console.log("success");
@@ -102,7 +86,8 @@ function Reset() {
         const user_info = await getUserData(data[1]);
 
         // setCookie("uid", username, 1);
-        // routeHomepage(parseInt(data[1]));
+         routeresetcode(parseInt(data[1]), parseInt(data[2]));
+        //  routeresetcode(parseInt(data[1]));
       }
     }).catch(function (error) {
       console.log("failed to send post request");
@@ -127,26 +112,8 @@ function Reset() {
                 <form method="post" onSubmit={handleSubmit}>
                     <div className="login-form-field">
                         <label>
-                            <h6>Username</h6>
-                            <input type="text" name="username" size="30" onChange={changeUsername} />
-                        </label>
-                    </div>
-                    <div className="login-form-field">
-                        <label>
-                            <h6>Current Password</h6>
-                            <input type="password" name="password" size="30" onChange={changePassword}/>
-                        </label>
-                    </div>
-                    <div className="login-form-field">
-                        <label>
-                            <h6>New Password</h6>
-                            <input type="password" name="password" size="30" onChange={changePassword}/>
-                        </label>
-                    </div>
-                    <div className="login-form-field">
-                        <label>
-                            <h6>Re-Enter New Password</h6>
-                            <input type="password" name="password" size="30" onChange={changePassword}/>
+                            <h6>Email</h6>
+                            <input type="text" name="username" size="30" onChange={changeEmail} />
                         </label>
                     </div>
                     <div id="login-submit">
