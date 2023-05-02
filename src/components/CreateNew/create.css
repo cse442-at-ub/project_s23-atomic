@@ -1,41 +1,57 @@
-#create-container {
+.create-container {
     margin: 100px 30% 50px 30%;
 
     text-align: left;
 }
 
-#create-container h2 {
+.create-container h2 {
     padding: 25px 0px 5px 0px;
     margin: 0px;
     text-align: left;
+
+    font-size: 40px;
+    font-weight: bold;
 }
 
-#create-container h3 {
+.create-container h3 {
     margin: 20px 0px 5px 0px;
 }
 
 /* Rest of Font Sizes */
-#create-container h3, #create-container select, #create-container input, #create-container textarea {
-    font-size: 24px;
+.create-container h3, .create-container select, .create-container input, .create-container textarea {
+    font-size: 18px;
 }
 
-#create-container input[type="text"] {
+.create-container h5 {
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.create-container input[type="text"] {
+    width: 70%;
+
     border: none;
     border-bottom: 2px solid black;
-
     border-radius: 0;
     background-color: #FFF4E2;
 
     padding: 10px;
     margin: 5px;
 }
-#create-container input[type="text"]:focus {
+.create-container input[type="text"]:focus {
     outline: none;
     border-bottom: 2px solid rgba(79, 98, 194, 0.75);
 }
 
+.create-container input[type="number"] {
+    height: 30px;
+    width: 50px;
+    align-self: center;
+}
 
-#create-container textarea {
+
+.create-container textarea {
     font-family: 'Inter', sans-serif;
 
     padding: 10px 15px;
@@ -47,28 +63,27 @@
     outline-color: rgba(79, 98, 194, 0.75);
 }
 
-#categories {
+.categories {
     display: flex;
     gap: 10px;
 }
 
-#create-container select {
+.create-container select {
     outline-color: rgba(79, 98, 194, 0.75);
 
 }
 
-#counter {
+.counter {
     display: flex;
     gap: 10px;
 }
 
 
-.habit-submit-div {
+.habit-submit-container {
     text-align: center;
 }
 
-#create-container input[type="submit"] {
+.create-container input[type="submit"] {
     width: 50%;
-
-    margin: 75px 0px;
+    border: none;
 }
