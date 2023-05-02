@@ -123,10 +123,18 @@ export default function Stats() {
                                     logs: user.good[habit].Days[num]
                                 }
                             )
+                        } else {
+                            return (
+                                {
+                                    day: "Today",
+                                    logs: user.good[habit].counter
+                                }
+                            )
                         }
                     })
                 )
-                setData(habitData.slice(1));
+                // setData(habitData.slice(1));
+                setData(habitData);
             }
         }
         // if the habit type is bad, get all the bad habits
@@ -153,10 +161,18 @@ export default function Stats() {
                                     logs: user.bad[habit].Days[num]
                                 }
                             )
+                        } else {
+                            return (
+                                {
+                                    day: "Today",
+                                    logs: user.bad[habit].counter
+                                }
+                            )
                         }
                     })
                 )
-                setData(habitData.slice(1));
+                // setData(habitData.slice(1));
+                setData(habitData);
             }
         }
 
