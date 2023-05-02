@@ -117,13 +117,13 @@ function Create() {
     return (
         <>
             <Navbar/>
-            <div id="create-container">
+            <div className="create-container">
                 <h2>Create New Habit</h2>
                 <form onSubmit={submitHandler}>
-                    <div id="categories">
+                    <div className="categories">
                         <div>
                             <h3>Category</h3>
-                            <select name="" id="" onClick={setCategory} required>
+                            <select name="" className="" onClick={setCategory} required>
                                 <option value="Health">Health</option>
                                 <option value="Work">Work</option>
                                 <option value="School">School</option>
@@ -134,22 +134,22 @@ function Create() {
                         </div>
                         <div>
                             <h3>Type</h3>
-                            <select name="" id="" onClick={setType} required>
+                            <select name="" className="" onClick={setType} required>
                                 <option value="Good">Good</option>
                                 <option value="Bad">Bad</option>
                             </select>
                         </div>
                     </div>
-                    <div id="title">
+                    <div className="title">
                         <h3>Title</h3>
                         <input onChange={setTitle} type="text" required/>
                     </div>
-                    <div id="details">
+                    <div className="details">
                         <h3>Details</h3>
                         {/* <input onChange={setDetails} type="text"/> */}
                         <textarea onChange={setDetails} name="details" rows="4"></textarea>
                     </div>
-                    <div id="counter">
+                    <div className="counter">
                         <h3>Daily Goal Counter</h3>
                         <input
                             type="number" onChange={setTotal} required

@@ -288,6 +288,22 @@ function Detail(){
     //     setTcounter(0)
     // };
 
+    const deleteHabit = () => {
+        console.log("deleteHabit() was called");
+
+        const title = state.title;
+        var list = null;
+        if (state.type === "Good") {
+            delete user.good[title];
+            sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
+        } else if (state.type === "Bad") {
+            delete user.bad[title];
+            sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
+        } else {
+            console.log("list was instead: " + list);
+        }
+    }
+
     useEffect(() => {
         if (sessionStorage.getItem("added") === "true"){
             sessionStorage.setItem("added","false");
@@ -324,7 +340,7 @@ function Detail(){
                         </div>
                         <label> / {state.total}</label>
                     </div>
-                    <button id="delete_button">Delete</button>
+                    <button id="delete_button" onClick={() => deleteHabit()}>Delete</button>
                 </div>
             </div>
         </div>    

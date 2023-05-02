@@ -175,14 +175,14 @@ function Edit() {
     return (
         <>
             <Navbar/>
-            <div id="create-container">
+            <div className="create-container">
                 <ToastContainer limit={1}/>
                 <h2>Edit Habit</h2>
                 <form onSubmit={submitHandler}>
-                    <div id="categories">
+                    <div className="categories">
                         <div>
                             <h5>Category</h5>
-                            <select name="" id="" onClick={setCategory} defaultValue={state.category} required>
+                            <select name="" className="" onClick={setCategory} defaultValue={state.category} required>
                                 <option value="Health">Health</option>
                                 <option value="Work">Work</option>
                                 <option value="School">School</option>
@@ -193,21 +193,21 @@ function Edit() {
                         </div>
                         <div>
                             <h5>Type</h5>
-                            <select name="" id="" onClick={setType} defaultValue={state.type} required>
+                            <select name="" className="" onClick={setType} defaultValue={state.type} required>
                                 <option value="Good">Good</option>
                                 <option value="Bad">Bad</option>
                             </select>
                         </div>
                     </div>
-                    <div id="title">
+                    <div className="title">
                         <h5>Title</h5>
                         <input onChange={setTitle} type="text" defaultValue={state.title} required/>
                     </div>
-                    <div id="details">
+                    <div className="details">
                         <h5>Details</h5>
                         <textarea onChange={setDetails} name="details" defaultValue={state.details} rows="4"></textarea>
                     </div>
-                    <div id="counter">
+                    <div className="counter">
                         <h5>Daily Goal Counter</h5>
                         <input
                             type="number" onChange={setTotal}  defaultValue={state.total} required
@@ -224,8 +224,8 @@ function Edit() {
                     </div>
                 </form>
                 {/* <button onClick={() => getCounter()}>Get Counter</button> */}
-                <button onClick={() => deleteHabit()}>Del habit</button>
-                <button onClick={() => console.log("user.good was: " + JSON.stringify(user.good))}>user.good</button>
+                {/* <button onClick={() => deleteHabit()}>Del habit</button>
+                <button onClick={() => console.log("user.good was: " + JSON.stringify(user.good))}>user.good</button> */}
             </div>
         </>
     );
