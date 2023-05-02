@@ -60,10 +60,10 @@ function Edit() {
         var list = null;
         if (state.type === "Good") {
             delete user.good[title];
-            sendHabits(sessionStorage.getItem("className"), user.good, user.bad); // Push changes to the database
+            sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
         } else if (state.type === "Bad") {
             delete user.bad[title];
-            sendHabits(sessionStorage.getItem("className"), user.good, user.bad); // Push changes to the database
+            sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
         } else {
             console.log("list was instead: " + list);
         }
@@ -71,7 +71,7 @@ function Edit() {
 
     useEffect(() => {
         const interval = setInterval(async () => {
-            const data = await getUserData(sessionStorage.getItem("className"));
+            const data = await getUserData(sessionStorage.getItem("id"));
         }, 1000);
 
         return () => clearInterval(interval)
@@ -138,9 +138,9 @@ function Edit() {
     }
 
     const submit = async(info, type) => {
-        // console.log(user.className)
-        // console.log(sessionStorage.getItem("className"))
-        const update = await sendHabits(sessionStorage.getItem("className"),user.good,user.bad);
+        // console.log(user.id)
+        // console.log(sessionStorage.getItem("id"))
+        const update = await sendHabits(sessionStorage.getItem("id"),user.good,user.bad);
         if (update){
             console.log("About to run routeDetail()");
             routeDetail(info, type);
@@ -175,14 +175,14 @@ function Edit() {
     return (
         <>
             <Navbar/>
-            <div className="create-container">
+            <div id="create-container">
                 <ToastContainer limit={1}/>
                 <h2>Edit Habit</h2>
                 <form onSubmit={submitHandler}>
-                    <div className="categories">
+                    <div id="categories">
                         <div>
                             <h5>Category</h5>
-                            <select name="" className="" onClick={setCategory} defaultValue={state.category} required>
+                            <select name="" id="" onClick={setCategory} defaultValue={state.category} required>
                                 <option value="Health">Health</option>
                                 <option value="Work">Work</option>
                                 <option value="School">School</option>
@@ -193,21 +193,21 @@ function Edit() {
                         </div>
                         <div>
                             <h5>Type</h5>
-                            <select name="" className="" onClick={setType} defaultValue={state.type} required>
+                            <select name="" id="" onClick={setType} defaultValue={state.type} required>
                                 <option value="Good">Good</option>
                                 <option value="Bad">Bad</option>
                             </select>
                         </div>
                     </div>
-                    <div className="title">
+                    <div id="title">
                         <h5>Title</h5>
                         <input onChange={setTitle} type="text" defaultValue={state.title} required/>
                     </div>
-                    <div className="details">
+                    <div id="details">
                         <h5>Details</h5>
                         <textarea onChange={setDetails} name="details" defaultValue={state.details} rows="4"></textarea>
                     </div>
-                    <div className="counter">
+                    <div id="counter">
                         <h5>Daily Goal Counter</h5>
                         <input
                             type="number" onChange={setTotal}  defaultValue={state.total} required
@@ -224,8 +224,8 @@ function Edit() {
                     </div>
                 </form>
                 {/* <button onClick={() => getCounter()}>Get Counter</button> */}
-                {/* <button onClick={() => deleteHabit()}>Del habit</button>
-                <button onClick={() => console.log("user.good was: " + JSON.stringify(user.good))}>user.good</button> */}
+                <button onClick={() => deleteHabit()}>Del habit</button>
+                <button onClick={() => console.log("user.good was: " + JSON.stringify(user.good))}>user.good</button>
             </div>
         </>
     );

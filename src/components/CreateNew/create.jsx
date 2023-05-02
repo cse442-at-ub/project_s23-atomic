@@ -84,9 +84,9 @@ function Create() {
     }
 
     const submit = async(info, type) => {
-        // console.log(user.className)
-        // console.log(sessionStorage.getItem("className"))
-        const update = await sendHabits(sessionStorage.getItem("className"),user.good,user.bad);
+        // console.log(user.id)
+        // console.log(sessionStorage.getItem("id"))
+        const update = await sendHabits(sessionStorage.getItem("id"),user.good,user.bad);
         if (update){
             console.log("About to run routeDetail()");
             routeDetail(info, type);
@@ -117,13 +117,13 @@ function Create() {
     return (
         <>
             <Navbar/>
-            <div className="create-container">
+            <div id="create-container">
                 <h2>Create New Habit</h2>
                 <form onSubmit={submitHandler}>
-                    <div className="categories">
+                    <div id="categories">
                         <div>
                             <h3>Category</h3>
-                            <select name="" className="" onClick={setCategory} required>
+                            <select name="" id="" onClick={setCategory} required>
                                 <option value="Health">Health</option>
                                 <option value="Work">Work</option>
                                 <option value="School">School</option>
@@ -134,22 +134,22 @@ function Create() {
                         </div>
                         <div>
                             <h3>Type</h3>
-                            <select name="" className="" onClick={setType} required>
+                            <select name="" id="" onClick={setType} required>
                                 <option value="Good">Good</option>
                                 <option value="Bad">Bad</option>
                             </select>
                         </div>
                     </div>
-                    <div className="title">
+                    <div id="title">
                         <h3>Title</h3>
                         <input onChange={setTitle} type="text" required/>
                     </div>
-                    <div className="details">
+                    <div id="details">
                         <h3>Details</h3>
                         {/* <input onChange={setDetails} type="text"/> */}
                         <textarea onChange={setDetails} name="details" rows="4"></textarea>
                     </div>
-                    <div className="counter">
+                    <div id="counter">
                         <h3>Daily Goal Counter</h3>
                         <input
                             type="number" onChange={setTotal} required
@@ -161,7 +161,7 @@ function Create() {
                             // }}
                         />
                     </div>
-                    <div className="habit-submit-container">
+                    <div className="habit-submit-div">
                         <input type="submit" />
                     </div>
                 </form>
