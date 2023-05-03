@@ -85,4 +85,5 @@
 
 .create-container input[type="submit"] {
     width: 50%;
+    border: none;
 }
