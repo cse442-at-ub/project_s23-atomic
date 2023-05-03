@@ -260,6 +260,7 @@ export default function Stats() {
     }, [habitType, habit])
     
 
+    
     // use effect will run once to set the title of the page
 
     useEffect(() => {

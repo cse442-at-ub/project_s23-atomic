@@ -63,7 +63,7 @@ function Resetcode() {
   return(
       <>
       <div id="login-back-link">
-          <button id="back_button" onClick={routeLanding}>Back</button>
+        <button id="back_buton" onClick={routeLanding}>&lt; Back</button>
       </div>
       <div className="login-container">
           <div id="login-main">

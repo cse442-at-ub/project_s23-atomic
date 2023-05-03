@@ -296,9 +296,11 @@ function Detail(){
         if (state.type === "Good") {
             delete user.good[title];
             sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
+            routeHome();
         } else if (state.type === "Bad") {
             delete user.bad[title];
             sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
+            routeHome();
         } else {
             console.log("list was instead: " + list);
         }
