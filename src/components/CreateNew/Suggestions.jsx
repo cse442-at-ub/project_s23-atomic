@@ -60,7 +60,7 @@ function Suggestions(){
                 submit(habit, pos)
             }
         }else{
-            pos = "Harmful";
+            pos = "Bad";
             habit = bad_habits[habit_title];
             if (user.bad[habit_title] !== undefined){
                 notifyExists();

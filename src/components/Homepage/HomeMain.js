@@ -37,7 +37,7 @@ export default function HomeMain() {
             pos = "Good";
             habit = user.good[habit_title];
         } else {
-            pos = "Harmful";
+            pos = "Bad";
             habit = user.bad[habit_title];
         }
         routeDetail(habit, pos);
@@ -163,6 +163,8 @@ export default function HomeMain() {
             getCateogries();
   
             if (thisUser.id) {
+                // console.log("user.good was: " + JSON.stringify(user.good));
+
                 if(categories.includes("Health")) {
                     fillLists(user.good, "Health", setGoodHealth,"good");
                     fillLists(user.bad, "Health", setBadHealth,"bad");
