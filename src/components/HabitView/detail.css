@@ -256,9 +256,6 @@
 /* we want to display different colors for different types */
 /* className will match the type title to pull correct CSS */
 
-.Harmful {
-    background-color: #ff9b9b;
-}
 .Bad {
     background-color: #ff9b9b;
 }
