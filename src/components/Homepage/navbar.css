@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+nav {
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+
+    width: 100%;
+    height: 100px;
+    top: 0px;
+    z-index: 1;
+
+    font-family: 'Inter', sans-serif;
+
+    background: #F69335;
+}
+
+.app_logo_div {
+    display: flex;
+    flex-direction: row;
+    font-size: 40px;
+    padding: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    text-align:left;
+
+    height: 100%;
+    width: 100%;
+
+    margin-left: 35px;
+}
+
+.app_logo_div img {
+    height: 60px;
+    width: 65px;
+}
+
+.app_logo_div :hover {
+    cursor: pointer;
+}
+
+#name_nav{
+    display: flex;
+    flex-direction: column;
+}
+
+.app_logo_div label{
+    margin-left: 22px;
+    align-items:flex-start;
+    justify-content: flex-start;
+    color: white;
+}
+#sub_label{
+    font-size: 22px;
+}
+
+.app_button_div {
+    display : flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    width : 100%;
+
+}
+
+.app_button_div p {
+    margin: 20px;
+    cursor: pointer;
+
+    font-size: 34px;
+    color: white;
+}
+
+.profile_nav_div {
+    display : flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    width : 100%;
+    margin-right: 35px;
+}
+
+.profile_nav_div img {
+
+    height: 88px;
+    width: 95px;
+
+    border-radius: 50%;
+    border: 2px solid white;
+
+    margin-left: 10px;
+    margin-right: 25px;
+}
+
+.profile_nav_div h2 {
+    font-size: 34px;
+    color: white;
+    margin-right: 10px;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-y: scroll;
+    text-align: center;
+
+}
+.profile_nav_div h2:hover {
+    cursor:pointer;
+}
+
+.nav_dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav_logout {
+    display: none;
+    position: absolute;
+    background-color: #F69335;
+    min-width: 160px;
+    height: 55px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+    z-index: 1;
+}
+
+.nav_logout p {
+    color: white;
+    display: block;
+
+    font-size: 30px;
+    text-align: center;
+    margin: 5px;
+
+}
+
+.nav_logout p:hover {
+    cursor: pointer;
+}
+
+.nav_dropdown:hover .nav_logout {
+    display: block;
+}
+
+.nav_dropdown:hover .nav_button_div p {
+    color: #F69335;
+}
+
+#current_tab {
+    text-decoration: underline;
+}
+
+
+@media screen and (max-width: 900px) {
+
+    .app_logo_div {
+        font-size: 14px;
+        width: 70%;
+        margin-left: 10px;
+        padding: 5px;
+    }
+
+    .app_logo_div img {
+        height: 30px;
+        width: 30px;
+        margin: 0px;
+        
+    }
+
+    .app_logo_div label {
+        font-size: 14px;
+    }
+    #sub_label {
+        font-size: 10px;
+    }
+
+    .app_button_div p {
+        font-size: 20px;
+    }
+
+    .profile_nav_div img {
+        height: 40px;
+        width: 40px;
+        margin: 5px;
+    }
+
+    .profile_nav_div h2 {
+        font-size: 20px;
+    }
+
+    .nav_logout p {
+        font-size: 20px;
+        text-align: center;
+    }
+    .nav_logout {
+        height: 40px;
+        min-width: 130px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+    
+}

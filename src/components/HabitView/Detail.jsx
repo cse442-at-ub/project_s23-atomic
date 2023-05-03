@@ -84,6 +84,7 @@ function Detail(){
         await axios({
            method: "post",
            url: "http://localhost:8000/updatehabit.php",
+        // url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/updatehabit.php",
            data: {
               id: id,
               counter: tcounter,
@@ -120,7 +121,6 @@ function Detail(){
                 }
         })
     }
-
 
     const increment = async() => {
         //console.log(state.title);
@@ -296,9 +296,11 @@ function Detail(){
         if (state.type === "Good") {
             delete user.good[title];
             sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
+            routeHome();
         } else if (state.type === "Bad") {
             delete user.bad[title];
             sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
+            routeHome();
         } else {
             console.log("list was instead: " + list);
         }
@@ -310,6 +312,11 @@ function Detail(){
             notify();
         }
       }, []);
+
+    useEffect(() => {
+        // set document title
+        document.title = "Habit Tracker - Details";
+    }, []);
 
     return(
         <div className="detail_wrapper">

@@ -72,7 +72,7 @@ function Edit() {
     useEffect(() => {
         const interval = setInterval(async () => {
             const data = await getUserData(sessionStorage.getItem("id"));
-        }, 1000);
+        }, 200);
 
         return () => clearInterval(interval)
     })

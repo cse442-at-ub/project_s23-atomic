@@ -140,3 +140,22 @@
     cursor: pointer;
     transform: translateX(5px);
 }
+
+@media screen and (max-width: 600px) {
+    .mainContainer {
+        margin-top: 20%;
+    }
+    .date_container {
+        width : 100%;
+    }
+    .createButton {
+        width: 80%;
+        height: 70px;
+        font-size: x-large;
+    }
+
+    .habit_container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

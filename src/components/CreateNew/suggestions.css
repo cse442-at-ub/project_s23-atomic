@@ -1,6 +1,8 @@
 .preset_container {
-    display: flex;
     color: rgba(79, 98, 194);
+
+    width: 100%;
+    height: 100%;
 }
 .overall_list_container {
     display: flex;
@@ -30,6 +32,8 @@
     text-align: left;
     text-decoration: none;
     color: rgba(79, 98, 194);
+
+    width: 8%;
 }
 .sug_back_link:hover{
     text-decoration: underline;
@@ -98,7 +102,7 @@
 
 @media screen and (max-width: 600px) {
     .overall_list_container{
-        margin-top: 16%;
+        margin-top: 23%;
     }
     .list_container {
         margin-top: 10%;
@@ -108,5 +112,9 @@
     .category_wrapper {
         width: 100%;
         height: 100%;
+    }
+
+    .sug_back_link {
+        width: 30%;
     }
 }

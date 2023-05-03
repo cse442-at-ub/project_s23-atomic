@@ -93,7 +93,7 @@ function Login() {
       // console.log("cookie exists")
       // get users data from database and store in context
       const request = await getID(userID);
-      // console.log(request)
+      console.log(request)
       // set correct session storage id
       sessionStorage.setItem("id", request.id);
       navigate("/CSE442-542/2023-Spring/cse-442q/homepage");
@@ -165,7 +165,7 @@ function Login() {
   return(
       <>
       <div id="login-back-link">
-          <button id="back_button" onClick={routeLanding}>Back</button>
+        <button id="back_buton" onClick={routeLanding}>&lt; Back</button>
       </div>
       <div className="login-container">
           <div id="login-main">

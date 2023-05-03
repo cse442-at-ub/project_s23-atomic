@@ -71,7 +71,7 @@ function Reenter() {
     await axios({
       method: "post",
       url: "http://localhost:8000/reenter.php",
-      //url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/resetcode.php",
+      //url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/reenter.php",
       data: {
         username: username,
         password: password
@@ -105,7 +105,7 @@ function Reenter() {
   return(
       <>
       <div id="login-back-link">
-          <button id="back_button" onClick={routeLanding}>Back</button>
+        <button id="back_buton" onClick={routeLanding}>&lt; Back</button>
       </div>
       <div className="login-container">
           <div id="login-main">

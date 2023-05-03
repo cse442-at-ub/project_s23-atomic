@@ -1,7 +1,7 @@
 import React from 'react';
 import './options.css';
 import Navbar from '../Homepage/Navbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link} from "react-router-dom";
 
 function Options(){
@@ -18,6 +18,11 @@ function Options(){
     const handleCustom = () => {
         navigate('/CSE442-542/2023-Spring/cse-442q/create');
     }
+
+    useEffect(() => {
+        // set document title
+        document.title = "Create New Habit";
+    }, []);
 
 
     return(
