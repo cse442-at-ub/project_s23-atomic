@@ -140,8 +140,8 @@ function Signin() {
   const makePost = async() => {
     await axios({
       method: "post",
-      //url: "http://localhost:8000/insert.php",
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/insert.php",
+      url: "http://localhost:8000/insert.php",
+      // url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/insert.php",
       data: {
         username: username,
         email: email,
@@ -209,6 +209,23 @@ function Signin() {
   }
 
   handleErrors();
+
+  // function to call the php script to send reminders
+  function sendReminderEmails() {
+    fetch('emailReminder.php')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to send reminder emails');
+        }
+        console.log('Reminder emails sent successfully');
+      })
+      .catch(error => {
+        console.error('Error sending reminder emails:', error);
+      });
+  }
+
+  sendReminderEmails();
+  
 
   useEffect(() => {
     document.title = "Sign Up";  

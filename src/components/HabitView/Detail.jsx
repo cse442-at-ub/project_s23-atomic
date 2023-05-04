@@ -16,6 +16,14 @@ function Detail(){
         let path = '/CSE442-542/2023-Spring/cse-442q/homepage'
         navigate(path)
     }
+
+    // Used preliminarly before routeDetail data transfer was written
+    // const routeEditHabit = () =>{
+    //     let path = '/CSE442-542/2023-Spring/cse-442q/edit'
+    //     navigate(path)
+    // }
+
+
     // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
     //need to pass in correct habit information to this component 
     // added will be a boolean to keep track of when a user gets sent to the page
@@ -23,6 +31,39 @@ function Detail(){
     // if false, regular habit information will be displayed with no success message
     // we use useLocation to get this state
     const { state } = useLocation();
+
+    // This is for navigating to the Edit page
+    // It gets saves the data that this Detail.jsx directly recieves from the first routDetail() call
+    const routeEdit = () => {
+        const n = state.title;
+        const c = state.category;
+        const d = state.details;
+        const sum = state.counter;
+        const t = state.total;
+        const type = state.type;
+        const days = getDays();
+        const path = '/CSE442-542/2023-Spring/cse-442q/edit';
+        
+        sessionStorage.setItem("added","true")
+        navigate(path, {state:{title:n, category:c, details:d, counter:sum, total:t, type:type, days:days}});
+    }
+
+    const getDays = () => {
+        var list = null; // WARNING: This is creating a COPY, not accessing user.good directly
+        if (state.type === "Good") {
+            list = user.good;
+        } else if (state.type === "Bad") {
+            list = user.bad;
+        } else {
+            console.log("list was instead: " + list);
+        }
+        const title = state.title;
+
+        const retVal = list[title]["Days"];
+        // console.log("getDays(): " + JSON.stringify(retVal));
+        return retVal;
+    }
+
 
     // notify user that habit was successfully added if coming from creating/adding habit
     const notify = () => {
@@ -43,6 +84,7 @@ function Detail(){
         await axios({
            method: "post",
            url: "http://localhost:8000/updatehabit.php",
+        // url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/updatehabit.php",
            data: {
               id: id,
               counter: tcounter,
@@ -80,20 +122,28 @@ function Detail(){
         })
     }
 
-
     const increment = async() => {
         //console.log(state.title);
         setTcounter(tcounter+1);
         const data = await getUserData(sessionStorage.getItem("id"));
         let thisuser = data
+        let separator = "/"
+        let newDate = new Date();
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
         // console.log(thisuser.good)
         // console.log("originals =", thisuser.good[state.title])
         // console.log(tcounter)
-
+        const day0={
+            date: current_date,
+            counter: tcounter+1
+        }
         //copy of original habit but with updated counter
         if(state.type === "Good"){
             const Days ={
-                0: tcounter + 1,
+                0: day0,
                 1: thisuser.good[state.title]["Days"][1],
                 2: thisuser.good[state.title]["Days"][2],
                 3: thisuser.good[state.title]["Days"][3],
@@ -123,7 +173,7 @@ function Detail(){
             sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
         }else{
             const Days ={
-                0: tcounter + 1,
+                0: day0,
                 1: thisuser.bad[state.title]["Days"][1],
                 2: thisuser.bad[state.title]["Days"][2],
                 3: thisuser.bad[state.title]["Days"][3],
@@ -156,10 +206,23 @@ function Detail(){
         setTcounter(tcounter-1);
         const data = await getUserData(sessionStorage.getItem("id"));
         let thisuser = data
+        let separator = "/"
+        let newDate = new Date();
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+        // console.log(thisuser.good)
+        // console.log("originals =", thisuser.good[state.title])
+        // console.log(tcounter)
+        const day0={
+            date: current_date,
+            counter: tcounter-1
+        }
         if (tcounter > 0){
             if(state.type === "Good"){
                 const Days ={
-                    0: tcounter - 1,
+                    0: day0,
                     1: thisuser.good[state.title]["Days"][1],
                     2: thisuser.good[state.title]["Days"][2],
                     3: thisuser.good[state.title]["Days"][3],
@@ -189,7 +252,7 @@ function Detail(){
                 sendHabits(sessionStorage.getItem("id"), rslt, thisuser.bad)
             }else{
                 const Days ={
-                    0: tcounter - 1,
+                    0: day0,
                     1: thisuser.bad[state.title]["Days"][1],
                     2: thisuser.bad[state.title]["Days"][2],
                     3: thisuser.bad[state.title]["Days"][3],
@@ -225,12 +288,35 @@ function Detail(){
     //     setTcounter(0)
     // };
 
+    const deleteHabit = () => {
+        console.log("deleteHabit() was called");
+
+        const title = state.title;
+        var list = null;
+        if (state.type === "Good") {
+            delete user.good[title];
+            sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
+            routeHome();
+        } else if (state.type === "Bad") {
+            delete user.bad[title];
+            sendHabits(sessionStorage.getItem("id"), user.good, user.bad); // Push changes to the database
+            routeHome();
+        } else {
+            console.log("list was instead: " + list);
+        }
+    }
+
     useEffect(() => {
         if (sessionStorage.getItem("added") === "true"){
             sessionStorage.setItem("added","false");
             notify();
         }
       }, []);
+
+    useEffect(() => {
+        // set document title
+        document.title = "Habit Tracker - Details";
+    }, []);
 
     return(
         <div className="detail_wrapper">
@@ -240,7 +326,7 @@ function Detail(){
                 <div className='back_link' onClick={routeHome}>&lt; Back to Home</div>
                 <div className='column_1'>
                     <h1 className="detail-title">{state.title}</h1>
-                    <button className='edit_button'>Edit</button>
+                    <button className='edit_button' onClick={() => routeEdit()}>Edit</button>
                 </div>
                 <div className='column_2'>
                     <div className='category_container'>
@@ -261,7 +347,7 @@ function Detail(){
                         </div>
                         <label> / {state.total}</label>
                     </div>
-                    <button id="delete_button">Delete</button>
+                    <button id="delete_button" onClick={() => deleteHabit()}>Delete</button>
                 </div>
             </div>
         </div>    

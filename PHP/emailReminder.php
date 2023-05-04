@@ -1,9 +1,9 @@
 <?php
 // Connect to the database
-$servername = "oceanus.cse.buffalo.edu:3306";
+$servername = "";
 $username = "";
 $password = "";
-$dbname = "cse442_2023_spring_team_q_db";
+$dbname = "";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -17,6 +17,7 @@ $sql = "SELECT email FROM users";
 $result = $conn->query($sql);
 
 // Loop through the email addresses and send an email to each one
+
 while ($row = $result->fetch_assoc()) {
   $to = $row['email'];
   $subject = "Reminder from Habit Tracker!";

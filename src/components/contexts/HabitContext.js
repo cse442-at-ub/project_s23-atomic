@@ -28,6 +28,256 @@ export const HabitProvider = ({ children }) => {
    let year = newDate.getFullYear();
    let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
 
+   // function that calculates how far back the current date is from the date in the queue
+   // this will be used to determine how many days to move up the queue
+   const calculateDays = (todaysDate, queueDate) => {
+      const today = new Date(todaysDate);
+      const queue = new Date(queueDate);
+      // console.log(today)
+      // console.log(queue)
+      let difference = today - queue;
+      let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      // console.log(days)
+      return days;
+   }
+
+
+   // function to move counter data up the queue and reset the current day
+   // takes in the current date and the type of habit
+   const moveQueue = async(todayDate, type) => {
+      let trackChange = false;
+      if(type === "Good"){ 
+         Object.keys(user.good).map((habit) => {
+            // calculate how many days the current date is from the date in the queue
+            let days = calculateDays(todayDate, user.good[habit].Days[0].date);
+            // save day object
+
+            // save counter data from other days
+            let day1 = user.good[habit].Days[1];
+            let day2 = user.good[habit].Days[2];
+            let day3 = user.good[habit].Days[3];
+            let day4 = user.good[habit].Days[4];
+            let day5 = user.good[habit].Days[5];
+            let day6 = user.good[habit].Days[6];
+            // day 7 gets pushed off the queue
+
+            // console.log(days)
+
+            // if the current day is not the same as the day in the queue
+            // if days is 0, then the current day is the same as the day in the queue
+            // if days is 1, then the current day is 1 day ahead of the day in the queue
+            if(days > 0 && days <= 7){
+               trackChange = true;
+               if (days === 1) {
+                  // move counter data up the queue
+                  user.good[habit].Days[1] = user.good[habit].Days[0].counter;
+                  user.good[habit].Days[2] = day1;
+                  user.good[habit].Days[3] = day2;
+                  user.good[habit].Days[4] = day3;
+                  user.good[habit].Days[5] = day4;
+                  user.good[habit].Days[6] = day5;
+                  user.good[habit].Days[7] = day6;
+
+                  // reset current day
+                  user.good[habit].Days[0].date = todayDate;
+                  user.good[habit].Days[0].counter = 0;
+                  user.good[habit].counter = 0;
+               } else{
+                  if(days < 4){
+                     if (days === 2){
+                        // move counter data up the queue
+                        user.good[habit].Days[1] = 0;
+                        user.good[habit].Days[2] = user.good[habit].Days[0].counter;
+                        user.good[habit].Days[3] = day1;
+                        user.good[habit].Days[4] = day2;
+                        user.good[habit].Days[5] = day3;
+                        user.good[habit].Days[6] = day4;
+                        user.good[habit].Days[7] = day5;
+
+                        // reset current day
+                        user.good[habit].Days[0].date = todayDate;
+                        user.good[habit].Days[0].counter = 0;
+                        user.good[habit].counter = 0;
+                     } else if (days === 3) {
+                        // move counter data up the queue
+                        user.good[habit].Days[1] = 0;
+                        user.good[habit].Days[2] = 0;
+                        user.good[habit].Days[3] = user.good[habit].Days[0].counter;
+                        user.good[habit].Days[4] = day1;
+                        user.good[habit].Days[5] = day2;
+                        user.good[habit].Days[6] = day3;
+                        user.good[habit].Days[7] = day4;
+
+                        // reset current day
+                        user.good[habit].Days[0].date = todayDate;
+                        user.good[habit].Days[0].counter = 0;
+                        user.good[habit].counter = 0;
+                     }
+                  } else{
+                     for(let i=1; i < 8 ; i++) {
+                        // move counter data up the queue according to the number of days
+                        // i.e: if days is 3, then move the current day counter data up the queue 3 times
+                        // only move the counter data up the queue if the new index is less than 8
+                        if ((i + days) < 8) {
+                           user.good[habit].Days[i + days] = user.good[habit].Days[i];
+                        }
+                     }
+
+                     // move counter data up the queue
+                     user.good[habit].Days[days] = user.good[habit].Days[0].counter;
+
+                     // fill in days before the moved data with 0
+                     for(let i=1; i < days ; i++) {
+                        // fill in missing days with 0
+                        user.good[habit].Days[i] = 0;
+                     }
+
+                     // reset current day
+                     user.good[habit].Days[0].date = todayDate;
+                     user.good[habit].Days[0].counter = 0;
+                     user.good[habit].counter = 0;
+                  }
+               }
+            } 
+            // if the current day is more than 7 days ahead of the day in the queue
+            // reset all counter data
+            else if (days > 7) {
+               trackChange = true;
+               // reset all counter data
+               user.good[habit].Days[0].date = todayDate;
+               user.good[habit].Days[0].counter = 0;
+               user.good[habit].counter = 0;
+
+               user.good[habit].Days[1] = 0;
+               user.good[habit].Days[2] = 0;
+               user.good[habit].Days[3] = 0;
+               user.good[habit].Days[4] = 0;
+               user.good[habit].Days[5] = 0;
+               user.good[habit].Days[6] = 0;
+               user.good[habit].Days[7] = 0;
+            }
+            // console.log(user.good[habit].Days)
+         })    
+      } else {
+         Object.keys(user.bad).map((habit) => {
+            let days = calculateDays(todayDate, user.bad[habit].Days[0].date);
+
+            // save counter data from other days
+            let day1 = user.bad[habit].Days[1];
+            let day2 = user.bad[habit].Days[2];
+            let day3 = user.bad[habit].Days[3];
+            let day4 = user.bad[habit].Days[4];
+            let day5 = user.bad[habit].Days[5];
+            let day6 = user.bad[habit].Days[6];
+            // day 7 gets pushed off the queue
+
+            // if the current day is not the same as the day in the queue
+            // if days is 0, then the current day is the same as the day in the queue
+            // if days is 1, then the current day is 1 day ahead of the day in the queue
+            if(days > 0 && days <= 7){
+               trackChange = true;
+               if (days === 1) {
+                  // move counter data up the queue
+                  user.bad[habit].Days[1] = user.bad[habit].Days[0].counter;
+                  user.bad[habit].Days[2] = day1;
+                  user.bad[habit].Days[3] = day2;
+                  user.bad[habit].Days[4] = day3;
+                  user.bad[habit].Days[5] = day4;
+                  user.bad[habit].Days[6] = day5;
+                  user.bad[habit].Days[7] = day6;
+
+                  // reset current day
+                  user.bad[habit].Days[0].date = todayDate;
+                  user.bad[habit].Days[0].counter = 0;
+                  user.bad[habit].counter = 0;
+               } else{
+                  if(days < 4){
+                     if(days === 2) {
+                        // move counter data up the queue
+                        user.bad[habit].Days[1] = 0;
+                        user.bad[habit].Days[2] = user.bad[habit].Days[0].counter;
+                        user.bad[habit].Days[3] = day1;
+                        user.bad[habit].Days[4] = day2;
+                        user.bad[habit].Days[5] = day3;
+                        user.bad[habit].Days[6] = day4;
+                        user.bad[habit].Days[7] = day5;
+
+                        // reset current day
+                        user.bad[habit].Days[0].date = todayDate;
+                        user.bad[habit].Days[0].counter = 0;
+                        user.bad[habit].counter = 0;
+
+                     } else if (days === 3) {
+                        // move counter data up the queue
+                        user.bad[habit].Days[1] = 0;
+                        user.bad[habit].Days[2] = 0;
+                        user.bad[habit].Days[3] = user.bad[habit].Days[0].counter;
+                        user.bad[habit].Days[4] = day1;
+                        user.bad[habit].Days[5] = day2;
+                        user.bad[habit].Days[6] = day3;
+                        user.bad[habit].Days[7] = day4;
+
+                        // reset current day
+                        user.bad[habit].Days[0].date = todayDate;
+                        user.bad[habit].Days[0].counter = 0;
+                        user.bad[habit].counter = 0;
+                     }
+                  } else {
+                     for(let i=1; i < 7 ; i++) {
+                        // move counter data up the queue according to the number of days
+                        // i.e: if days is 3, then move the current day counter data up the queue 3 times
+                        // only move the counter data up the queue if the new index is less than 8
+                        if ((i + days) < 8) {
+                           user.bad[habit].Days[i + days] = user.bad[habit].Days[i];
+                        }
+                     }
+
+                     // move counter data up the queue
+                     user.bad[habit].Days[days] = user.bad[habit].Days[0].counter;
+
+                     // fill in days before the moved data with 0
+                     for(let i=1; i < days ; i++) {
+                        // fill in missing days with 0
+                        user.bad[habit].Days[i] = 0;
+                     }
+
+                     // reset current day
+                     user.bad[habit].Days[0].date = todayDate;
+                     user.bad[habit].Days[0].counter = 0;
+                     user.bad[habit].counter = 0;
+                  }
+               }
+            }
+            // if the current day is more than 7 days ahead of the day in the queue
+            // reset all counter data
+            else if (days > 7) {
+               trackChange = true;
+               // reset all counter data
+               user.bad[habit].Days[0].date = todayDate;
+               user.bad[habit].Days[0].counter = 0;
+               user.bad[habit].counter = 0;
+
+               user.bad[habit].Days[1] = 0;
+               user.bad[habit].Days[2] = 0;
+               user.bad[habit].Days[3] = 0;
+               user.bad[habit].Days[4] = 0;
+               user.bad[habit].Days[5] = 0;
+               user.bad[habit].Days[6] = 0;
+               user.bad[habit].Days[7] = 0;
+            }
+         })
+      }
+
+      // if the user's data was changed, update the database
+      if (trackChange) {
+         // update the user's data
+         const update_queue = await sendHabits(sessionStorage.getItem("id"), user.good, user.bad);
+         trackChange = false;
+      }
+   }
+          
+
+
    // this should never really change since it contains the preset habits
    const [good_habits, setGoodHabits] = useState({ 
       "Sleep 6-8 Hours": {"title":"Sleep 6-8 Hours","counter": 0, "total": 1, "details": "Getting enough sleep is vital to your health.", "category": "Health","Days":{7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: {"date": current_date,"counter": 0} }},
@@ -122,8 +372,8 @@ export const HabitProvider = ({ children }) => {
       let username = "";
 
       await axios
-      //.get("http://localhost:8000/user.php?userid="+ userid)
-      .get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/user.php?userid="+ userid)
+      .get("http://localhost:8000/user.php?userid="+ userid)
+      // .get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/user.php?userid="+ userid)
       .then(function (response) {
          // successful call will replace user object with correct information
          // console.log("success");
@@ -168,12 +418,12 @@ export const HabitProvider = ({ children }) => {
       let userid = 0;
 
       await axios
-      //.get("http://localhost:8000/returnid.php?userid="+ username)
-      .get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/returnid.php?userid="+ username)
+      .get("http://localhost:8000/returnid.php?userid="+ username)
+      // .get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/returnid.php?userid="+ username)
       .then(function (response) {
          // successful call will replace user object with correct information
          // console.log("success");
-         console.log(response.data)
+         // console.log(response.data)
 
          const result_object = (response.data).split("\n");
          userid = result_object[1];
@@ -212,8 +462,8 @@ export const HabitProvider = ({ children }) => {
       let result = true;
       await axios({
          method: "post",
-         //url: "http://localhost:8000/addhabit.php",
-         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/addhabit.php",
+         url: "http://localhost:8000/addhabit.php",
+         // url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/addhabit.php",
          data: {
             id: id,
             good_habits: g,
@@ -221,9 +471,9 @@ export const HabitProvider = ({ children }) => {
          },
          }).then(function (response) {
             // successful call will replace user object with correct information
-            console.log("success");
-            console.log(response.data)
-            console.log(response.config.data);
+            // console.log("success");
+            // console.log(response.data)
+            // console.log(response.config.data);
          }).catch(function (error) {
             console.log("failed to send post request");
             console.log(error);
@@ -245,7 +495,10 @@ export const HabitProvider = ({ children }) => {
       addBadHabit,
       sendHabits,
       getUserData,
-      getID
+      getID,
+      moveQueue,
+      calculateDays,
+      current_date,
    }}>
       {children}
    </HabitContext.Provider>
