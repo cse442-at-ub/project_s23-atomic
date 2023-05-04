@@ -1,7 +1,7 @@
 import React from 'react';
 import './choose.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useContext } from 'react'
 import HabitContext from '../contexts/HabitContext'
@@ -20,11 +20,11 @@ function ChooseHabits() {
     // useLocation is used to get that state
     const { state } = useLocation();
     const routeHome = () =>{ 
-        let path = `/homepage`; 
+        let path = `/CSE442-542/2023-Spring/cse-442q/homepage`; 
         navigate(path);
     }
     const routeSignup = () =>{ 
-        let path = `/signup`; 
+        let path = `/CSE442-542/2023-Spring/cse-442q/signup`; 
         navigate(path);
     }
 
@@ -105,6 +105,7 @@ function ChooseHabits() {
         await axios({
         method: "post",
         url: "http://localhost:8000/addhabit.php",
+        // url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/addhabit.php",
         data: {
             id: state.user,
             good_habits: good_habits_object,
@@ -149,6 +150,10 @@ function ChooseHabits() {
         }
     }
 
+    useEffect(() => {
+        document.title = "Choose Your Habits";  
+    }, []);
+
     return (
         <div className='choose_habits_container'>
             <div className="choose_habits_div">
@@ -161,36 +166,36 @@ function ChooseHabits() {
                     <div className="habit_group">
                         <ul>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Sleep 6-8 Hours"/>
-                                <label id="habit_label">Sleep 6-8 Hours</label>
+                                <input onClick={addHabit} id="habit_input_1" type="checkbox" value="Sleep 6-8 Hours"/>
+                                <label htmlFor="habit_input_1" id="habit_label">Sleep 6-8 Hours</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Eat Breakfast"/>
-                                <label id="habit_label">Eat Breakfast</label>
+                                <input onClick={addHabit} id="habit_input_2" type="checkbox" value="Eat Breakfast"/>
+                                <label htmlFor="habit_input_2" id="habit_label">Eat Breakfast</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Drink Water"/>
-                                <label id="habit_label">Drink Water</label>
+                                <input onClick={addHabit} id="habit_input_3" type="checkbox" value="Drink Water"/>
+                                <label htmlFor="habit_input_3" id="habit_label">Drink Water</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Exercise"/>
-                                <label id="habit_label">Exercise</label>
+                                <input onClick={addHabit} id="habit_input_4" type="checkbox" value="Exercise"/>
+                                <label htmlFor="habit_input_4" id="habit_label">Exercise</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Meditate"/>
-                                <label id="habit_label">Meditate</label>
+                                <input onClick={addHabit} id="habit_input_5" type="checkbox" value="Meditate"/>
+                                <label htmlFor="habit_input_5" id="habit_label">Meditate</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Journal"/>
-                                <label id="habit_label">Journal</label>
+                                <input onClick={addHabit} id="habit_input_6" type="checkbox" value="Journal"/>
+                                <label htmlFor="habit_input_6" id="habit_label">Journal</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Read"/>
-                                <label id="habit_label">Read</label>
+                                <input onClick={addHabit} id="habit_input_7" type="checkbox" value="Read"/>
+                                <label htmlFor="habit_input_7" id="habit_label">Read</label>
                             </li>
                             <li>
-                                <input onClick={addHabit} id="habit_input" type="checkbox" value="Clean"/>
-                                <label id="habit_label">Clean</label>
+                                <input onClick={addHabit} id="habit_input_8" type="checkbox" value="Clean"/>
+                                <label htmlFor="habit_input_8" id="habit_label">Clean</label>
                             </li>
                         </ul>
                     </div>
@@ -198,28 +203,28 @@ function ChooseHabits() {
                     <div className="habit_group">
                         <ul>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Smoke"/>
-                                <label id="habit_label">Smoke</label>
+                                <input onClick={addHabitToStop} id="habit_input_9" type="checkbox" value="Smoke"/>
+                                <label htmlFor="habit_input_9" id="habit_label">Smoke</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Drink Alcohol"/>
-                                <label id="habit_label">Drink Alcohol</label>
+                                <input onClick={addHabitToStop} id="habit_input_10" type="checkbox" value="Drink Alcohol"/>
+                                <label htmlFor="habit_input_10" id="habit_label">Drink Alcohol</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Drink Coffee"/>
-                                <label id="habit_label">Drink Coffee</label>
+                                <input onClick={addHabitToStop} id="habit_input_11" type="checkbox" value="Drink Coffee"/>
+                                <label htmlFor="habit_input_11" id="habit_label">Drink Coffee</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Eat Junk Food"/>
-                                <label id="habit_label">Eat Junk Food</label>
+                                <input onClick={addHabitToStop} id="habit_input_12" type="checkbox" value="Eat Junk Food"/>
+                                <label htmlFor="habit_input_12" id="habit_label">Eat Junk Food</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Sit All Day"/>
-                                <label id="habit_label">Sit All Day</label>
+                                <input onClick={addHabitToStop} id="habit_input_13" type="checkbox" value="Sit All Day"/>
+                                <label htmlFor="habit_input_13" id="habit_label">Sit All Day</label>
                             </li>
                             <li>
-                                <input onClick={addHabitToStop} id="habit_input" type="checkbox" value="Bite Nails"/>
-                                <label id="habit_label">Bite Nails</label>
+                                <input onClick={addHabitToStop} id="habit_input_14" type="checkbox" value="Bite Nails"/>
+                                <label htmlFor="habit_input_14" id="habit_label">Bite Nails</label>
                             </li>
                         </ul>
                     </div>

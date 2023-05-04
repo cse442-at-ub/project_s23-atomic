@@ -32,6 +32,10 @@
     margin-left: 10%;
     margin-right: 10%;
 }
+.back_link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 
 .column_1 {
     display: flex;
@@ -49,7 +53,7 @@
 }
 .column_1 h1 {
     color: black;
-    font-weight: 100;
+    font-weight: 600;
     padding: 0px;
     width: 70%;
     text-align: left;
@@ -93,10 +97,16 @@
     width: 80%;
     color: black;
 }
+.category_container{
+    display: flex;
+    flex-direction: row;
+}
 #category_label{
-    background-color: orange;
+    /* background-color: orange; */
     width: 130px;
     height: 50px;
+
+    margin-right: 20px;
 
     border-radius: 20px;
     text-align: center;
@@ -219,4 +229,36 @@
 }
 #delete_button:active {
     transform: translateY(3px);
+    box-shadow: 0 0  7px #202344;
+}
+
+/* We Want to Display different colors for different categories */
+/* className will match the category title to pull correct CSS */
+.Health {
+    background-color: orange;
+}
+.School {
+    background-color: #6ebbff;
+}
+.Work {
+    background-color: #b26eff;
+}
+.Family {
+    background-color: #ff80f0;
+}
+.Misc {
+    background-color: #6756ff;
+}
+.Social {
+    background-color: #fff787;
+}
+
+/* we want to display different colors for different types */
+/* className will match the type title to pull correct CSS */
+
+.Bad {
+    background-color: #ff9b9b;
+}
+.Good {
+    background-color: #96ffab;
 }

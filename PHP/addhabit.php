@@ -8,10 +8,8 @@
 		// create connection
 		// this is the database I used to test locally
 		// servername, username, password, database name.
-		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
-
 		// this is our groups database
-		// $conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
+		$conn = mysqli_connect("oceanus.cse.buffalo.edu:3306", "argraca", "50301883", "cse442_2023_spring_team_q_db");
 
 
 		// the database will have one table for now
@@ -47,17 +45,24 @@
 		$bad = json_encode($data['bad_habits'],JSON_FORCE_OBJECT);
 
 		// want to pull out users information from users table using id
-		$query = "SELECT * FROM users WHERE id = '{$id}'";
-		$result = mysqli_query($conn,$query);
+		$prep_stmt = "SELECT * FROM users WHERE id = ? LIMIT 1";
+		$stmt = $conn->prepare($prep_stmt);
+		$stmt->bind_param('i', $id);
+		$stmt->execute();
+		$result = $stmt->get_result();
 		$row = $result->fetch_assoc();
+
+		print(gettype($bad));
 		
 		// now add habit and date objects into users table
-		$sql = "UPDATE users SET `good_habits` = '$good', `bad_habits` = '$bad' WHERE `id` = '$id'";
-        if(mysqli_query($conn, $sql)){
+		$stmt = $conn->prepare("UPDATE users SET `good_habits` = ?, `bad_habits` = ? WHERE `id` = ?");
+		$stmt->bind_param("ssi", $good, $bad, $id); 
+
+		if ($stmt->execute()) {
             echo "Records added successfully.\n";
-        } else{
-            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-        }
+		} else {
+			echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+		}
 
 		// Close connection
 		mysqli_close($conn);

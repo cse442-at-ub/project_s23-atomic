@@ -1,7 +1,7 @@
 import React from 'react';
 import './options.css';
 import Navbar from '../Homepage/Navbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link} from "react-router-dom";
 
 function Options(){
@@ -12,19 +12,24 @@ function Options(){
 
     const handlePreset = () => {
         sessionStorage.setItem("id", user)
-        navigate('/suggestions');
+        navigate('/CSE442-542/2023-Spring/cse-442q/suggestions');
     }
 
     const handleCustom = () => {
-        navigate('/create');
+        navigate('/CSE442-542/2023-Spring/cse-442q/create');
     }
+
+    useEffect(() => {
+        // set document title
+        document.title = "Create New Habit";
+    }, []);
 
 
     return(
         <div className="options_container">
             <Navbar />
             <div id="link">
-                <Link to="/homepage" className='options_back_link'>&lt; Back</Link>
+                <Link to="/CSE442-542/2023-Spring/cse-442q/homepage" className='options_back_link'>&lt; Back</Link>
             </div>
             <div className="options_title_container">
                 <div className="preset_option_container" onClick={handlePreset}>

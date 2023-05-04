@@ -124,6 +124,12 @@
     margin: 15px;
 }
 
+.habit_group label {
+    cursor: pointer;
+    padding: 5px;
+    margin: 15px;
+}
+
 .button_group {
     display: flex;
     align-items: stretch;
@@ -158,6 +164,8 @@
 }
 
 .button_group button:hover {
+    background: rgba(39, 68, 210, 0.75);
+    cursor: pointer;
     transform: translateX(3px)
 }
 .button_group button:active {

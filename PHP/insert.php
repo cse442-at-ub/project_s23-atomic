@@ -5,11 +5,8 @@
         // create connection
 		// this is the database I used to test locally
 		// servername, username, password, database name.
-		$conn = mysqli_connect("localhost:3306", "root", "blkjesus", "atomic_test"); 
-
 		// this is our groups database
-		// $conn = mysqli_connect("", "", "", ""); //servername, username, pass, db.
-
+		$conn = mysqli_connect("oceanus.cse.buffalo.edu:3306", "argraca", "50301883", "cse442_2023_spring_team_q_db");
 
 		// the database will have one table for now
 		// users table: holds id (int), username, email, password, good_habits, bad_habits, and dates
@@ -43,33 +40,60 @@
 		// functions to check if email or usernames exist in database
 		// prevent duplicate accounts
 		function emailExists($conn,$input) {
-			$query = "SELECT * FROM users WHERE email = '{$input}'";
-			$result = mysqli_query($conn,$query);
-			return $result;
+			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+			$stmt->bind_param("s", $input); 
+			$stmt->execute();
+
+			$result = $stmt->get_result(); // get the mysqli result
+			$row = $result->fetch_assoc(); // fetch data
+
+			// if row exists, return true, else return false
+			if ($row) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 		function usernameExists($conn,$input) {
-			$query = "SELECT * FROM users WHERE username = '{$input}'";
-			$result = mysqli_query($conn,$query);
-			return $result;
+			$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+			$stmt->bind_param("s", $input); 
+			$stmt->execute();
+
+			$result = $stmt->get_result(); // get the mysqli result
+			$row = $result->fetch_assoc(); // fetch data	
+
+			// if row exists, return true, else return false
+			if ($row) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		// if account is unique, add to database, if not return message of what is not unique 
-		if (mysqli_num_rows(emailExists($conn,$email)) != 0) {
+		if (emailExists($conn,$email) && $email != "") {
 			// this will send back Email message, signin ReactJS component will pull this message and deal with it 
 			echo "Email\n";
-		} else if(mysqli_num_rows(usernameExists($conn,$username)) != 0){
+		} else if(usernameExists($conn,$username) && $username != ""){
 			// this will send back Username message, signin ReactJS component will pull this message and deal with it 
 			echo "Username\n";
-		} else{
+		} else if ($username != "" && $email != "" and $password != ""){
 			// insert into database
 			// only inserting registration values, next page will allow user to choose habits, which will be added in the database 
 			// in another php file
-			$sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
-			if(mysqli_query($conn, $sql)){
+			$sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+			$prep = $conn->prepare($sql);
+			$prep->bind_param("sss", $username, $email, $hashed_password);
+			
+			if($prep->execute()){
+				
 				// want to save user id to send back
-				$query = "SELECT id FROM users WHERE username = '{$username}'";
-				$result = mysqli_query($conn,$query);
+				$stmtprep = $conn->prepare("SELECT id FROM users WHERE username = ?");
+				$stmtprep->bind_param("s", $username);
+				$stmtprep->execute();
+				$result = $stmtprep->get_result();
 				$row = $result->fetch_assoc();
+
 				echo $row["id"];
 				echo "\nRecords added successfully.\n";
 			} else{

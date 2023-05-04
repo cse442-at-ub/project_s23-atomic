@@ -1,6 +1,8 @@
 .preset_container {
-    display: flex;
     color: rgba(79, 98, 194);
+
+    width: 100%;
+    height: 100%;
 }
 .overall_list_container {
     display: flex;
@@ -20,12 +22,18 @@
     width: 100%;
     height: 100%;
 }
+.top_page h1{
+    padding: 0px;
+    margin: 15px;
+}
 .sug_back_link {
     font-size: 38px;
     margin-left:6.5%;
     text-align: left;
     text-decoration: none;
     color: rgba(79, 98, 194);
+
+    width: 8%;
 }
 .sug_back_link:hover{
     text-decoration: underline;
@@ -55,16 +63,18 @@
     height: 30em;
 
     background-color: #ffc79997;
+
 }
 
 .category_wrapper h3{
-    border-radius: 5px;
-    padding: 7px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
     font-size: 32px;
     background-color: rgba(79, 98, 194);
     font-weight:900;
-    border: 3px solid rgba(79, 98, 194);;
     color:white;
+    margin: 0px;
+    height: 50px;
 }
 .category {
     height: 21.3em;
@@ -92,7 +102,7 @@
 
 @media screen and (max-width: 600px) {
     .overall_list_container{
-        margin-top: 16%;
+        margin-top: 23%;
     }
     .list_container {
         margin-top: 10%;
@@ -102,5 +112,9 @@
     .category_wrapper {
         width: 100%;
         height: 100%;
+    }
+
+    .sug_back_link {
+        width: 30%;
     }
 }

@@ -3,13 +3,13 @@ import './suggestions.css';
 import Navbar from '../Homepage/Navbar';
 import { useContext } from 'react'
 import HabitContext from '../contexts/HabitContext'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Suggestions(){
-    const {user, good_habits, bad_habits,addGoodHabit,addBadHabit,sendHabits} = useContext(HabitContext);
+    const {user, good_habits, bad_habits,addGoodHabit,addBadHabit,sendHabits, getUserData} = useContext(HabitContext);
 
     const navigate = useNavigate();
     // any page that routes to this page should send in state param values (title, category, details, counter, total, added)
@@ -18,15 +18,16 @@ function Suggestions(){
     // if true, user came from editing or adding/creating a new habit and a success message will be displayed
     // if false, regular habit information will be displayed with no success message
     // we use useLocation to get this state
-    const routeDetail = (habit) => {
+    const routeDetail = (habit, type) => {
         const n = habit["title"];
         const c = habit["category"];
         const d = habit["details"];
         const sum = habit["counter"];
         const t = habit["total"];
-        const path = '/detail';
+        const path = '/CSE442-542/2023-Spring/cse-442q/detail';
+        
         sessionStorage.setItem("added","true")
-        navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t, added: true}});
+        navigate(path, {state: {title: n, category: c, details: d, counter: sum, total: t,type: type, added: true}});
     }
 
     // use toastify to notify user on error for username or email that's already in use
@@ -34,31 +35,67 @@ function Suggestions(){
         toast.error('Error Adding Habit',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
     }
 
+    const notifyExists = ()=>{
+        toast.error('Habit Already Exists',{position: toast.POSITION.TOP_RIGHT, autoClose:false,theme:"colored"})
+    }
+
     const getHabit = (event) => {
         const habit_title = event.target.innerHTML;
         const type = event.target.value;
+        let pos = "";
         let habit = {}
         console.log(type)
         // good habits will not have a value, so type should equal 0
         // bad habits will have the value "1"
         if (type === 0){
+            pos = "Good";
             habit = good_habits[habit_title];
-            addGoodHabit(habit);
+            // console.log(user.good[habit_title])
+            if (user.good[habit_title] !== undefined){
+                console.log("habit exists")
+                notifyExists();
+            } else {
+                // add habit to user's good habits
+                addGoodHabit(habit);
+                submit(habit, pos)
+            }
         }else{
+            pos = "Bad";
             habit = bad_habits[habit_title];
-            addBadHabit(habit);
+            if (user.bad[habit_title] !== undefined){
+                notifyExists();
+            } else {
+                // add habit to user's bad habits
+                addBadHabit(habit);
+                submit(habit, pos)
+            }
         }
         console.log(user)
-        submit(habit)
 
     }
 
-    const submit = async(info) => {
+    // use effect will run every 700 milliseconds to get the user data from the backend
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            // call the getUserData function from HabitContext.js to get the user data
+            // makes get request to backend to get user data
+            const info = await getUserData(sessionStorage.getItem("id"));
+
+        }, 1050)
+        return () => clearInterval(interval)
+    })
+
+    useEffect(() => {
+        // set document title
+        document.title = "Pick From Our Options";
+    }, []);
+
+    const submit = async(info, type) => {
         // console.log(user.id)
-        console.log(sessionStorage.getItem("id"))
+        // console.log(sessionStorage.getItem("id"))
         const update = await sendHabits(sessionStorage.getItem("id"),user.good,user.bad);
         if (update){
-            routeDetail(info);
+            routeDetail(info, type);
         }else{
             notify();
         }
@@ -68,9 +105,9 @@ function Suggestions(){
         <div className="preset_container">
             <Navbar />
             <div className="overall_list_container">
-                <ToastContainer />
+                <ToastContainer limit={1}/>
                 <div className='top_page'>
-                    <Link to="/options" className='sug_back_link'>&lt; Back</Link>
+                    <Link to="/CSE442-542/2023-Spring/cse-442q/options" className='sug_back_link'>&lt; Back</Link>
                     <h1>Pick From Our Options!</h1>
                 </div>
                 <div className="list_container">
@@ -179,7 +216,7 @@ function Suggestions(){
                                 <li onClick={getHabit} value="1">Drink Coffee</li>
                                 <li onClick={getHabit} value="1">Eat Junk Food</li>
                                 <li onClick={getHabit} value="1">Sit All Day</li>
-                                <li onClick={getHabit} value="1">Bite Your Nails</li>
+                                <li onClick={getHabit} value="1">Bite Nails</li>
                                 <li onClick={getHabit} value="1">Skip A Meal</li>
                                 <li onClick={getHabit} value="1">Multitask</li>
                                 <li onClick={getHabit} value="1">Criticize Yourself</li>
