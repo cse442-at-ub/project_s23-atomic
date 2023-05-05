@@ -43,6 +43,7 @@ export default function Navbar() {
 
     const routeStatistics = () => {navigate('/CSE442-542/2023-Spring/cse-442q/statistics')}
     const routeFAQ = () => {navigate('/CSE442-542/2023-Spring/cse-442q/information')}
+    const routeEmail = () => {navigate('/CSE442-542/2023-Spring/cse-442q/email')}
     const routeLogout = () => {
         sessionStorage.clear();
         setUser({})
@@ -68,6 +69,7 @@ export default function Navbar() {
         <div className='app_button_div'>
             {checkPath("statistics") ? <p id="current_tab" onClick={routeStatistics}>Statistics</p> : <p onClick={routeStatistics}>Statistics</p>}
             {checkPath("information") ? <p id="current_tab" onClick={routeFAQ}>FAQ</p> : <p onClick={routeFAQ}>FAQ</p>}
+            {checkPath("email") ? <p id="current_tab" onClick={routeEmail}>Email Reminder</p> : <p onClick={routeEmail}>Email Reminder</p>} 
         </div>
         <div className='profile_nav_div'>
             <img src={pepe} alt="avatar"></img>

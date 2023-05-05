@@ -22,6 +22,7 @@ import Edit from './components/Edit/Edit';
 import Reset from './components/Reset/Reset';
 import Resetcode from './components/Reset/Resetcode'
 import Reenter from './components/Reset/Reenter'
+import EmailReminder from './components/Emails/EmailReminder'
 
 import {HabitProvider} from './components/contexts/HabitContext';
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/CSE442-542/2023-Spring/cse-442q/reset" element={<Reset />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/resetcode" element={<Resetcode />} />
         <Route path="/CSE442-542/2023-Spring/cse-442q/reenter" element={<Reenter />} />
+        <Route path="/CSE442-542/2023-Spring/cse-442q/email" element={<EmailReminder />} />
       </Routes>  
       </HabitProvider>  
     </div>
