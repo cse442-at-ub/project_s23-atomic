@@ -46,6 +46,8 @@ export default function Navbar() {
     const routeLogout = () => {
         sessionStorage.clear();
         setUser({})
+        removeCookie();
+        
         navigate('/CSE442-542/2023-Spring/cse-442q/')
     }
 
@@ -54,6 +56,10 @@ export default function Navbar() {
             return true;
         }
         return false;
+    }
+
+    function removeCookie() {
+        document.cookie = "uid= ;expires = Thu, 01 Jan 1970 00:00:00 GMT ;path=/";
     }
 
     return (
