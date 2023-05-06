@@ -47,6 +47,9 @@ input[type="submit"] {
 
     padding: 10px 10px;
     width: 100%;
+
+    color: white;
+    border: none;
 }
 input[type="submit"]:hover {
     background: rgba(39, 68, 210, 0.75);
@@ -61,7 +64,7 @@ input[type="submit"]:active {
     font-size: 36px;
     text-align: left;
 
-    margin: 25px 0px 0px 100px;
+    margin: 25px 0px 0px 20px;
 }
 
 #login-back-link a {

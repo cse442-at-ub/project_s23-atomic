@@ -120,6 +120,8 @@
 
     border-radius: 15px;
     background-color: #ffc79997;
+
+    overflow-y: scroll;
 }
 #detail_box p {
     text-align: left;
@@ -256,12 +258,25 @@
 /* we want to display different colors for different types */
 /* className will match the type title to pull correct CSS */
 
-.Harmful {
-    background-color: #ff9b9b;
-}
 .Bad {
     background-color: #ff9b9b;
 }
 .Good {
     background-color: #96ffab;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .info_container {
+        margin-top: 15%;
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+
+    .info_container {
+        margin-top: 35%;
+    }
+    
 }

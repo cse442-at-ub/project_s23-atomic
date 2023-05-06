@@ -100,6 +100,10 @@
 
     color: #FFFFFF;
 }
+#login_button:hover {
+    background: rgba(39, 68, 210, 0.75);
+    cursor: pointer;
+}
 #login_button:active {
     transform: translateY(4px);
 }
@@ -215,6 +219,9 @@
     text-align: center;
     color: #FFFFFF;
     cursor: pointer;
+}
+#create_account_button:hover {
+    background: rgba(79, 98, 194, 0.9);
 }
 #create_account_button:active {
     transform: translateY(4px);
