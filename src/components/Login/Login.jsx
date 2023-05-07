@@ -127,8 +127,8 @@ function Login() {
   const makePost = async() => {
     await axios({
       method: "post",
-      url: "http://localhost:8000/login.php",
-      //url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/login.php",
+      //url: "http://localhost:8000/login.php",
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/login.php",
       data: {
         username: username,
         password: password,

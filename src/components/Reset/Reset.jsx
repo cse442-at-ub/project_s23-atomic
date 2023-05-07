@@ -64,8 +64,8 @@ function Reset() {
   const makePost = async() => {
     await axios({
       method: "post",
-      url: "http://localhost:8000/resetcode.php",
-      //url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/resetcode.php",
+      //url: "http://localhost:8000/resetcode.php",
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/resetcode.php",
       data: {
         email: email
       },

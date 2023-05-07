@@ -83,8 +83,8 @@ function Detail(){
         let result = true;
         await axios({
            method: "post",
-           url: "http://localhost:8000/updatehabit.php",
-        // url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/updatehabit.php",
+           //url: "http://localhost:8000/updatehabit.php",
+           url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/updatehabit.php",
            data: {
               id: id,
               counter: tcounter,
@@ -326,7 +326,7 @@ function Detail(){
                 <div className='back_link' onClick={routeHome}>&lt; Back to Home</div>
                 <div className='column_1'>
                     <h1 className="detail-title">{state.title}</h1>
-                    <button className='edit_button' onClick={() => routeEdit()}>Edit</button>
+                    <button className='edit_button' onClick={routeEdit}>Edit</button>
                 </div>
                 <div className='column_2'>
                     <div className='category_container'>
