@@ -47,9 +47,11 @@ function Edit() {
         setHabit({ ...habit, details: event.target.value });
     };
     const setCategory = (event) => {
+        console.log("category")
         setHabit({ ...habit, category: event.target.value });
     };
     const setType = (event) => {
+        console.log("type")
         setHabit({ ...habit, type: event.target.value });
     };
 
@@ -97,6 +99,10 @@ function Edit() {
     const submitHandler = (event) => {
         console.log("Create Habit submitHandler() called");
         event.preventDefault();
+        console.log(habit.type)
+        console.log(habit.category)
+        console.log(state.type)
+        console.log(state.category)
 
         if (changedValues()) {
 
@@ -110,7 +116,7 @@ function Edit() {
             let month = newDate.getMonth() + 1;
             let year = newDate.getFullYear();
             let current_date = `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
-
+            
             // Create habit JSON Object
             const habitObj = {};
             habitObj["title"] = habit.title;
@@ -182,7 +188,7 @@ function Edit() {
                     <div className="categories">
                         <div>
                             <h5>Category</h5>
-                            <select name="" className="" onClick={setCategory} defaultValue={state.category} required>
+                            <select name="" className="" onChange={setCategory} defaultValue={state.category} required>
                                 <option value="Health">Health</option>
                                 <option value="Work">Work</option>
                                 <option value="School">School</option>
@@ -193,7 +199,7 @@ function Edit() {
                         </div>
                         <div>
                             <h5>Type</h5>
-                            <select name="" className="" onClick={setType} defaultValue={state.type} required>
+                            <select name="" className="" onChange={setType} defaultValue={state.type} required>
                                 <option value="Good">Good</option>
                                 <option value="Bad">Bad</option>
                             </select>
