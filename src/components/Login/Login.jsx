@@ -74,6 +74,11 @@ function Login() {
     navigate(path)
   }
 
+  const routeReset = () =>{
+    let path = '/CSE442-542/2023-Spring/cse-442q/reset';
+    navigate(path)
+  }
+
   useEffect(() => {
     checkCookie();
   }, []);
@@ -88,10 +93,10 @@ function Login() {
       // console.log("cookie exists")
       // get users data from database and store in context
       const request = await getID(userID);
-      // console.log(request)
+      console.log(request)
       // set correct session storage id
       sessionStorage.setItem("id", request.id);
-      window.location = "/CSE442-542/2023-Spring/cse-442q/homepage";
+      navigate("/CSE442-542/2023-Spring/cse-442q/homepage");
     }
 
 
@@ -122,7 +127,7 @@ function Login() {
   const makePost = async() => {
     await axios({
       method: "post",
-      //url: "http://localhost:8000/login.php"
+      //url: "http://localhost:8000/login.php",
       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442q/login.php",
       data: {
         username: username,
@@ -160,7 +165,7 @@ function Login() {
   return(
       <>
       <div id="login-back-link">
-          <button id="back_button" onClick={routeLanding}>Back</button>
+        <button id="back_buton" onClick={routeLanding}>&lt; Back</button>
       </div>
       <div className="login-container">
           <div id="login-main">
@@ -187,6 +192,9 @@ function Login() {
                         <input type="submit" value="Submit"/>
                     </div>
                 </form>
+                <div id="login-submit">
+                        <input type="submit" value="Forgot Password" onClick={routeReset}/>
+                    </div>
               </div>
           </div>
       </div>
